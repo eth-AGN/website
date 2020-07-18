@@ -1,0 +1,26 @@
+
+
+body.category-denken {
+    background-color: $color__denken-background;
+    color: $color__denken-text;
+
+    a {
+        color: $color__denken-link;
+        &:hover {
+            color: $color__denken-link-hover;
+        }
+    }
+
+    .text-border {
+        &:before, &:after {
+            background-color: $color__denken-background;
+        }
+        svg text {
+            fill: $color__denken-text;
+        }
+    }
+
+    .loading-screen {
+        background-color: $color__denken-background;
+    }
+}

@@ -43,15 +43,72 @@
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
+		<?php
+		$current_url = home_url(add_query_arg($_GET, $wp->request));
+		$urls = array(
+			'wissen' => get_category_link(get_category_by_slug('wissen')),
+			'denken' => get_category_link(get_category_by_slug('denken')),
+			'handeln' => get_category_link(get_category_by_slug('handeln'))
+		);
+		?>
+
+
 		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'agn-theme' ); ?></button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
+			<div id="primary-menu" class="menu">
+				<ul class="nav-menu">
+					<?php foreach ($urls as $category => $url) : ?>
+						<li class="page_item<?php echo $current_url == $url ? ' current_page_item is-covering' : ''; echo sprintf(' %s_page', $category) ?>">
+							<a href="<?php echo $url ?>">
+								<?php echo $category ?>	
+							</a>
+						</li>
+					<?php endforeach ?>
+				</ul>
+			</div>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
+
+	<noscript>
+		<style>
+			.loading-screen {
+				display: none;
+			}
+		</style>
+	</noscript>
+	<div class="loading-screen"></div>
+
+	<div class="text-border">
+		<svg viewBox="0 0 200 200" preserveAspectRatio="none">
+			<path id="curve"
+				  	d="M 90 195
+					   L 10 195 Q 5 195, 5 190
+					   L 5 10 Q 5 5, 10 5
+					   L 190 5 Q 195 5, 195 10
+					   L 195 190 Q 195 195, 190 195
+					   L 110 195" fill="transparent" />
+			<text style="font-size: 3pt">
+				<textPath xlink:href="#curve">
+					ARBEITSGRUPPE DIE AUSGEHEND VOM DEPARTEMENT
+					ARCHITEKTUR DER ETH ZÜRICH VERÄNDERUNG AUF
+					ALLEN EBENEN UND IN ALLEN MASSTÄBEN MITGESTALTET.
+					FREI IM DENKEN UND VERANTWORTUNGSBEWUSST IM TUN.
+					RAUM FÜR DISKUSSION UND ENGAGEMENT. FÜR EINE NEUE
+					SELBSTVERSTÄNDLICHKEIT DER NACHHALTIGKEIT.
+					ARBEITSGRUPPE DIE AUSGEHEND VOM DEPARTEMENT
+					ARCHITEKTUR DER ETH ZÜRICH VERÄNDERUNG AUF
+					ALLEN EBENEN UND IN ALLEN MASSTÄBEN MITGESTALTET.
+					FREI IM DENKEN UND VERANTWORTUNGSBEWUSST IM TUN.
+					RAUM FÜR DISKUSSION UND ENGAGEMENT. FÜR EINE NEUE
+					SELBSTVERSTÄNDLICHKEIT DER NACHHALTIGKEIT.
+					ARBEITSGRUPPE DIE AUSGEHEND VOM DEPARTEMENT
+					ARCHITEKTUR DER ETH ZÜRICH VERÄNDERUNG AUF
+					ALLEN EBENEN UND IN ALLEN MASSTÄBEN MITGESTALTET.
+					FREI IM DENKEN UND VERANTWORTUNGSBEWUSST IM TUN.
+					RAUM FÜR DISKUSSION UND ENGAGEMENT. FÜR EINE NEUE
+					SELBSTVERSTÄNDLICHKEIT DER NACHHALTIGKEIT.
+				</textPath>
+			</text>
+		</svg>
+	</div>
 
 	<div id="content" class="site-content">

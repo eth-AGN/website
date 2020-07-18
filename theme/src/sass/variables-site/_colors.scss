@@ -1,3 +1,7 @@
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+$green: rgb(8, 232, 0);
+
 $color__background-body: #fff;
 $color__background-screen: #f1f1f1;
 $color__background-hr: #ccc;
@@ -9,7 +13,7 @@ $color__text-screen: #21759b;
 $color__text-input: #666;
 $color__text-input-focus: #111;
 $color__link: royalblue;
-$color__link-visited: purple;
+$color__link-visited: $color__link;
 $color__link-hover: midnightblue;
 $color__text-main: #404040;
 
@@ -18,3 +22,18 @@ $color__border-button-hover: #ccc #bbb #aaa;
 $color__border-button-focus: #aaa #bbb #bbb;
 $color__border-input: #ccc;
 $color__border-abbr: #666;
+
+$color__wissen-background: $black;
+$color__wissen-text: $green;
+$color__wissen-link: $green;
+$color__wissen-link-hover: darken($color__wissen-link, 20%);
+
+$color__denken-background: $white;
+$color__denken-text: $black;
+$color__denken-link: $black;
+$color__denken-link-hover: lighten($color__denken-link, 20%);
+
+$color__handeln-background: $green;
+$color__handeln-text: $white;
+$color__handeln-link: $white;
+$color__handeln-link-hover: darken($color__handeln-link, 20%);

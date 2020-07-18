@@ -1,0 +1,25 @@
+
+body.category-handeln {
+    background-color: $color__handeln-background;
+    color: $color__handeln-text;
+
+    a {
+        color: $color__handeln-link;
+        &:hover {
+            color: $color__handeln-link-hover;
+        }
+    }
+
+    .text-border {
+        &:before, &:after {
+            background-color: $color__handeln-background;
+        }
+        svg text {
+            fill: $color__handeln-text;
+        }
+    }
+
+    .loading-screen {
+        background-color: $color__handeln-background;
+    }
+}

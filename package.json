@@ -5,8 +5,6 @@
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack --watch",
-    "eslint": "eslint \"theme/src/**/*.{js,jsx}\" --quiet",
-    "eslint:fix": "eslint \"theme/src/**/*.{js,jsx}\" --quiet --fix",
     "format": "prettier --write \"theme/src/**/*.{js,jsx,scss}\"",
     "wp-pot": "wp-pot --src '*.php' --dest-file 'languages/agn_theme.pot' --domain 'agn-theme'"
   },

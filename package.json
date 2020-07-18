@@ -5,11 +5,9 @@
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack --watch",
-    "eslint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "eslint:fix": "eslint \"src/**/*.{js,jsx}\" --quiet --fix",
-    "format": "prettier --write \"src/**/*.{js,jsx,scss}\"",
-    "stylelint": "stylelint \"src/**/*.{css,scss}\"",
-    "stylelint:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
+    "eslint": "eslint \"theme/src/**/*.{js,jsx}\" --quiet",
+    "eslint:fix": "eslint \"theme/src/**/*.{js,jsx}\" --quiet --fix",
+    "format": "prettier --write \"theme/src/**/*.{js,jsx,scss}\"",
     "wp-pot": "wp-pot --src '*.php' --dest-file 'languages/agn_theme.pot' --domain 'agn-theme'"
   },
   "repository": {
@@ -50,6 +48,7 @@
     "style-loader": "^1.0.0",
     "stylelint": "^11.0.0",
     "stylelint-config-recommended-scss": "^4.0.0",
+    "stylelint-config-sass-guidelines": "^7.0.0",
     "stylelint-config-wordpress": "^15.0.0",
     "stylelint-order": "^3.1.1",
     "stylelint-scss": "^3.11.1",

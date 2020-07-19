@@ -53,6 +53,7 @@
 		?>
 
 
+		<div class="main-navigation-overlay"></div>
 		<nav id="site-navigation" class="main-navigation">
 			<div id="primary-menu" class="menu">
 				<ul class="nav-menu">

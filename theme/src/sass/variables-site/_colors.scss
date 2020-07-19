@@ -1,6 +1,12 @@
-$black: rgb(0, 0, 0);
+// color scheme from https://color.adobe.com/search?q=neon%20green
+$black: #0D0D0D;
 $white: rgb(255, 255, 255);
-$green: rgb(8, 232, 0);
+$green: #04D924;
+$green-0: $green;
+$green-1: #0ABF04;
+$green-2: #09A603;
+$green-3: #067302;
+
 
 $color__background-body: #fff;
 $color__background-screen: #f1f1f1;
@@ -26,14 +32,14 @@ $color__border-abbr: #666;
 $color__wissen-background: $black;
 $color__wissen-text: $green;
 $color__wissen-link: $green;
-$color__wissen-link-hover: darken($color__wissen-link, 20%);
+$color__wissen-link-hover: $green-1;
 
 $color__denken-background: $white;
 $color__denken-text: $black;
 $color__denken-link: $black;
-$color__denken-link-hover: lighten($color__denken-link, 20%);
+$color__denken-link-hover: lighten($color__denken-link, 40%);
 
 $color__handeln-background: $green;
 $color__handeln-text: $white;
 $color__handeln-link: $white;
-$color__handeln-link-hover: darken($color__handeln-link, 20%);
+$color__handeln-link-hover: darken($color__handeln-link, 5%);

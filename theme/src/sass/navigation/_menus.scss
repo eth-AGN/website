@@ -1,12 +1,18 @@
 $tab-width: 3.5rem;
+$tab-width-expanded: 4.5rem;
 $body-padding: 1.5rem;
 
 body.category-wissen {
-	padding-right: 3*$tab-width;
+	padding-right: 3*$tab-width + $body-padding;
+
+	.main-navigation-overlay {
+		height: $tab-width + 1.5rem;
+		background-color: $color__wissen-background;
+	}
 }
 
 body.category-denken {
-	padding-left: 2*$tab-width;
+	padding-left: 2*$tab-width + $body-padding;
 	padding-right: $tab-width + $body-padding;
 
 	.main-navigation {
@@ -18,15 +24,34 @@ body.category-denken {
 		position: fixed;
 		right: 0;
 	}
+
+	.main-navigation-overlay {
+		height: 2*$tab-width;
+		background-color: $color__denken-background;
+	}
 }
 
 body.category-handeln {
-	padding-left: 3*$tab-width;
+	padding-left: 3*$tab-width + $body-padding;
 
 	.main-navigation {
 		right: auto;
 		left: 0;
 	}
+
+	.main-navigation-overlay {
+		height: 3*$tab-width;
+		background-color: $color__handeln-background;
+	}
+}
+
+.main-navigation-overlay {
+	display: none;
+	position: fixed;
+	z-index: $z-index__main-navigation-overlay;
+	width: 100%;
+	top: 0;
+	left: 0;
 }
 
 .main-navigation {
@@ -35,6 +60,7 @@ body.category-handeln {
 	bottom: 0;
 	right: 0;
 	z-index: $z-index__tabs;
+
 
 	ul {
 		display: none;
@@ -51,7 +77,7 @@ body.category-handeln {
 		transform: rotate(180deg);
 		height: 100vh;
 		max-width: $tab-width;
-		width: 1.5*$tab-width;
+		width: $tab-width-expanded;
 		line-height: $tab-width;
 		text-transform: uppercase;
 		padding: 3rem 0;
@@ -69,15 +95,18 @@ body.category-handeln {
 			max-width: calc(100vw - #{2*$tab-width});
 		}
 
+		&:hover {
+			max-width: $tab-width-expanded;
+			a {
+				max-width: $tab-width-expanded;
+			}
+		}
+
 		&.current_page_item {
 			background-color: transparent;
 			max-width: $tab-width;
-		}
-
-		&:hover {
-			max-width: 1.5*$tab-width;
 			a {
-				max-width: 1.5*$tab-width;
+				max-width: $tab-width;
 			}
 		}
 
@@ -113,11 +142,15 @@ body.category-handeln {
 }
 
 @media screen and (max-width: 37.5em) {
+	.main-navigation-overlay {
+		display: initial;
+	}
+	
 	body.category-wissen {
-		padding: ($tab-width + 1rem) 2rem (2*$tab-width + 1rem);
+		padding: ($tab-width + 1.5rem) 2rem (2*$tab-width + 1.5rem);
 
 		.wissen_page {
-			padding-top: 1rem;
+			padding-top: 1.5rem;
 		}
 
 		.denken_page {
@@ -132,7 +165,7 @@ body.category-handeln {
 	}
 
 	body.category-denken {
-		padding: 2*$tab-width 2rem ($tab-width + 1rem);
+		padding: 2*$tab-width 2rem ($tab-width + 1.5rem);
 
 		.handeln_page {
 			bottom: 0;
@@ -145,6 +178,7 @@ body.category-handeln {
 
 	.main-navigation{
 		left: 0;
+		bottom: auto;
 
 		ul {
 			flex-direction: column;
@@ -175,7 +209,9 @@ body.category-handeln {
 			height: $tab-width;
 			writing-mode: initial;
 			transform: none;
-			max-width: none;
+			max-width: none !important;
+			width: 100%;
+			position: absolute;
 			padding: 0 1rem 0 2rem;
 		}
 	}

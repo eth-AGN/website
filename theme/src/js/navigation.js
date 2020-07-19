@@ -12,6 +12,12 @@
   }
   
   document.querySelectorAll('.page_item a').forEach(link => {
+    // check if href is current page
+    console.log(link.href == window.location.href)
+    if (link.href == window.location.href) {
+      link.parentElement.classList.add('current_page_item');
+    }
+    
     link.addEventListener('click', event => {
       event.preventDefault();
       link.blur();

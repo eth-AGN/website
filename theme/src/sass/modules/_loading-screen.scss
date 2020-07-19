@@ -1,0 +1,15 @@
+
+.loading-screen {
+    position: fixed;
+    z-index: $z-index__loading-screen;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transition: .2s ease;
+
+    &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

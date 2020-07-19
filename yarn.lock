@@ -4196,6 +4196,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+magic-grid@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/magic-grid/-/magic-grid-3.2.4.tgz#3770740fa46b6c6da25b551ac77fca4754068d23"
+  integrity sha512-zdV8b4q3YpmWZKLcbbfKisxAWlYF9S2dguCi3LR9pq59yq2pl140td4ViwDqYkZGZ6TP+B7YaExaVE3YNqN7/g==
+
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
@@ -7231,6 +7236,11 @@ wide-align@^1.1.0:
   integrity sha512-QGkOQc8XL6Bt5PwnsExKBPuMKBxnGxWWW3fU55Xt4feHozMUhdUMaBCk290qpm/wG5u/RSKzwdAC4i51YigihA==
   dependencies:
     string-width "^1.0.2 || 2"
+
+wordcloud@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/wordcloud/-/wordcloud-1.1.1.tgz#a68d75a05339c2da8ec8aea21a00f90e6f2e8eba"
+  integrity sha512-uL/QooAjq8XeFlbYIdAq1wlbu7RP6xl42i5cJyk6ahG7hHFg96ZM9H3QStyqn/WW2/B5sEjsDFwRBeN4MM5M4A==
 
 worker-farm@^1.7.0:
   version "1.7.0"

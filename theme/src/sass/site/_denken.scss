@@ -23,4 +23,30 @@ body.category-denken {
     .loading-screen {
         background-color: $color__denken-background;
     }
+
+    .wordcloud {
+        width: 100%;
+        height: calc(100vh - 6rem);
+        > * {
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .is-small {
+            color: $color__wissen-link;
+            &:hover {
+                color: $color__wissen-link-hover;
+            }
+        }
+    }
+}
+
+.denken__posts-container {
+    width: 100%;
+    margin-bottom: 2rem;
+
+    .post {
+        border: 2px solid $black;
+        padding: 1rem;
+        margin: 0;
+    }
 }

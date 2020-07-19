@@ -64,6 +64,13 @@
 @import 'modules/clearings';
 
 /*--------------------------------------------------------------
+# Site-specific modules
+--------------------------------------------------------------*/
+@import 'modules/loading-screen';
+@import 'modules/text-border';
+@import 'modules/magic-grid';
+
+/*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
 @import 'site/secondary/widgets';

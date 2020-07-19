@@ -135,6 +135,97 @@ function agn_theme_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'agn_theme_scripts' );
 
+
+function compile_post_type_labels($singular = 'Post', $plural = 'Posts') {
+	$p_lower = strtolower($plural);
+	$s_lower = strtolower($singular);
+	
+	return [
+        'name' => $plural,
+        'singular_name' => $singular,
+        'add_new_item' => "New $singular",
+        'edit_item' => "Edit $singular",
+        'view_item' => "View $singular",
+        'view_items' => "View $plural",
+        'search_items' => "Search $plural",
+        'not_found' => "No $p_lower found",
+        'not_found_in_trash' => "No $p_lower found in trash",
+        'parent_item_colon' => "Parent $singular",
+        'all_items' => "All $plural",
+        'archives' => "$singular Archives",
+        'attributes' => "$singular Attributes",
+        'insert_into_item' => "Insert into $s_lower",
+        'uploaded_to_this_item' => "Uploaded to this $s_lower",
+    ];
+}
+
+function event_meta_box(WP_Post $post) {
+	add_meta_box('event_meta', 'Event Details', function() use ($post) {
+		$field_name = 'event_date';
+		$field_value = get_the_date('Y-m-d', $post);
+		wp_nonce_field('event_nonce', 'event_nonce');
+		?>
+		<table class="form-table">
+            <tr>
+                <th> <label for="<?php echo $field_name; ?>">Event Date</label></th>
+                <td>
+                    <input id="<?php echo $field_name; ?>"
+                           name="<?php echo $field_name; ?>"
+                           type="date"
+                           value="<?php echo $field_value; ?>"
+                    />
+                </td>
+            </tr>
+		</table>
+		<?php
+	});
+}
+
+add_action('init', function() {
+	$type = 'event';
+	$labels = compile_post_type_labels('Event', 'Events');
+
+	$supports = ['title', 'editor', 'author', 'thumbnail', 'revisions', 'page-attributes'];
+
+	$arguments = [
+		'has_archive' => true,
+		'taxonomies' => ['post_tag', 'category'],
+		'register_meta_box_cb' => 'event_meta_box',
+		'public' => true,
+		'show_in_rest' => true,
+		'supports' => $supports,
+		'description' => 'Posts for the Handeln page.',
+		'labels' => $labels
+	];
+	register_post_type($type, $arguments);
+});
+
+// save metadata
+add_action('save_post', function($post_id){
+    $post = get_post($post_id);
+    $is_revision = wp_is_post_revision($post_id);
+    $field_name = 'event_date';
+
+    // Do not save meta for a revision or on autosave
+    if ( $post->post_type != 'event' || $is_revision )
+        return;
+
+    // Do not save meta if fields are not present,
+    // like during a restore.
+    if( !isset($_POST[$field_name]) )
+        return;
+
+    // Secure with nonce field check
+    if( ! check_admin_referer('event_nonce', 'event_nonce') )
+        return;
+
+    // Clean up data
+    $field_value = trim($_POST[$field_name]);
+
+    // Do the update
+	update_post_meta($post_id, $field_name, $field_value);
+});
+
 /**
  * Implement the Custom Header feature.
  */
@@ -162,9 +253,32 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-/**
- * Load WooCommerce compatibility file.
- */
-if ( class_exists( 'WooCommerce' ) ) {
-	require get_template_directory() . '/inc/woocommerce.php';
+
+function get_tags_by_category($category) {
+	global $wpdb;
+
+	$cat = get_category($category);
+	$tags = $wpdb->get_results
+	("
+		SELECT tag.term_id as term_id, tag.name as name, COUNT(post.id) as count
+		FROM
+			(
+				SELECT p.ID as ID
+				FROM
+					wp_posts p
+					JOIN wp_term_relationships ts ON ts.object_ID = p.ID
+					JOIN wp_term_taxonomy tt ON tt.term_taxonomy_id = ts.term_taxonomy_id
+					JOIN wp_terms cat ON cat.term_id = tt.term_id
+				WHERE
+					tt.taxonomy = 'category' AND cat.term_id = $cat->term_id
+			) as post
+			JOIN wp_term_relationships ts ON ts.object_ID = post.ID
+			JOIN wp_term_taxonomy tt ON tt.term_taxonomy_id = ts.term_taxonomy_id
+			JOIN wp_terms tag ON tag.term_id = tt.term_id
+		WHERE
+			tt.taxonomy = 'post_tag'
+		GROUP BY term_id
+		ORDER BY count DESC
+	");
+	return $tags;
 }

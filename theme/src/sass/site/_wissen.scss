@@ -1,33 +1,17 @@
 
 
 body.category-wissen {
-    background-color: $color__wissen-background;
-    color: $color__wissen-text;
-
-    a {
-        color: $color__wissen-link;
-        &:hover {
-            color: $color__wissen-link-hover;
-        }
-    }
-
-    .loading-screen {
-        background-color: $color__wissen-background;
-    }
+    @include set-color-scheme(
+        $color__wissen-background,
+        $color__wissen-text,
+        $color__wissen-link,
+        $color__wissen-link-hover
+    );
 
     .wissen__entry-header {
         display: grid;
         align-items: center;
         grid-template-columns: repeat(4, auto);
         gap: .5rem;
-    }
-
-    .text-border {
-        &:before, &:after {
-            background-color: $color__wissen-background;
-        }
-        svg text {
-            fill: $color__wissen-text;
-        }
     }
 }

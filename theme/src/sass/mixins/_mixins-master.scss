@@ -27,3 +27,38 @@
 @mixin column-width($numberColumns: 3) {
 	width: map-get( $columns, $numberColumns ) - ( ( $columns__margin * ( $numberColumns - 1 ) ) / $numberColumns );
 }
+
+@mixin mobile() {
+	@media screen and (max-width: 37.5em) {
+		@content;
+	}
+}
+
+@mixin set-color-scheme($background, $text, $link, $link-hover) {
+	background-color: $background;
+    color: $text;
+
+    a {
+        color: $link;
+        &:hover {
+            color: $link-hover;
+        }
+    }
+
+    .text-border {
+        .border {
+            background-color: $background;
+        }
+        svg text {
+            fill: $text;
+        }
+    }
+
+    .loading-screen {
+        background-color: $background;
+	}
+	
+	.search-popup__container {
+		border-color: $text;
+	}
+}

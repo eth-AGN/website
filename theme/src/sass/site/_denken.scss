@@ -1,28 +1,12 @@
 
 
 body.category-denken {
-    background-color: $color__denken-background;
-    color: $color__denken-text;
-
-    a {
-        color: $color__denken-link;
-        &:hover {
-            color: $color__denken-link-hover;
-        }
-    }
-
-    .text-border {
-        &:before, &:after {
-            background-color: $color__denken-background;
-        }
-        svg text {
-            fill: $color__denken-text;
-        }
-    }
-
-    .loading-screen {
-        background-color: $color__denken-background;
-    }
+    @include set-color-scheme(
+        $color__denken-background,
+        $color__denken-text,
+        $color__denken-link,
+        $color__denken-link-hover
+    );
 
     .wordcloud {
         width: 100%;

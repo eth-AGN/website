@@ -55,6 +55,24 @@
 
 		<div class="main-navigation-overlay"></div>
 		<nav id="site-navigation" class="main-navigation">
+			<div id="search-menu">
+				<div class="search-icon">
+					<svg viewbox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+						<path fillmode="even-odd" d="
+							M 30 10
+							A 20 20 0 0 0 30 50
+							A 20 20 0 0 0 30 10
+							Z
+							M 26 30
+							L 34 30
+							L 34 60
+							L 26 60
+							Z"></path>
+						<circle fill="white" cx=30 cy=30 r=10></circle>
+					</svg>
+				</div>
+			</div>
+
 			<div id="primary-menu" class="menu">
 				<ul class="nav-menu">
 					<?php foreach ($urls as $category => $url) : ?>
@@ -69,6 +87,27 @@
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
 
+
+
+	<div class="search-popup">
+		<div class="search-popup__container">
+			<div class="search-popup__column">
+				<!-- <input type="text" placeholder="Search" class="search-input"> -->
+				<form action="/" method="get">
+					<input class="search-input"
+						placeholder="Search"
+						type="text"
+						name="s"
+						id="search"
+						value="<?php the_search_query(); ?>">
+				</form>
+			</div>
+			<div class="search-popup__column">
+				<button type="button" class="filter-button">Filter</button>
+			</div>
+		</div>
+	</div>
+
 	<noscript>
 		<style>
 			.loading-screen {
@@ -79,6 +118,11 @@
 	<div class="loading-screen"></div>
 
 	<div class="text-border">
+		<div class="border border-top"></div>
+		<div class="border border-bottom"></div>
+		<div class="border border-left"></div>
+		<div class="border border-right"></div>
+
 		<svg viewBox="0 0 200 200" preserveAspectRatio="none">
 			<path id="curve"
 				  	d="M 90 195

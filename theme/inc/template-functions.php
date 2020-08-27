@@ -22,6 +22,8 @@ function agn_theme_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
+	$classes[] = 'category-'.get_the_category()[0]->slug;
+
 	return $classes;
 }
 add_filter( 'body_class', 'agn_theme_body_classes' );

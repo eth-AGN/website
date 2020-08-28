@@ -34,10 +34,8 @@
 		elseif ( is_search() ) :
 			?>
 
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'agn-theme' ); ?></p>
+			<p>There is no search result.</p>
 			<?php
-			get_search_form();
-
 		else :
 			?>
 

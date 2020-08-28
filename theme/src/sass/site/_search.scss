@@ -1,0 +1,53 @@
+body.search{
+    padding-top: 6rem;
+
+    .search-popup{
+        background-color: white;
+    }
+
+}
+
+.search-results-container{
+    padding: 2rem 0;
+    background: repeating-linear-gradient(135deg, rgba($black,1) 0, rgba($black,1) 0.5rem, rgba($black,0) 0.5rem, rgba($black,0) 1rem);
+
+    .post, .page {
+        @mixin set-colors($background, $link, $link_hover){
+            background-color: $background;
+            a {
+                color: $link;
+
+                &:hover{
+                    color: $link_hover;
+                }
+            }
+        }
+
+        &.category-denken{
+            @include set-colors($color__denken-background, $color__denken-link, $color__denken-link-hover);
+        }
+
+        &.category-wissen{
+            @include set-colors($color__wissen-background, $color__wissen-link, $color__wissen-link-hover);
+        }
+
+        &.category-handeln{
+            @include set-colors($color__handeln-background, $color__handeln-link, $color__handeln-link-hover);
+        }
+
+
+        width: fit-content;
+        padding: 0rem 0.5rem 0rem 2rem;
+        background-color: white;
+
+        h2{
+            text-transform: none;
+            font-size: 1.2rem;
+            font-weight: normal;
+            a{
+                text-decoration: none;
+            }
+        }
+    }
+
+}

@@ -11,16 +11,6 @@ body.category-denken {
     .wordcloud {
         width: 100%;
         height: calc(100vh - 6rem);
-        > * {
-            text-transform: uppercase;
-            text-decoration: none;
-        }
-        .is-small {
-            color: $color__wissen-link;
-            &:hover {
-                color: $color__wissen-link-hover;
-            }
-        }
     }
 }
 

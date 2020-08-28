@@ -79,8 +79,8 @@
 					$tags = get_tags();
 					$data = array();
 					foreach ($tags as $tag) {
-						$tag_link = get_tag_link($tag->term_id) . '?cat=' . $cat->term_id;
-						$data[] = [$tag->name, $tag->count, $tag_link];
+						// $tag_link = get_tag_link($tag->term_id) . '?cat=' . $cat->term_id;
+						$data[] = [$tag->name, $tag->count, ['data-tag-slug' => $tag->slug]];
 					}
 					echo htmlspecialchars(json_encode($data));
 					?>

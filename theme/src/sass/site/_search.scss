@@ -1,17 +1,13 @@
 body.search{
     padding-top: 6rem;
 
-    @mixin set-stripes($text){
-        background: repeating-linear-gradient(135deg, rgba($text,1) 0, rgba($text,1) 0.5rem, rgba($text,0) 0.5rem, rgba($text,0) 1rem);
-    }
-
     &.category-denken{
         .search-popup{
             background-color: $color__denken-background;
         }
 
         .search-results-container{
-            @include set-stripes($color__denken-text)
+            @include stripes($color__denken-text)
         }
     }
 
@@ -21,7 +17,7 @@ body.search{
         }
 
         .search-results-container{
-            @include set-stripes($color__wissen-text)
+            @include stripes($color__wissen-text)
         }
     }
     
@@ -31,7 +27,7 @@ body.search{
         }
 
         .search-results-container{
-            @include set-stripes($color__handeln-text)
+            @include stripes($color__handeln-text)
         }
     }
 

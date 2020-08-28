@@ -34,6 +34,10 @@
 	}
 }
 
+@mixin stripes($color, $size: 1rem){
+	background: repeating-linear-gradient(135deg, rgba($color,1) 0, rgba($color,1) 0.5*$size, rgba($color,0) 0.5*$size, rgba($color,0) $size);
+}
+
 @mixin set-color-scheme($background, $text, $link, $link-hover) {
 	background-color: $background;
     color: $text;

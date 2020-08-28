@@ -15,7 +15,6 @@ import WordCloud from 'wordcloud';
             return;
         }
 
-        console.log(list)
         const maxSize = list.reduce((max, item) => Math.max(max, item[1]), 0)
         const minSize = list.reduce((min, item) => Math.min(min, item[1]), maxSize)
 
@@ -41,10 +40,6 @@ import WordCloud from 'wordcloud';
                 list: list,
                 fontFamily: 'Helvetica Neue',
                 weightFactor: fontSize,
-                classes(word, weight, fontSize) {
-                    if (fontSize <= minFontSize) return 'is-small';
-                    else return 'is-big';
-                },
                 gridSize: 32,
                 minRotation: 0,
                 maxRotation: 0,
@@ -64,11 +59,27 @@ import WordCloud from 'wordcloud';
                 const link = document.createElement('a');
                 const item = list.find(item => item[0] == span.innerHTML);
                 link.innerHTML = item[0];
+
+                // set attributes to values specified in options
+                let options = item[2];
+                for (let key of Object.keys(options)) {
+                    link.setAttribute(key, options[key]);
+                }
+
+                // apply styles to element
                 link.style.cssText = span.style.cssText;
-                link.href = item[2];
+                link.style.width = '';
+                link.style.height = '';
                 link.setAttribute('class', span.getAttribute('class'))
+
+                // romve old element, attach new element to the DOM
                 el.removeChild(span);
                 el.appendChild(link);
+            });
+
+            // wait one frame for the client to render the new elements
+            requestAnimationFrame(() => {
+                window.dispatchEvent(new CustomEvent('wordcloud:ready'))
             });
         });
     })

@@ -21,7 +21,7 @@ get_header();
 				$data = array();
 				foreach ($tags as $tag) {
 					$tag_link = get_tag_link($tag->term_id) . '?cat=' . $cat->term_id;
-					array_push($data, [$tag->name, $tag->count, $tag_link]);
+					array_push($data, [$tag->name, $tag->count, ['href' => $tag_link]]);
 				}
 				echo htmlspecialchars(json_encode($data));
 				?>

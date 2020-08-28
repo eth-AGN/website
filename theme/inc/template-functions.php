@@ -22,7 +22,11 @@ function agn_theme_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
-	$classes[] = 'category-'.get_the_category()[0]->slug;
+	if (is_search()) {
+		$classes[] = 'category-'.$_GET['cat'];
+	} else {
+		$classes[] = 'category-'.get_the_category()[0]->slug;
+	}
 
 	return $classes;
 }

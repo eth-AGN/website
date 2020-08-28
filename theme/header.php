@@ -53,6 +53,42 @@
 		?>
 
 
+
+		<div class="search-popup">
+			<div class="search-popup__header">
+				<div class="search-popup__column">
+					<form action="/" method="get">
+						<input class="search-input"
+							placeholder="Search"
+							type="text"
+							name="s"
+							id="search"
+							value="<?php the_search_query(); ?>">
+						<input hidden type="text" name="cat" value="<?php echo get_the_category()[0]->slug ?>">
+						<button hidden type="submit">submit</button>
+					</form>
+				</div>
+				<div class="search-popup__column">
+					<button type="button" class="filter-button">Filter</button>
+				</div>
+			</div>
+
+			<div class="search-popup__filter">
+				<div class="wordcloud" data-wordcloud-list="
+					<?php
+					$tags = get_tags();
+					$data = array();
+					foreach ($tags as $tag) {
+						$tag_link = get_tag_link($tag->term_id) . '?cat=' . $cat->term_id;
+						$data[] = [$tag->name, $tag->count, $tag_link];
+					}
+					echo htmlspecialchars(json_encode($data));
+					?>
+				"></div>
+			</div>
+		</div>
+
+
 		<div class="main-navigation-overlay"></div>
 		<nav id="site-navigation" class="main-navigation">
 			<div id="search-menu">
@@ -86,27 +122,6 @@
 			</div>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
-
-
-
-	<div class="search-popup">
-		<div class="search-popup__container">
-			<div class="search-popup__column">
-				<!-- <input type="text" placeholder="Search" class="search-input"> -->
-				<form action="/" method="get">
-					<input class="search-input"
-						placeholder="Search"
-						type="text"
-						name="s"
-						id="search"
-						value="<?php the_search_query(); ?>">
-				</form>
-			</div>
-			<div class="search-popup__column">
-				<button type="button" class="filter-button">Filter</button>
-			</div>
-		</div>
-	</div>
 
 	<noscript>
 		<style>

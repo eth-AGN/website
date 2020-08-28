@@ -306,7 +306,7 @@ body.category-handeln {
 	max-height: 9.25rem;
 	overflow: hidden;
 
-	transition: .3s ease;
+	transition: max-height .3s ease, transform .3s ease;
 
 	&.is-open {
 		transform: none !important;

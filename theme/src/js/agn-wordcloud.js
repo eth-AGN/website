@@ -52,7 +52,9 @@ import WordCloud from 'wordcloud';
         }
 
         initWordCloud();
-        window.addEventListener('resize', initWordCloud);
+        window.addEventListener('resize', () => {
+            requestAnimationFrame(initWordCloud);
+        });
 
         el.addEventListener('wordcloudstop', () => {
             el.querySelectorAll('span').forEach(span => {

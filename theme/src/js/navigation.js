@@ -12,21 +12,17 @@
   }
   
   document.querySelectorAll('.page_item a').forEach(link => {
-    // check if href is current page
-    console.log(link.href == window.location.href)
-    if (link.href == window.location.href) {
-      link.parentElement.classList.add('current_page_item');
+    if (link.href) { 
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        link.blur();
+        setTimeout(() => {
+          window.location = link.href
+        }, 100);
+        link.parentElement.classList.add('is-expanded');
+        loadingScreen.classList.remove('is-hidden')
+      })
     }
-    
-    link.addEventListener('click', event => {
-      event.preventDefault();
-      link.blur();
-      setTimeout(() => {
-        window.location = link.href
-      }, 100);
-      link.parentElement.classList.add('is-expanded');
-      loadingScreen.classList.remove('is-hidden')
-    })
   })
 
 })();

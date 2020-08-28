@@ -53,7 +53,6 @@
 		?>
 
 
-
 		<div class="search-popup">
 			<div class="search-popup__header">
 				<div class="search-popup__column">
@@ -79,7 +78,6 @@
 					$tags = get_tags();
 					$data = array();
 					foreach ($tags as $tag) {
-						// $tag_link = get_tag_link($tag->term_id) . '?cat=' . $cat->term_id;
 						$data[] = [$tag->name, $tag->count, ['data-tag-slug' => $tag->slug]];
 					}
 					echo htmlspecialchars(json_encode($data));
@@ -111,13 +109,19 @@
 
 			<div id="primary-menu" class="menu">
 				<ul class="nav-menu">
-					<?php foreach ($urls as $category => $url) : ?>
-						<li class="page_item<?php echo $current_url == $url ? ' current_page_item is-covering' : ''; echo sprintf(' %s_page', $category) ?>">
+					<?php foreach ($urls as $category => $url) :
+						if (is_category($category)):
+						?>
+						<li class="page_item current_page_item is-covering <?php echo $category.'_page' ?>">
+							<a><?php echo $category ?></a>
+						</li>
+						<?php else: ?>
+						<li class="page_item <?php echo $category.'_page' ?>">
 							<a href="<?php echo $url ?>">
-								<?php echo $category ?>	
+								<?php echo $category ?>
 							</a>
 						</li>
-					<?php endforeach ?>
+					<?php endif; endforeach ?>
 				</ul>
 			</div>
 		</nav><!-- #site-navigation -->

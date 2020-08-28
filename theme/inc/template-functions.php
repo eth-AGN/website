@@ -24,7 +24,7 @@ function agn_theme_body_classes( $classes ) {
 
 	if (is_search()) {
 		$classes[] = 'category-'.$_GET['cat'];
-	} else {
+	} elseif (is_single()) {
 		$classes[] = 'category-'.get_the_category()[0]->slug;
 	}
 

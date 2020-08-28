@@ -31,13 +31,13 @@
 
     // redirect user if any filters have been changed
     function redirectIfDirty() {
-        let oldTags = new Set(tagString ? tagString.split(',') : []);
+        let oldTags = tagString ? tagString.split(',') : [];
 
         // check if the filters have changed
         let dirty = false;
-        if (tags.size == oldTags.size) {
-            for (let tag of tags) {
-                if (!oldTags.has(tag)) dirty = true;
+        if (tags.size == oldTags.length) {
+            for (let tag of oldTags) {
+                if (!tags.has(tag)) dirty = true;
             }
         } else {
             dirty = true;

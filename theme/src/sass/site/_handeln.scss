@@ -8,6 +8,86 @@ body.category-handeln {
     );
 }
 
+.post.category-handeln {
+    display: flex;
+    justify-content: space-between;
+
+    .header-container {
+        position: relative;
+        flex: 1 0 40%;
+    }
+
+    .entry-header {
+        position: sticky;
+        top: 5rem;
+        z-index: 1;
+        padding-right: 2rem;
+
+        .entry-title > * {
+            margin: 0;
+            color: $green;
+            background-color: $black;
+            width: fit-content;
+            padding: 0 .5rem;
+            text-transform: none;
+            font-weight: normal;
+            font-size: 1.25rem;
+            white-space: nowrap;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            padding-top: 2rem;
+
+            .action {
+                display: inline-block;
+                line-height: 1;
+                width: fit-content;
+                background: $white;
+                padding: .5rem .75rem;
+                border: none;
+                outline: none;
+                font-size: 1rem;
+                text-decoration: none;
+                border-radius: 1rem;
+                display: flex;
+                align-items: center;
+
+                &:not(:first-child) {
+                    margin-top: 1rem;
+                }
+
+                &.has-plus {
+                    padding: .5rem .75rem .5rem 2rem;
+
+                    &:before, &:after {
+                        content: '';
+                        position: absolute;
+                        width: 3px;
+                        border-radius: 3px;
+                        height: 1rem;
+                        background-color: $black;
+                        left: 1rem;
+                    }
+    
+                    &:before {
+                        transform: rotate(90deg);
+                    }
+                }
+
+            }
+        }
+    }
+
+    .entry-content {
+
+        :first-child {
+            margin-top: 0;
+        }
+    }
+}
+
 .handeln__posts-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
@@ -33,7 +113,7 @@ body.category-handeln {
             top: 0;
             left: 0;
             z-index: 1;
-
+    
             > * {
                 margin: 0;
                 color: $green;

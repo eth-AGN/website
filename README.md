@@ -14,6 +14,8 @@ To get the website running locally:
 
 ### Setup
 Once the local WordPress instance is running...
-1. Change the theme to `Agn_Theme` (under Appearance -> Themes)
-2. Create categories with the slugs `wissen`, `denken`, `handeln` (under Posts -> Categories)
-3. Optionally create some posts with tags to fill the database with some test data
+1. Install all required WordPress plugins:
+   - Advanced Custom Fields (v5.9)
+2. Change the theme to `Agn_Theme` (under Appearance -> Themes)
+3. Get a copy of the live database by visiting [agn.arch.ethz.ch] and creating an export file (under Tools -> Export)
+4. Import the created file locally (under Tools -> Import -> WordPress -> Install Now -> Run Importer)

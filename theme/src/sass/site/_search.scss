@@ -1,15 +1,54 @@
 body.search{
     padding-top: 6rem;
 
+    @mixin set-stripes($text){
+        background: repeating-linear-gradient(135deg, rgba($text,1) 0, rgba($text,1) 0.5rem, rgba($text,0) 0.5rem, rgba($text,0) 1rem);
+    }
+
+    &.category-denken{
+        .search-popup{
+            background-color: $color__denken-background;
+        }
+
+        .search-results-container{
+            @include set-stripes($color__denken-text)
+        }
+    }
+
+    &.category-wissen{
+        .search-popup{
+            background-color: $color__wissen-background;
+        }
+
+        .search-results-container{
+            @include set-stripes($color__wissen-text)
+        }
+    }
+    
+    &.category-handeln{
+        .search-popup{
+            background-color: $color__handeln-background;
+        }
+
+        .search-results-container{
+            @include set-stripes($color__handeln-text)
+        }
+    }
+
+   
     .search-popup{
-        background-color: white;
+        transform: none;
+
+    }
+
+    .search-icon{
+        transform: none;
     }
 
 }
 
 .search-results-container{
     padding: 2rem 0;
-    background: repeating-linear-gradient(135deg, rgba($black,1) 0, rgba($black,1) 0.5rem, rgba($black,0) 0.5rem, rgba($black,0) 1rem);
 
     .post, .page {
         @mixin set-colors($background, $link, $link_hover){

@@ -40,6 +40,6 @@ $color__denken-link: $black;
 $color__denken-link-hover: lighten($color__denken-link, 40%);
 
 $color__handeln-background: $green;
-$color__handeln-text: $white;
-$color__handeln-link: $white;
-$color__handeln-link-hover: darken($color__handeln-link, 5%);
+$color__handeln-text: $black;
+$color__handeln-link: $black;
+$color__handeln-link-hover: lighten($color__handeln-link, 20%);

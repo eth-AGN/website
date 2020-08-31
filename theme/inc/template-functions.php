@@ -22,6 +22,18 @@ function agn_theme_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
+	if ( is_page_template( 'page-wissen.php' ) ) {
+        $classes[] = 'category-wissen';
+	}
+	
+	if ( is_page_template( 'page-denken.php' ) ) {
+        $classes[] = 'category-denken';
+	}
+	
+	if ( is_page_template( 'page-handeln.php' ) ) {
+        $classes[] = 'category-handeln';
+    }
+
 	if (is_search()) {
 		$classes[] = 'category-'.$_GET['cat'];
 	} elseif (is_single()) {

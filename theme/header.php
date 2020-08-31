@@ -46,9 +46,9 @@
 		<?php
 		$current_url = home_url(add_query_arg($_GET, $wp->request));
 		$urls = array(
-			'wissen' => get_category_link(get_category_by_slug('wissen')),
-			'denken' => get_category_link(get_category_by_slug('denken')),
-			'handeln' => get_category_link(get_category_by_slug('handeln'))
+			'wissen' => get_page_link(get_page_by_path('wissen')),
+			'denken' => get_page_link(get_page_by_path('denken')),
+			'handeln' => get_page_link(get_page_by_path('handeln'))
 		);
 		?>
 
@@ -110,7 +110,7 @@
 			<div id="primary-menu" class="menu">
 				<ul class="nav-menu">
 					<?php foreach ($urls as $category => $url) :
-						if (is_category($category)):
+						if (is_category($category) || is_page($category)):
 						?>
 						<li class="page_item current_page_item is-covering <?php echo $category.'_page' ?>">
 							<a><?php echo $category ?></a>

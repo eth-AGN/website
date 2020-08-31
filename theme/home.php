@@ -22,7 +22,7 @@
     <div id="content">
 
     <div class="agn-logo">
-        <a href="/category/denken">
+        <a href="/denken">
             <svg viewbox="0 0 100 100">
                 <defs>
                 <mask id="hole">
@@ -43,12 +43,12 @@
     
     <p>
         <span class="is-left">
-            <a href="<?php echo esc_url( wp_login_url('/category/denken') ); ?>" alt="<?php esc_attr_e( 'Login', 'textdomain' ); ?>">
+            <a href="<?php echo esc_url( wp_login_url('/denken') ); ?>" alt="<?php esc_attr_e( 'Login', 'textdomain' ); ?>">
                 ETH login
             </a>
         </span>
         <span class="is-right">
-            <a href="/category/denken">
+            <a href="/denken">
                 or enter
             </a>
         </span>
@@ -57,7 +57,7 @@
     <script type="text/javascript">
     window.addEventListener('keydown', event => {
         if (event.key == 'Enter') {
-            window.location = '/category/denken'
+            window.location = '/denken'
         }
     })
     </script>

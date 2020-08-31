@@ -1,0 +1,17 @@
+.bbp-template-notice {
+    margin-top: 0;
+    
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+            font-size: 1rem;
+        }
+    }
+
+    &.error {
+        border-color: $danger;
+        background-color: rgba($danger, 0.2);
+    }
+}

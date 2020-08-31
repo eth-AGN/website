@@ -19,41 +19,41 @@ body.category-denken {
     margin-bottom: 2rem;
 
     a.topic {
-        padding: 1rem;
+        position: relative;
+        display: block;
         color: inherit !important;
         text-decoration: inherit;
         &:hover {
             color: inherit !important;
         }
 
+        .bbp-topic-header {
+            background-color: $green;
+            padding: .75rem 1rem;
+            text-transform: uppercase;
 
+            .bbp-topic-author {
+                font-size: .875rem;
+            }
+
+            .bbp-topic-title {
+                margin: 0;
+                margin-top: .5rem;
+            }
+        }
+
+        .bbp-topic-description {
+            padding: 1rem;
+        }
     }
 
-    .bbp-form {
+    #bbpress-forums .bbp-form, .bbp-form {
         position: relative;
         border: none;
         padding: 0;
         margin: 0;
         padding: 1rem;
         padding-bottom: 3.5rem;
-
-        .bbp-template-notice {
-            margin-top: 0;
-            
-            ul {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                li {
-                    font-size: 1rem;
-                }
-            }
-
-            &.error {
-                border-color: $danger;
-                background-color: rgba($danger, 0.2);
-            }
-        }
 
         .wp-editor-container {
             border: none;

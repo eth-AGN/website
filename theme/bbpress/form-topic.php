@@ -10,14 +10,7 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! bbp_is_single_forum() ) : ?>
-
-<div id="bbpress-forums" class="bbpress-wrapper">
-
-	<?php bbp_breadcrumb(); ?>
-
-<?php endif; ?>
-
+?>
 <?php if ( bbp_is_topic_edit() ) : ?>
 
 	<?php bbp_topic_tag_list( bbp_get_topic_id() ); ?>
@@ -186,7 +179,7 @@ if ( ! bbp_is_single_forum() ) : ?>
 
 <?php else : ?>
 
-	<div id="no-topic-<?php bbp_forum_id(); ?>" class="bbp-no-topic">
+	<!-- <div id="no-topic-<?php bbp_forum_id(); ?>" class="bbp-no-topic">
 		<div class="bbp-template-notice">
 			<ul>
 				<li><?php is_user_logged_in()
@@ -202,12 +195,7 @@ if ( ! bbp_is_single_forum() ) : ?>
 
 		<?php endif; ?>
 
-	</div>
+	</div> -->
 
 <?php endif; ?>
 
-<?php if ( ! bbp_is_single_forum() ) : ?>
-
-</div>
-
-<?php endif;

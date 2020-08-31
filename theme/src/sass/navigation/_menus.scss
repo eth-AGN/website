@@ -9,6 +9,24 @@ $tab-width-expanded: 4.5rem;
 $body-padding: 1.5rem;
 $search-icon-size: 4rem;
 
+// if no category class is set, use the following styles
+body, .search-popup {
+	padding-right: 3*$tab-width + $body-padding;
+}
+
+.main-navigation-overlay {
+	height: 3*$tab-width;
+	background-color: $color__denken-background;
+}
+
+.search-icon {
+	left: $tab-width - 0.5*$search-icon-size;
+}
+
+.search-popup {
+	background-color: $white;
+	transform: translateX(100%);
+}
 
 body.category-wissen {
 	&, .search-popup {
@@ -52,6 +70,7 @@ body.category-denken {
 	}
 
 	.search-icon {
+		left: auto;
 		right: $tab-width - 0.5*$search-icon-size;
 	}
 
@@ -64,6 +83,7 @@ body.category-denken {
 body.category-handeln {
 	&, .search-popup {
 		padding-left: 3*$tab-width + $body-padding;
+		padding-right: $body-padding;
 	}
 
 	.main-navigation {
@@ -77,6 +97,7 @@ body.category-handeln {
 	}
 
 	.search-icon {
+		left: auto;
 		right: $tab-width - 0.5*$search-icon-size;
 	}
 
@@ -191,6 +212,10 @@ body.category-handeln {
 @include mobile() {
 	.main-navigation-overlay {
 		display: initial;
+	}
+
+	body, .search-popup {
+		padding: 3*$tab-width + 1.5rem 2rem 1.5rem;
 	}
 	
 	body.category-wissen {
@@ -363,6 +388,79 @@ body.category-handeln {
 
 		a {
 			cursor: pointer;
+		}
+	}
+}
+
+@include mobile() {
+	.search-icon,
+	body.category-wissen .search-icon,
+	body.category-denken .search-icon,
+	body.category-handeln .search-icon {
+		top: 3*$tab-width + .25rem;
+		left: auto;
+		right: .25rem;
+		width: 3.5rem;
+		height: 3.5rem;
+	}
+
+	.search-popup .search-popup__header {
+		flex-direction: column;
+		align-items: flex-start;
+
+		> :first-child {
+			padding-bottom: .5rem;
+		}
+	}
+
+	body.category-wissen  {
+		.search-popup {
+			padding-top: $tab-width + 1rem;
+			padding-left: 2rem;
+			padding-right: 2rem;
+			max-height: $tab-width + 7rem;
+		}
+
+		.search-popup__filter {
+			height: calc(100vh - #{3*$tab-width + 7rem});
+		}
+
+		.search-popup.filter-is-open {
+			max-height: calc(100vh - #{2*$tab-width});
+		}
+	}
+
+	body.category-denken {
+		.search-popup {
+			padding-top: 2*$tab-width;
+			padding-left: 2rem;
+			padding-right: 2rem;
+			max-height: 2*$tab-width + 6rem;
+		}
+
+		.search-popup__filter {
+			height: calc(100vh - #{3*$tab-width + 6rem});
+		}
+
+		.search-popup.filter-is-open {
+			max-height: calc(100vh - #{$tab-width});
+		}
+	}
+
+	body.category-handeln {
+		.search-popup {
+			padding-top: 3*$tab-width;
+			padding-left: 2rem;
+			padding-right: 2rem;
+			max-height: 3*$tab-width + 6rem;
+		}
+
+		.search-popup__filter {
+			height: calc(100vh - #{3*$tab-width + 6rem});
+		}
+
+		.search-popup.filter-is-open {
+			max-height: 100vh;
 		}
 	}
 }

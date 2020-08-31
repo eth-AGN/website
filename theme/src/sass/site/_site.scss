@@ -15,3 +15,12 @@
 .site-branding {
     display: none;
 }
+
+body {
+    @include set-color-scheme(
+        $color__denken-background,
+        $color__denken-text,
+        $color__denken-link,
+        $color__denken-link-hover
+    );
+}

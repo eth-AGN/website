@@ -135,30 +135,6 @@ function agn_theme_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'agn_theme_scripts' );
 
-
-function compile_post_type_labels($singular = 'Post', $plural = 'Posts') {
-	$p_lower = strtolower($plural);
-	$s_lower = strtolower($singular);
-	
-	return [
-        'name' => $plural,
-        'singular_name' => $singular,
-        'add_new_item' => "New $singular",
-        'edit_item' => "Edit $singular",
-        'view_item' => "View $singular",
-        'view_items' => "View $plural",
-        'search_items' => "Search $plural",
-        'not_found' => "No $p_lower found",
-        'not_found_in_trash' => "No $p_lower found in trash",
-        'parent_item_colon' => "Parent $singular",
-        'all_items' => "All $plural",
-        'archives' => "$singular Archives",
-        'attributes' => "$singular Attributes",
-        'insert_into_item' => "Insert into $s_lower",
-        'uploaded_to_this_item' => "Uploaded to this $s_lower",
-    ];
-}
-
 /**
  * Implement the Custom Header feature.
  */
@@ -184,6 +160,45 @@ require get_template_directory() . '/inc/customizer.php';
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
+}
+
+function add_tags_to_query($query) {
+	// echo $_GET['tag'];
+ 	if ($_GET['tag'] && ! empty($_GET['tag'])) {
+		if ($query->is_category()) {
+			$query->query_vars['tag'] = $_GET['tag'];
+		}
+		if (is_page('denken')) {
+			$query->query_vars['tax_query'] = array(
+				array(
+					'taxonomy' => 'topic-tag',
+					'field'    => 'slug',
+					'terms'    => explode(',', $_GET['tag'])
+				)
+			);
+		}
+	}
+}
+add_action('pre_get_posts', 'add_tags_to_query');
+
+function get_topic_tags() {
+	global $wpdb;
+
+	$cat = get_category($category);
+	$tags = $wpdb->get_results
+	("
+		SELECT tag.term_id as term_id, tag.name as name, COUNT(post.id) as count
+		FROM
+			wp_posts post
+			JOIN wp_term_relationships ts ON ts.object_ID = post.ID
+			JOIN wp_term_taxonomy tt ON tt.term_taxonomy_id = ts.term_taxonomy_id
+			JOIN wp_terms tag ON tag.term_id = tt.term_id
+		WHERE
+			tt.taxonomy = 'topic-tag'
+		GROUP BY term_id
+		ORDER BY count DESC
+	");
+	return $tags;
 }
 
 

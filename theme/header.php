@@ -75,7 +75,19 @@
 			<div class="search-popup__filter">
 				<div class="wordcloud" data-wordcloud-list="
 					<?php
-					$tags = get_tags();
+					$post_tags = get_tags();
+					$topic_tags = get_topic_tags();
+					$tags = array();
+					foreach ($post_tags as $tag) {
+						$tags[$tag->name] = $tag;
+					}
+					foreach ($topic_tags as $tag) {
+						if (isset($tags[$tag->name])) {
+							$tags[$tag->name]->count += $tag->count;
+						} else {
+							$tags[$tag->name] = $tag;
+						}
+					}
 					$data = array();
 					foreach ($tags as $tag) {
 						$data[] = [$tag->name, $tag->count, ['data-tag-slug' => $tag->slug]];

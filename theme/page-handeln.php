@@ -16,13 +16,6 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<?php
-				echo '<h1 class="page-title">' . single_cat_title('', false) . '</h1>';
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
-
             <div class="handeln__posts-container">
                 <?php
                 /* Start the Loop */

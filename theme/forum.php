@@ -1,6 +1,5 @@
 <?php
 /**
- * Template Name: DenkenPage
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *

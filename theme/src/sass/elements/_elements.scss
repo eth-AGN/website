@@ -11,15 +11,28 @@ html {
 }
 
 body {
-	background: $color__background-body; /* Fallback for when there is no custom background color defined. */
+	background-color: $color__background-body; /* Fallback for when there is no custom background color defined. */
 	padding: 3rem;
+	padding-top: 5rem;
 }
 
 hr {
 	background-color: $color__background-hr;
 	border: 0;
-	height: 1px;
+	height: .25rem;
 	margin-bottom: 1.5em;
+
+	&.is-white {
+		background-color: $white;
+	}
+
+	&.is-black {
+		background-color: $black;
+	}
+
+	&.is-green {
+		background-color: $green;
+	}
 }
 
 @import "lists";

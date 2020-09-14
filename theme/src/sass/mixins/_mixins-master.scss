@@ -4,6 +4,40 @@
 	font-size: $sizeValue * 1rem;
 }
 
+@mixin button {
+	display: inline-block;
+	width: fit-content;
+	padding: .5rem .75rem;
+
+	border: none;
+	outline: none;
+	border-radius: 0;
+	
+	font-size: 1rem;
+	line-height: 1;
+	text-decoration: none;
+	
+	background-color: $color__background-button;
+
+	&:hover {
+		border-color: $color__border-button-hover;
+	}
+
+	&:active,
+	&:focus {
+		border-color: $color__border-button-focus;
+	}
+}
+
+@mixin is-rounded {
+	border-radius: 1000rem;
+}
+
+@mixin rounded-border($color, $radius: 1rem) {
+	border: .25rem solid $color;
+	border-radius: $radius;
+}
+
 // Center block
 @mixin center-block {
 	display: block;
@@ -38,9 +72,13 @@
 	background: repeating-linear-gradient(135deg, rgba($color,1) 0, rgba($color,1) 0.5*$size, rgba($color,0) 0.5*$size, rgba($color,0) $size);
 }
 
-@mixin set-color-scheme($background, $text, $link, $link-hover) {
+@mixin set-color-scheme($background, $navigation, $text, $link, $link-hover) {
 	background-color: $background;
-    color: $text;
+	color: $text;
+	
+	.main-navigation, .search-popup {
+		color: $navigation;
+	}
 
     a {
         color: $link;
@@ -54,7 +92,7 @@
             background-color: $background;
         }
         svg text {
-            fill: $text;
+            fill: $navigation;
         }
     }
 
@@ -63,6 +101,6 @@
 	}
 	
 	.search-popup__header {
-		border-color: $text;
+		border-color: $navigation;
 	}
 }

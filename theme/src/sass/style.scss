@@ -66,11 +66,13 @@
 /*--------------------------------------------------------------
 # Site-specific modules
 --------------------------------------------------------------*/
+@import 'modules/helpers';
 @import 'modules/loading-screen';
 @import 'modules/text-border';
 @import 'modules/magic-grid';
 @import 'modules/wordcloud';
 @import 'modules/bbpress';
+@import 'modules/global-fab';
 
 /*--------------------------------------------------------------
 # Widgets

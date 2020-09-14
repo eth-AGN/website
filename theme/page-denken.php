@@ -32,9 +32,8 @@ get_header();
         <?php endif; ?>
 
         <?php
-        $forum_id = get_posts(array('post_type' => 'forum'))[0]->ID;
-        bbpress()->current_forum_id = $forum_id;
-        // bbp_set_query_name('bbp_single_forum');
+		// this way, the forum can be filtered by tags
+        bbpress()->current_forum_id = get_forum_id_by_name('denken');
         bbp_get_template_part( 'content',  'single-forum' );
         ?>
 

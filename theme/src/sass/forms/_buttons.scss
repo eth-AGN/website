@@ -1,23 +1,48 @@
 button,
+.button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-	background: $color__background-button;
-	border: 1px solid;
-	border-color: $color__border-button;
-	border-radius: 3px;
-	color: rgba(0, 0, 0, 0.8);
-	line-height: 1;
-	padding: 0.6em 1em 0.4em;
+	@include button();
 
-	@include font-size(0.75);
-
-	&:hover {
-		border-color: $color__border-button-hover;
+	&.is-rounded {
+		@include is-rounded();
 	}
 
-	&:active,
-	&:focus {
-		border-color: $color__border-button-focus;
+	&.is-white {
+		background-color: $white;
+		color: $black;
+
+		&:hover {
+			background-color: darken($white, 5%);
+			color: lighten($black, 10%);
+		}
+	}
+
+	&.is-black {
+		background-color: $black;
+		color: $green;
+
+		&:hover {
+			background-color: lighten($black, 10%);
+			color: lighten($green, 5%);
+		}
+	}
+
+	&.is-green {
+		background-color: $green;
+		color: $black;
+
+		&:hover {
+			background-color: darken($green, 5%);
+			color: lighten($black, 10%);
+		}
+	}
+
+	&.fab {
+		@include is-rounded;
+		width: 4rem;
+		height: 4rem;
+		padding: 0;
 	}
 }

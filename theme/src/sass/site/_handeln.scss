@@ -2,6 +2,7 @@
 body.category-handeln {
     @include set-color-scheme(
         $color__handeln-background,
+        $color__handeln-navigation,
         $color__handeln-text,
         $color__handeln-link,
         $color__handeln-link-hover
@@ -41,16 +42,6 @@ body.category-handeln {
             padding-top: 2rem;
 
             .action {
-                display: inline-block;
-                line-height: 1;
-                width: fit-content;
-                background: $white;
-                padding: .5rem .75rem;
-                border: none;
-                outline: none;
-                font-size: 1rem;
-                text-decoration: none;
-                border-radius: 1rem;
                 display: flex;
                 align-items: center;
 

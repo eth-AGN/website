@@ -43,7 +43,7 @@ defined( 'ABSPATH' ) || exit;
 
 				<?php endif; ?>
 
-				<?php if ( current_user_can( 'unfiltered_html' ) ) : ?>
+				<!-- <?php if ( current_user_can( 'unfiltered_html' ) ) : ?>
 
 					<div class="bbp-template-notice">
 						<ul>
@@ -51,7 +51,7 @@ defined( 'ABSPATH' ) || exit;
 						</ul>
 					</div>
 
-				<?php endif; ?>
+				<?php endif; ?> -->
 
 				<?php do_action( 'bbp_template_notices' ); ?>
 
@@ -95,14 +95,11 @@ defined( 'ABSPATH' ) || exit;
 
 					<?php if ( ! bbp_is_single_forum() ) : ?>
 
-						<?php do_action( 'bbp_theme_before_topic_form_forum' ); ?>
-
-						<p>
+						<p hidden>
 							<label for="bbp_forum_id"><?php esc_html_e( 'Forum:', 'bbpress' ); ?></label><br />
 							<?php
 								bbp_dropdown( array(
-									'show_none' => esc_html__( '&mdash; No forum &mdash;', 'bbpress' ),
-									'selected'  => bbp_get_form_topic_forum()
+									'selected'  => get_forum_id_by_name('denken')
 								) );
 							?>
 						</p>
@@ -148,7 +145,7 @@ defined( 'ABSPATH' ) || exit;
 
 						<?php do_action( 'bbp_theme_before_topic_form_submit_button' ); ?>
 
-						<button type="submit" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit"><?php esc_html_e( 'Submit', 'bbpress' ); ?></button>
+						<button type="submit" id="bbp_reply_submit" name="bbp_reply_submit" class="button submit is-rounded is-green"><?php esc_html_e( 'publish post', 'bbpress' ); ?></button>
 
 						<?php do_action( 'bbp_theme_after_topic_form_submit_button' ); ?>
 

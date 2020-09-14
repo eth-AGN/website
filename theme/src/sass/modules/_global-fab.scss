@@ -1,0 +1,26 @@
+
+#global-fab {
+    position: fixed;
+    top: 10rem;
+    left: 1.5rem;
+    z-index: $z-index__global-fab;
+
+    button {
+        cursor: pointer;
+    }
+
+    .canvas {
+        transition: transform .3s ease;
+        transform-origin: 50% 50%;
+    }
+
+    .search-appendum {
+        transform-origin: 50% 50%;
+        transition: .3s ease;
+        transform: scale(0);
+
+        &.is-visible {
+            transform: none;
+        }
+    }
+}

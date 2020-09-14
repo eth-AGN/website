@@ -3,15 +3,171 @@
 body.category-wissen {
     @include set-color-scheme(
         $color__wissen-background,
+        $color__wissen-navigation,
         $color__wissen-text,
         $color__wissen-link,
         $color__wissen-link-hover
     );
+}
 
-    .wissen__entry-header {
-        display: grid;
-        align-items: center;
-        grid-template-columns: repeat(4, auto);
-        gap: .5rem;
+.wissen__posts {
+    display: table;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+
+    .post {
+        margin: 0;
+        display: contents;
+    }
+}
+
+.wissen__post-entry {
+    width: 100%;
+    display: table-row;
+    text-decoration: none;
+
+    &:hover {
+        background-color: $green;
+        color: $black !important;
+
+        > .scroll-wrapper:before, > .scroll-wrapper:after {
+            background-image: linear-gradient(to left, $green, rgba($green, 0));
+        }
+    }
+
+    > .scroll-wrapper {
+        display: table-cell;
+        position: relative;
+        padding: .25rem 0 ; 
+        max-width: 12rem;
+        
+        > * {
+            padding: 0 1rem;
+            display: block;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow-x: scroll;
+            
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+            &::-webkit-scrollbar { 
+                display: none;  /* Safari and Chrome */
+            }
+        }
+
+        &:before, &:after {
+            content: '';
+            background-image: linear-gradient(to left, $black, rgba($black, 0));
+            position: absolute;
+            height: 100%;
+            width: 1rem;
+        }
+
+        &:before {
+            transform: rotate(180deg);
+            top: 0;
+            left: 0;
+        }
+
+        &:after {
+            top: 0;
+            right: 0;
+        }
+    }
+}
+
+.wissen__post {
+    position: relative;
+    margin-bottom: 0;
+    padding-bottom: 4rem;
+    min-height: calc(100vh - 12.25rem);
+
+    .entry-header {
+        display: flex;
+        justify-content: space-between;   
+    }
+
+    .entry-header-item {
+        max-width: 33%;
+        > * {
+            font-size: 1.5rem;
+            line-height: 1.15;
+            background-color: $green;
+            color: $black;
+        }
+    }
+
+    .author-description {
+        margin-left: 20%;
+    }
+
+    .actions {
+        position: absolute;
+        bottom: 0;
+
+        > :first-child {
+            margin-right: 3rem;
+        }
+
+        > :nth-child(2) {
+            margin-right: 1rem;
+        }
+    }
+}
+
+/**
+* Hide columns depending on viewport width
+*/
+
+@mixin show-n-rows($n, $body-hpadding: 15.5rem, $column-min-width: 12rem) {
+
+    @media screen and (max-width: #{$body-hpadding + ($n + 1)*$column-min-width}) {
+        .wissen__post-entry > .scroll-wrapper {
+            display: none;
+        }
+
+        @for $i from 1 to $n + 1 {
+            .wissen__post-entry > :nth-child(#{$i}) {
+                display: table-cell;
+            }
+        }
+    }
+}
+
+@include show-n-rows(4);
+@include show-n-rows(3);
+@include show-n-rows(2);
+@include show-n-rows(3, 4rem, 8rem);
+@include show-n-rows(2, 4rem, 8rem);
+
+@include mobile() {
+    .wissen__post-entry > .scroll-wrapper {
+        max-width: 8rem;
+    }
+
+    .wissen__post {
+        padding-bottom: 8rem;
+
+        .entry-header {
+            flex-direction: column;
+        }
+
+        .entry-header-item {
+            max-width: none;
+        }
+
+        .author-description {
+            margin-left: 0;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+
+            > :not(:last-child) {
+                margin-bottom: 1rem;
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@
 
 $tab-width: 3.5rem;
 $tab-width-expanded: 4.5rem;
-$body-padding: 1.5rem;
+$body-padding: 2rem;
 $search-icon-size: 4rem;
 
 // if no category class is set, use the following styles
@@ -24,7 +24,7 @@ body, .search-popup {
 }
 
 .search-popup {
-	background-color: $white;
+	background-color: $color__wissen-background;
 	transform: translateX(100%);
 }
 
@@ -102,7 +102,7 @@ body.category-handeln {
 	}
 
 	.search-popup {
-		background-color: $green;
+		background-color: $color__handeln-background;
 		transform: translateX(-100%);
 	}
 }
@@ -189,17 +189,17 @@ body.category-handeln {
 	.wissen_page {
 		display: flex;
 		justify-content: flex-end;
-		@include category-page($color__wissen-background, $color__wissen-text);
+		@include category-page($color__wissen-background, $color__wissen-navigation);
 		a {
 			display: flex;
 			align-items: flex-end;
 		}
 	}
 	.denken_page {
-		@include category-page($color__denken-background, $color__denken-text);
+		@include category-page($color__denken-background, $color__denken-navigation);
 	}
 	.handeln_page {
-		@include category-page($color__handeln-background, $color__handeln-text);
+		@include category-page($color__handeln-background, $color__handeln-navigation);
 	}
 }
 
@@ -361,6 +361,7 @@ body.category-handeln {
 
 			&::placeholder {
 				color: inherit;
+				opacity: 1;
 			}
 		}
 
@@ -476,27 +477,38 @@ body {
 				color: $active-text;
 			}
 		}
+
+		.search-popup {
+			.search-input:not(:placeholder-shown)::first-line {
+				background-color: $active-background;
+				color: $active-text;
+			}
+			&.filter-is-open .filter-button {
+				color: $active-text;
+				background-color: $active-background;
+			}
+		}
 	}
 
 	&.category-wissen {
 		@include set-colors(
-			$color__wissen-text,
-			$color__handeln-background,
-			$color__handeln-text
+			$color__wissen-navigation,
+			$green,
+			$white
 		);
 	}
 	&.category-denken {
 		@include set-colors(
-			$color__denken-text,
-			$color__wissen-background,
-			$color__wissen-text
+			$color__denken-navigation,
+			$green,
+			$black
 		);
 	}
 	&.category-handeln {
 		@include set-colors(
-			$color__handeln-text,
-			$color__denken-background,
-			$color__denken-text
+			$color__handeln-navigation,
+			$white,
+			$black
 		);
 	}
 }

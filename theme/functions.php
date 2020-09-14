@@ -230,3 +230,19 @@ function get_tags_by_category($category) {
 	");
 	return $tags;
 }
+
+function get_forum_id_by_name($name) {
+	global $wpdb;
+	$forums = $wpdb->get_results
+	("
+		SELECT *
+		FROM wp_posts p
+		WHERE p.post_type = 'forum' AND p.post_name = '$name'
+		LIMIT 1;
+	");
+	if (count($forums) == 1) {
+		return $forums[0]->ID;
+	} else {
+		return null;
+	}
+}

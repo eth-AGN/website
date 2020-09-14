@@ -26,7 +26,7 @@ function agn_theme_body_classes( $classes ) {
         $classes[] = 'category-wissen';
 	}
 	
-	if ( is_page_template( 'page-denken.php' ) ) {
+	if ( is_page_template( 'page-denken.php' ) || is_bbpress() ) {
         $classes[] = 'category-denken';
 	}
 	

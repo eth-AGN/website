@@ -19,6 +19,7 @@
 body {
     @include set-color-scheme(
         $color__denken-background,
+        $color__denken-navigation,
         $color__denken-text,
         $color__denken-link,
         $color__denken-link-hover

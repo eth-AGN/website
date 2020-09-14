@@ -3,6 +3,7 @@
 body.category-denken {
     @include set-color-scheme(
         $color__denken-background,
+        $color__denken-navigation,
         $color__denken-text,
         $color__denken-link,
         $color__denken-link-hover
@@ -11,6 +12,12 @@ body.category-denken {
     .wordcloud {
         width: 100%;
         height: calc(100vh - 6rem);
+        a {
+            color: $black;
+            &:hover {
+                color: lighten($black, 20%);
+            }
+        }
     }
 }
 
@@ -47,87 +54,116 @@ body.category-denken {
         }
     }
 
-    #bbpress-forums .bbp-form, .bbp-form {
-        position: relative;
-        border: none;
-        padding: 0;
-        margin: 0;
+    .bbp-form {
         padding: 1rem;
-        padding-bottom: 3.5rem;
-
-        .wp-editor-container {
-            border: none;
-        }
-
-        .mce-top-part:before {
-            box-shadow: none;
-        }
-
-        .mce-toolbar-grp {
-            // border: none;
-            border-bottom: 2px solid darken(white, 10%);
-            background: none;
-        }
-
-        .mce-statusbar {
-            border-top: 2px solid darken(white, 10%) !important;
-        }
-
-        .mce-statusbar > .mce-container-body {
-            display: none;
-        }
-
-        input {
-            border: none;
-            width: 100%;
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        #bbp_topic_title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        p {
-            margin-bottom: 0;
-        }
-
-        .bbp-submit-wrapper {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-
-            .button.submit {
-                width: 100%;
-                height: 2.5rem;
-                font-size: 1rem;
-                text-transform: uppercase;
-                font-weight: bold;
-                color: $black;
-                background-color: $green;
-                border: none;
-                border-radius: 0 0 .75rem .75rem;
-                outline: none;
-                cursor: pointer;
-                transition: .3s ease;
-
-                &:hover, &:focus {
-                    background-color: darken($green, 5%);
-                }
-            }
-        }
     }
 
     > * {
-        border: .25rem solid $green;
-        border-radius: 1rem;
+        @include rounded-border($green);
         margin: 0;
-
-
     }
+}
+
+.bbp-form {
+    position: relative;
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    .wp-editor-container {
+        border: none;
+    }
+
+    .mce-top-part:before {
+        box-shadow: none;
+    }
+
+    .mce-toolbar-grp {
+        // border: none;
+        border-bottom: 2px solid darken(white, 10%);
+        background: none;
+    }
+
+    .mce-statusbar {
+        border-top: 2px solid darken(white, 10%) !important;
+    }
+
+    .mce-statusbar > .mce-container-body {
+        display: none;
+    }
+
+    input {
+        border: none;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    #bbp_topic_title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.denken__post {
+    @include rounded-border($green);
+
+    > * {
+        padding: 1rem;
+    }
+}
+
+.denken__post-header {
+    background-color: $green;
+
+    p {
+        color: $white;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+}
+
+.denken__post-replies {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    p {
+        display: inline;
+    }
+
+    .denken__reply {
+        margin-bottom: .75rem;
+    }
+
+    .denken__reply-meta {
+        font-weight: bold;
+    }
+
+    .denken__reply:first-child {
+        font-size: 1.25rem;
+        .denken__reply-meta {
+            display: none;
+        }
+    }
+
+    .denken__reply:not(:first-child) {
+        color: $green;
+    }
+}
+
+.denken__reply-meta, .denken__post-header p {
+    text-transform: uppercase;
+    font-size: .875rem;
+    margin: 0;
 }

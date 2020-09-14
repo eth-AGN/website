@@ -12,7 +12,9 @@
     const filterButton = popup.querySelector('.filter-button');
     if (!filterButton) return;
 
+    let popupIsOpen = false
     function toggleSearchPopup() {
+        popupIsOpen = !popupIsOpen;
         el.classList.toggle('is-open');
         button.classList.toggle('is-open');
         popup.classList.toggle('is-open');
@@ -21,6 +23,13 @@
             popup.classList.toggle('filter-is-open');
             redirectIfDirty();
         }
+
+        if (popupIsOpen) {
+            window.globalFab.setAction('arrow');
+        } else {
+            redirectIfDirty();
+            window.globalFab.resetAction();
+        }
     }
 
     button.addEventListener('click', toggleSearchPopup);
@@ -28,6 +37,7 @@
     const tagString = window.sessionStorage['tag-filter'];
     const tags = new Set(tagString ? tagString.split(',') : []);
     let filterIsOpen = false;
+    console.log(tags)
 
     // redirect user if any filters have been changed
     function redirectIfDirty() {
@@ -60,10 +70,13 @@
         }
     }
 
+    console.log(window.sessionStorage['tag-filter'])
+
     // add or remove tag from filter list
     function toggleTagFilter(event) {
         const el = event.target;
         const slug = el.dataset.tagSlug;
+        console.log(el, slug)
 
         if (tags.has(slug)) {
             tags.delete(slug);

@@ -2,4 +2,6 @@
 yarn-error.log
 /theme/public
 
+# prevent compressed theme from being pushed to git
+theme.zip
 .DS_Store

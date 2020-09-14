@@ -23,9 +23,10 @@ function createDragListeners(root, paddingTop, paddingBottom) {
 
         if (!rightClick) {
             isDragging = true;
-            window.addEventListener('mouseup', handleMouseUp);
-            window.addEventListener('touchend', handleMouseUp);
-            window.addEventListener('mouseleave', handleMouseUp);
+            window.addEventListener('mouseup', handleMouseUp, { passive: true });
+            window.addEventListener('touchend', handleMouseUp, { passive: true });
+            window.addEventListener('mouseleave', handleMouseUp, { passive: true });
+            window.addEventListener('blur', handleMouseUp, { passive: true });
             window.addEventListener('mousemove', handleMouseMove);
             window.addEventListener('touchmove', handleMouseMove);
         }
@@ -35,13 +36,16 @@ function createDragListeners(root, paddingTop, paddingBottom) {
         window.removeEventListener('mouseup', handleMouseUp);
         window.removeEventListener('touchend', handleMouseUp);
         window.removeEventListener('mouseleave', handleMouseUp);
+        window.removeEventListener('blur', handleMouseUp);
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('touchmove', handleMouseMove);
         isDragging = false;
     }
 
     function handleMouseMove(e) {
-        if (isDragging) {
+        let scrollHeight = document.body.clientHeight;
+        let windowHeight = window.innerHeight;
+        if (isDragging && scrollHeight - windowHeight > 0) {
             let mouseY = e.clientY;
             if (e.touches) {
                 mouseY = e.touches[0].clientY;
@@ -51,7 +55,7 @@ function createDragListeners(root, paddingTop, paddingBottom) {
             let buttonHeight = root.offsetHeight;
 
             let scrollPercent = (mouseY - paddingTop - buttonHeight/2) / buttonRange;
-            let scrollPx = scrollPercent * (document.body.clientHeight - window.innerHeight);
+            let scrollPx = scrollPercent * Math.max(windowHeight, scrollHeight - windowHeight);
             window.scrollTo(0, scrollPx);
         }
     }
@@ -93,13 +97,12 @@ function createDragListeners(root, paddingTop, paddingBottom) {
     const paddingBottom = new Number(window.getComputedStyle(document.body).paddingBottom.replace('px', ''));
     window.addEventListener('scroll', event => {
         const windowHeight = window.innerHeight;
-        const buttonHeight = root.offsetHeight;
         const scrollHeight = document.body.scrollHeight;
         const scrollTop = window.pageYOffset;
 
         // check if the user is able to scroll
-        if (windowHeight < scrollHeight) {
-            let scrollPercent = scrollTop / (scrollHeight - windowHeight);
+        if (scrollHeight - windowHeight > 0) {
+            let scrollPercent = scrollTop / Math.max(windowHeight, scrollHeight - windowHeight);
             let buttonRange = getButtonRange(root, paddingTop + paddingBottom);
             root.style.transform = `translateY(${scrollPercent * buttonRange}px)`;
         }

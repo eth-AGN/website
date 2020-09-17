@@ -6,8 +6,10 @@
 
 $tab-width: 3.5rem;
 $tab-width-expanded: 4.5rem;
-$body-padding: 2rem;
+$body-padding: $body__padding-left;
 $search-icon-size: 4rem;
+
+$global-fab-width: 4rem;
 
 // if no category class is set, use the following styles
 body, .search-popup {
@@ -31,6 +33,7 @@ body, .search-popup {
 body.category-wissen {
 	&, .search-popup {
 		padding-right: 3*$tab-width + $body-padding;
+		padding-left: $body-padding + 0.5*$global-fab-width;
 	}
 
 	.main-navigation-overlay {
@@ -51,7 +54,7 @@ body.category-wissen {
 body.category-denken {
 	&, .search-popup {
 		padding-left: 2*$tab-width + $body-padding;
-		padding-right: $tab-width + $body-padding;
+		padding-right: $tab-width + $body-padding + .25*$global-fab-width;
 	}
 
 	.main-navigation {
@@ -83,7 +86,7 @@ body.category-denken {
 body.category-handeln {
 	&, .search-popup {
 		padding-left: 3*$tab-width + $body-padding;
-		padding-right: $body-padding;
+		padding-right: $body-padding + 0.5*$global-fab-width;
 	}
 
 	.main-navigation {
@@ -144,6 +147,7 @@ body.category-handeln {
 		writing-mode: vertical-rl;
 		transform: rotate(180deg);
 		height: 100vh;
+		height: -webkit-fill-available;
 		max-width: $tab-width;
 		width: $tab-width-expanded;
 		line-height: $tab-width;
@@ -210,19 +214,29 @@ body.category-handeln {
 }
 
 @include mobile() {
-	.main-navigation-overlay {
-		display: initial;
+	.is-scrolled {
+		.page_item {
+			max-height: 2rem !important;
+			a {
+				opacity: 0;
+			}
+		}
+		.current_page_item {
+			max-height: 0 !important;
+			pointer-events: none;
+		}
 	}
 
 	body, .search-popup {
-		padding: 3*$tab-width + 1.5rem 2rem 1.5rem;
+		padding: (3*$tab-width + 1.5rem) $body-padding 1.5rem;
 	}
 	
 	body.category-wissen {
-		padding: ($tab-width + 1.5rem) 2rem (2*$tab-width + 1.5rem);
+		padding: $body-padding $body-padding (2*$tab-width + 1.5rem);
 
 		.wissen_page {
-			padding-top: 1.5rem;
+			position: fixed;
+			bottom: 2*$tab-width;
 		}
 
 		.denken_page {
@@ -237,7 +251,7 @@ body.category-handeln {
 	}
 
 	body.category-denken {
-		padding: 2*$tab-width 2rem ($tab-width + 1.5rem);
+		padding: 2*$tab-width $body-padding ($tab-width + 1.5rem);
 
 		.handeln_page {
 			bottom: 0;
@@ -245,7 +259,7 @@ body.category-handeln {
 	}
 
 	body.category-handeln {
-		padding: 3*$tab-width 2rem 2rem;
+		padding: 3*$tab-width $body-padding $body-padding;
 	}
 
 	.main-navigation{
@@ -257,7 +271,7 @@ body.category-handeln {
 		}
 
 		.wissen_page, .denken_page, .handeln_page {
-			max-width: none;
+			max-width: none !important;
 			&:hover {
 				max-width: none;
 			}
@@ -326,7 +340,7 @@ body.category-handeln {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	padding: 6rem 3rem 0rem 3rem;
+	padding: 6rem 3rem $body-padding 3rem;
 
 	max-height: 9.25rem;
 	overflow: hidden;
@@ -380,6 +394,7 @@ body.category-handeln {
 	.search-popup__filter {
 		width: 100%;
 		height: calc(100vh - 9.25rem);
+		height: calc(-webkit-fill-available - 9.25rem);
 		// transform: translateY(-100%);
 
 		.wordcloud {
@@ -393,12 +408,33 @@ body.category-handeln {
 	}
 }
 
+
+
+@mixin set-spacing($top, $side, $tab-size) {
+	.search-popup {
+		padding-top: $top;
+		padding-left: $side;
+		padding-right: $side;
+		max-height: 6rem + $top;
+		transition: padding .3s ease, max-height .3s ease, transform .3s ease;
+	}
+
+	.search-popup__filter {
+		height: calc(100vh - #{3*$tab-size + 6rem + $body-padding});
+		height: calc(-webkit-fill-available - #{3*$tab-size + 6rem + $body-padding});
+	}
+
+	.search-popup.filter-is-open {
+		max-height: calc(100vh - #{3*$tab-size - $top});
+	}
+}
+
 @include mobile() {
 	.search-icon,
 	body.category-wissen .search-icon,
 	body.category-denken .search-icon,
 	body.category-handeln .search-icon {
-		top: 3*$tab-width + .25rem;
+		top: 2*$tab-width - 0.5*3.5rem;
 		left: auto;
 		right: .25rem;
 		width: 3.5rem;
@@ -415,53 +451,20 @@ body.category-handeln {
 	}
 
 	body.category-wissen  {
-		.search-popup {
-			padding-top: $tab-width + 1rem;
-			padding-left: 2rem;
-			padding-right: 2rem;
-			max-height: $tab-width + 7rem;
-		}
-
-		.search-popup__filter {
-			height: calc(100vh - #{3*$tab-width + 7rem});
-		}
-
-		.search-popup.filter-is-open {
-			max-height: calc(100vh - #{2*$tab-width});
-		}
+		@include set-spacing($body-padding, $body-padding, $tab-width);
 	}
 
 	body.category-denken {
-		.search-popup {
-			padding-top: 2*$tab-width;
-			padding-left: 2rem;
-			padding-right: 2rem;
-			max-height: 2*$tab-width + 6rem;
-		}
-
-		.search-popup__filter {
-			height: calc(100vh - #{3*$tab-width + 6rem});
-		}
-
-		.search-popup.filter-is-open {
-			max-height: calc(100vh - #{$tab-width});
+		@include set-spacing(2*$tab-width, $body-padding, $tab-width);
+		&.is-scrolled {
+			@include set-spacing($body-padding + .5rem, $body-padding, $body-padding)
 		}
 	}
 
 	body.category-handeln {
-		.search-popup {
-			padding-top: 3*$tab-width;
-			padding-left: 2rem;
-			padding-right: 2rem;
-			max-height: 3*$tab-width + 6rem;
-		}
-
-		.search-popup__filter {
-			height: calc(100vh - #{3*$tab-width + 6rem});
-		}
-
-		.search-popup.filter-is-open {
-			max-height: 100vh;
+		@include set-spacing(3*$tab-width, $body-padding, $tab-width);
+		&.is-scrolled {
+			@include set-spacing(2*$body-padding + .5rem, $body-padding, $body-padding)
 		}
 	}
 }

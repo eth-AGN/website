@@ -12,6 +12,7 @@ body.category-denken {
     .wordcloud {
         width: 100%;
         height: calc(100vh - 6rem);
+        height: calc(-webkit-fill-available - 6rem);
         a {
             color: $black;
             &:hover {

@@ -12,8 +12,21 @@ html {
 
 body {
 	background-color: $color__background-body; /* Fallback for when there is no custom background color defined. */
-	padding: 3rem;
-	padding-top: 5rem;
+	padding-left: $body__padding-left;
+	padding-right: $body__padding-right;
+	padding-top: $body__padding-top;
+	
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+	scrollbar-width: none;  /* Firefox */
+	&::-webkit-scrollbar { 
+		display: none;  /* Safari and Chrome */
+	}
+}
+
+@include mobile {
+	body {
+		padding-top: $body__mobile-padding-top;
+	}
 }
 
 hr {

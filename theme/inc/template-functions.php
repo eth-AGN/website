@@ -5,6 +5,26 @@
  * @package Agn_Theme
  */
 
+function is_wissen() {
+	$cat = null;
+	if (count(get_the_category()) > 0) {
+		$cat = get_the_category()[0]->slug;
+	}
+	return is_page_template( 'page-wissen.php') || is_category('wissen') || $cat == 'wissen';
+}
+
+function is_denken() {
+	return is_page_template( 'page-denken.php' ) || is_bbpress();
+}
+
+function is_handeln() {
+	$cat = null;
+	if (count(get_the_category()) > 0) {
+		$cat = get_the_category()[0]->slug;
+	}
+	return is_page_template('paged_handeln.php') || is_category('handeln') || $cat == 'handeln';
+}
+
 /**
  * Adds custom classes to the array of body classes.
  *
@@ -22,22 +42,12 @@ function agn_theme_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
-	if ( is_page_template( 'page-wissen.php' ) ) {
-        $classes[] = 'category-wissen';
-	}
-	
-	if ( is_page_template( 'page-denken.php' ) || is_bbpress() ) {
-        $classes[] = 'category-denken';
-	}
-	
-	if ( is_page_template( 'page-handeln.php' ) ) {
-        $classes[] = 'category-handeln';
-    }
+	if (is_wissen()) $classes[] = 'category-wissen';
+	if (is_denken()) $classes[] = 'category-denken';
+	if (is_handeln()) $classes[] = 'category-handeln';
 
 	if (is_search()) {
 		$classes[] = 'category-'.$_GET['cat'];
-	} elseif (is_single()) {
-		$classes[] = 'category-'.get_the_category()[0]->slug;
 	}
 
 	return $classes;
@@ -53,3 +63,14 @@ function agn_theme_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'agn_theme_pingback_header' );
+
+function agn_get_the_area() {
+	if (is_wissen()) return 'wissen';
+	else if (is_denken()) return 'denken';
+	else if (is_handeln()) return 'handeln';
+	else return '';
+}
+
+function agn_get_parent_archive_url() {
+	return '/'.agn_get_the_area();
+}

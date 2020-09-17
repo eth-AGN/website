@@ -93,9 +93,7 @@ function createDragListeners(root, paddingTop, paddingBottom) {
      * Move the FAB when user is scrolling down
      */
 
-    const paddingTop = root.offsetTop;
-    const paddingBottom = new Number(window.getComputedStyle(document.body).paddingBottom.replace('px', ''));
-    window.addEventListener('scroll', event => {
+    function setGlobalFabPosition() {
         const windowHeight = window.innerHeight;
         const scrollHeight = document.body.scrollHeight;
         const scrollTop = window.pageYOffset;
@@ -106,14 +104,20 @@ function createDragListeners(root, paddingTop, paddingBottom) {
             let buttonRange = getButtonRange(root, paddingTop + paddingBottom);
             root.style.transform = `translateY(${scrollPercent * buttonRange}px)`;
         }
+    }
+    
+    const paddingTop = root.offsetTop;
+    const paddingBottom = new Number(window.getComputedStyle(document.body).paddingBottom.replace('px', ''));
+    window.addEventListener('scroll', () => {
+        setGlobalFabPosition()
     }, { passive: true });
+    setGlobalFabPosition();
 
 
     /**
      * Define actions and set global helper methods for changing them
      */
     
-    console.log('initializing global fab');
     const initialAction = root.dataset.initialAction || 'blank';
     let currentAction = initialAction;
     
@@ -122,7 +126,11 @@ function createDragListeners(root, paddingTop, paddingBottom) {
             cursor: 'pointer',
             title: 'Show search results',
             click() {
-                console.log('arrow clicked');
+                if (searchPopup.filterIsOpen) {
+                    searchPopup.toggleFilterPopup();
+                } else {
+                    searchPopup.submitSearch();
+                }
             }
         },
         blank: {
@@ -132,7 +140,11 @@ function createDragListeners(root, paddingTop, paddingBottom) {
         },
         cross: {
             cursor: 'pointer',
-            title: 'Close this post'
+            title: 'Close this post',
+            click() {
+                const url = root.dataset.homeUrl;
+                if (url) window.location = url;
+            }
         },
         plus: {
 
@@ -151,17 +163,16 @@ function createDragListeners(root, paddingTop, paddingBottom) {
     icons.querySelectorAll('path').forEach(path => {
         paths[path.id] = path.getAttribute('d');
     });
-    console.log(paths);
 
     window.globalFab = {
         paths,
         actions,
-        resetAction() {
-            this.setAction(initialAction);
+        resetAction(duration) {
+            this.setAction(initialAction, duration);
         },
-        setAction(action) {
+        setAction(action, duration) {
             if (this.actions[action]) {
-                this.setIcon(action)
+                this.setIcon(action, duration)
                 currentAction = action;
                 button.setAttribute('title', this.actions[action].title);
                 button.style.cursor = this.actions[action].cursor;
@@ -203,10 +214,7 @@ function createDragListeners(root, paddingTop, paddingBottom) {
         }
     }
 
-    // let initialIcon = initial.getAttribute('href').replace('#', '');
-    // globalFab.setIcon(initialIcon, 0)
     initial.style.display = 'none';
-
-    globalFab.resetAction();
+    globalFab.resetAction(0);
 
 })()

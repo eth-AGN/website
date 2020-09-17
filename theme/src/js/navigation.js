@@ -18,11 +18,23 @@
         link.blur();
         setTimeout(() => {
           window.location = link.href
-        }, 100);
+        }, 150);
         link.parentElement.classList.add('is-expanded');
-        loadingScreen.classList.remove('is-hidden')
+        loadingScreen.classList.remove('is-hidden');
       })
     }
-  })
+  });
+
+  const scrollThreshold = 16;
+  function setBodyClassIfScrolled(cls) {
+    const scrollTop = window.pageYOffset;
+    if (scrollTop >= scrollThreshold) document.body.classList.add(cls);
+    else document.body.classList.remove(cls);
+  }
+
+  window.addEventListener('scroll', () => {
+    setBodyClassIfScrolled('is-scrolled');
+  }, { passive: true });
+  setBodyClassIfScrolled('is-scrolled');
 
 })();

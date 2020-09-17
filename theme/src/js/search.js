@@ -9,87 +9,90 @@
     const popup = document.querySelector('.search-popup');
     if (!popup) return;
 
+    const form = popup.querySelector('.search-form');
+    if (!form) return;
+
     const filterButton = popup.querySelector('.filter-button');
     if (!filterButton) return;
 
-    let popupIsOpen = false
-    function toggleSearchPopup() {
-        popupIsOpen = !popupIsOpen;
-        el.classList.toggle('is-open');
-        button.classList.toggle('is-open');
-        popup.classList.toggle('is-open');
-
-        if (filterIsOpen) {
-            popup.classList.toggle('filter-is-open');
-            redirectIfDirty();
-        }
-
-        if (popupIsOpen) {
-            window.globalFab.setAction('arrow');
-        } else {
-            redirectIfDirty();
-            window.globalFab.resetAction();
-        }
-    }
-
-    button.addEventListener('click', toggleSearchPopup);
 
     const tagString = window.sessionStorage['tag-filter'];
     const tags = new Set(tagString ? tagString.split(',') : []);
-    let filterIsOpen = false;
-    console.log(tags)
 
-    // redirect user if any filters have been changed
-    function redirectIfDirty() {
-        let oldTags = tagString ? tagString.split(',') : [];
-
-        // check if the filters have changed
-        let dirty = false;
-        if (tags.size == oldTags.length) {
-            for (let tag of oldTags) {
-                if (!tags.has(tag)) dirty = true;
+    const searchPopup = {
+        isOpen: false,
+        filterIsOpen: false,
+        tags,
+        toggle() {
+            searchPopup.isOpen = !searchPopup.isOpen;
+            el.classList.toggle('is-open');
+            button.classList.toggle('is-open');
+            popup.classList.toggle('is-open');
+    
+            if (searchPopup.filterIsOpen) {
+                popup.classList.toggle('filter-is-open');
+                searchPopup.redirectIfDirty();
             }
-        } else {
-            dirty = true;
-        }
+    
+            if (searchPopup.isOpen) {
+                window.globalFab.setAction('arrow');
+            } else {
+                searchPopup.redirectIfDirty();
+                window.globalFab.resetAction();
+            }
+        },
+        // show or hide filter panel
+        toggleFilterPopup() {
+            searchPopup.filterIsOpen = !searchPopup.filterIsOpen;
+            popup.classList.toggle('filter-is-open', searchPopup.filterIsOpen);
+            if (!searchPopup.filterIsOpen) {
+                searchPopup.redirectIfDirty();
+            }
+        },
+        // add or remove tag from filter list
+        toggleTagFilter(event) {
+            const el = event.target;
+            const slug = el.dataset.tagSlug;
 
-        // if yes, redirect to same lcation with new filters applied
-        if (dirty) {
-            const url = new URL(window.location);
-            url.searchParams.set('tag', sessionStorage['tag-filter']);
-            window.location = url;
+            if (searchPopup.tags.has(slug)) {
+                searchPopup.tags.delete(slug);
+                el.classList.remove('is-active');
+                window.sessionStorage['tag-filter'] = Array.from(searchPopup.tags);
+            } else {
+                searchPopup.tags.add(slug);
+                el.classList.add('is-active');
+                window.sessionStorage['tag-filter'] = Array.from(searchPopup.tags);
+            };
+        },
+        // redirect user if any filters have been changed
+        redirectIfDirty() {
+            let oldTags = tagString ? tagString.split(',') : [];
+
+            // check if the filters have changed
+            let dirty = false;
+            if (searchPopup.tags.size == oldTags.length) {
+                for (let tag of oldTags) {
+                    if (!searchPopup.tags.has(tag)) dirty = true;
+                }
+            } else {
+                dirty = true;
+            }
+
+            // if yes, redirect to same lcation with new filters applied
+            if (dirty) {
+                const url = new URL(window.location);
+                url.searchParams.set('tag', sessionStorage['tag-filter']);
+                window.location = url;
+            }
+        },
+        submitSearch() {
+            form.submit();
         }
     }
 
-    // show or hide filter panel
-    function toggleFilterPopup() {
-        filterIsOpen = !filterIsOpen;
-        popup.classList.toggle('filter-is-open', filterIsOpen);
-        if (!filterIsOpen) {
-            redirectIfDirty();
-        }
-    }
+    button.addEventListener('click', searchPopup.toggle);
 
-    console.log(window.sessionStorage['tag-filter'])
-
-    // add or remove tag from filter list
-    function toggleTagFilter(event) {
-        const el = event.target;
-        const slug = el.dataset.tagSlug;
-        console.log(el, slug)
-
-        if (tags.has(slug)) {
-            tags.delete(slug);
-            el.classList.remove('is-active');
-            window.sessionStorage['tag-filter'] = Array.from(tags);
-        } else {
-            tags.add(slug);
-            el.classList.add('is-active');
-            window.sessionStorage['tag-filter'] = Array.from(tags);
-        };
-    }
-
-    filterButton.addEventListener('click', toggleFilterPopup);
+    filterButton.addEventListener('click', searchPopup.toggleFilterPopup);
 
     // wait for the wordcloud to finish rendering until registering event listeners
     window.addEventListener('wordcloud:ready', () => {
@@ -97,8 +100,10 @@
             const slug = el.dataset.tagSlug;
             if (tags.has(slug)) el.classList.add('is-active');
     
-            el.addEventListener('click', toggleTagFilter);
+            el.addEventListener('click', searchPopup.toggleTagFilter);
         });
     })
+
+    window.searchPopup = searchPopup;
 
 })()

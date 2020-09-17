@@ -1,4 +1,6 @@
 
+
+
 #global-fab {
     position: fixed;
     top: 10rem;
@@ -16,11 +18,67 @@
 
     .search-appendum {
         transform-origin: 50% 50%;
-        transition: .3s ease;
+        transition: transform .3s ease;
         transform: scale(0);
 
         &.is-visible {
             transform: none;
         }
+    }
+}
+
+@mixin global-fab-position($top, $left, $right) {
+    #global-fab {
+        top: $top;
+        left: $left;
+        right: $right;
+    }
+}
+
+@mixin global-fab-color($fill, $background) {
+    #global-fab {
+        .the-button {
+            background-color: $background;
+        }
+
+        path {
+            fill: $fill;
+        }
+    }
+}
+
+body.category-wissen {
+    @include global-fab-position(10rem, 2rem, initial);
+    @include global-fab-color($white, $green);
+}
+
+body.category-denken {
+    @include global-fab-position(10rem, initial, 1.5rem);
+    @include global-fab-color($green, $black);
+}
+
+body.category-handeln {
+    @include global-fab-position(10rem, initial, 2rem);
+    @include global-fab-color($green, $white);
+}
+
+@include mobile() {
+    #global-fab {
+        .the-button {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+    }
+
+    body.category-wissen {
+        @include global-fab-position(9.25rem, initial, .25rem);
+    }
+    
+    body.category-denken {
+        @include global-fab-position(9.25rem, initial, .25rem);
+    }
+    
+    body.category-handeln {
+        @include global-fab-position(9.25rem, initial, .25rem);
     }
 }

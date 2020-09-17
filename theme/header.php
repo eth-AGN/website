@@ -20,6 +20,7 @@
 </head>
 
 <body <?php body_class(); ?>>
+
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'agn-theme' ); ?></a>
 
@@ -56,14 +57,14 @@
 		<div class="search-popup">
 			<div class="search-popup__header">
 				<div class="search-popup__column">
-					<form action="/" method="get">
+					<form class="search-form" action="/" method="get">
+						<input hidden type="text" name="cat" value="<?php echo agn_get_the_area() ?>">
 						<input class="search-input"
 							placeholder="Search"
 							type="text"
 							name="s"
 							id="search"
 							value="<?php the_search_query(); ?>">
-						<input hidden type="text" name="cat" value="<?php echo get_the_category()[0]->slug ?>">
 						<button hidden type="submit">submit</button>
 					</form>
 				</div>
@@ -123,7 +124,8 @@
 			<div id="primary-menu" class="menu">
 				<ul class="nav-menu">
 					<?php foreach ($urls as $category => $url) :
-						if (is_category($category) || is_page($category)):
+						$is_current_area = "is_$category";
+						if ($is_current_area()):
 						?>
 						<li class="page_item current_page_item is-covering <?php echo $category.'_page' ?>">
 							<a><?php echo $category ?></a>
@@ -138,21 +140,23 @@
 				</ul>
 			</div>
 
-			<div id="global-fab" data-initial-action="blank">
+			<?php $initial_action = is_single() ? 'cross' : 'blank' ?>
+			<div id="global-fab"
+				data-initial-action="<?php echo $initial_action ?>"
+				data-home-url="<?php echo agn_get_parent_archive_url() ?>">
 				<button class="the-button fab">
 					<svg class="icon-set" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90">
 						<defs>
 							<style>.cls-1{fill:#fff;}.cls-2{fill:#0f0;}</style>
 							<g class="icons">
-								<path id="arrow" d="M 19.51 50.31 L 19.51 39.69 L 0.33 39.69 C -0.09 43.218 -0.09 46.782 0.33 50.31 Z M 45 14.2 L 37.49 21.71 L 60.77 45 L 37.49 68.29 L 45 75.8 L 75.8 45 L 45 14.2 Z"/>
-								<path id="cross" d="M 59.27 23.22 L 45 37.49 L 30.73 23.22 L 23.22 30.73 L 37.49 45 L 23.22 59.27 L 30.73 66.78 L 45 52.51 L 59.27 66.78 L 66.78 59.27 L 52.51 45 L 66.78 30.73 L 59.27 23.22 Z"/>
+								<path id="arrow" d="M 0.05 46.773 C 0.066 47.166 0.086 47.56 0.112 47.953 C 0.138 48.347 0.169 48.74 0.206 49.133 C 0.242 49.526 0.283 49.918 0.33 50.31 L 19.51 50.31 L 19.51 45 L 19.51 39.69 L 0.33 39.69 C 0.283 40.082 0.242 40.474 0.206 40.867 C 0.169 41.26 0.138 41.653 0.112 42.047 C 0.086 42.44 0.066 42.834 0.05 43.227 C 0.034 43.621 0.024 44.015 0.019 44.409 C 0.014 44.803 0.014 45.197 0.019 45.591 C 0.024 45.985 0.034 46.379 0.05 46.773 M 60.77 45 L 37.49 21.71 L 45 14.2 L 45 14.2 L 75.8 45 L 45 75.8 L 37.49 68.29 L 60.77 45"/>
+								<path id="cross" d="M 23.22 59.27 C 25.723 61.773 28.227 64.277 30.73 66.78 C 35.487 62.023 40.243 57.267 45 52.51 C 49.757 57.267 54.513 62.023 59.27 66.78 L 66.78 59.27 L 52.51 45 L 66.78 30.73 L 59.27 23.22 C 59.27 23.22 59.27 23.22 59.27 23.22 C 54.513 27.977 49.757 32.733 45 37.49 C 40.243 32.733 35.487 27.977 30.73 23.22 C 28.227 25.723 25.723 28.227 23.22 30.73 C 27.977 35.487 32.733 40.243 37.49 45 C 32.733 49.757 27.977 54.513 23.22 59.27 M 66.821 44.728 L 66.821 44.728 L 66.821 44.728 L 66.821 44.728 L 66.821 44.728 L 66.821 44.728 L 66.821 44.728 L 66.821 44.728"/>
 								<path id="logo" d="M 23.34 23.34 C 18.03 28.648 14.853 35.727 14.416 43.223 C 13.98 50.718 16.314 58.118 20.973 64.007 C 25.631 69.895 32.295 73.87 39.69 75.17 L 39.69 60.42 C 37.342 59.624 35.21 58.296 33.46 56.54 C 30.401 53.481 28.68 49.327 28.68 45 C 28.68 40.673 30.401 36.519 33.46 33.46 C 36.519 30.401 40.673 28.68 45 28.68 C 49.327 28.68 53.481 30.401 56.54 33.46 C 59.599 36.519 61.32 40.673 61.32 45 C 61.32 49.327 59.599 53.481 56.54 56.54 C 54.79 58.296 52.658 59.624 50.31 60.42 L 50.31 75.17 C 57.938 73.816 64.776 69.616 69.433 63.425 C 74.091 57.234 76.23 49.5 75.416 41.796 C 74.603 34.091 70.896 26.975 65.048 21.893 C 59.201 16.81 51.637 14.131 43.894 14.4 C 36.151 14.669 28.792 17.865 23.31 23.34 Z"></path>
 								<path id="plus" d="M 39.69 19.51 L 39.69 39.69 L 19.51 39.69 L 19.51 50.31 L 39.69 50.31 L 39.69 70.49 L 50.31 70.49 L 50.31 50.31 L 70.49 50.31 L 70.49 39.69 L 50.31 39.69 L 50.31 19.51 L 39.69 19.51 Z"></path>
 								<path id="search" d="M 45 14.36 C 37.49 14.356 30.234 17.115 24.624 22.108 C 19.013 27.101 15.43 33.987 14.561 41.447 C 13.692 48.907 15.597 56.432 19.91 62.58 L 30.34 52.15 C 28.641 48.674 28.23 44.706 29.18 40.956 C 30.13 37.206 32.381 33.912 35.529 31.664 C 38.678 29.416 42.525 28.357 46.38 28.676 C 50.235 28.996 53.855 30.674 56.591 33.409 C 59.326 36.145 61.004 39.765 61.324 43.62 C 61.643 47.475 60.584 51.322 58.336 54.471 C 56.088 57.619 52.794 59.87 49.044 60.82 C 45.294 61.77 41.326 61.359 37.85 59.66 L 27.42 70.09 C 33.771 74.541 41.58 76.42 49.26 75.343 C 56.941 74.267 63.933 70.313 68.815 64.287 C 73.697 58.261 76.113 50.601 75.572 42.865 C 75.032 35.128 71.574 27.878 65.902 22.59 C 60.229 17.301 52.755 14.358 45 14.36 Z"></path>
 							</g>
 						</defs>
-						<circle class="cls-1" cx="45" cy="45" r="45"/>
-						<use class="initial cls-2" href="#blank"></use>
+						<use class="initial cls-2" href="#<?php echo $initial_action ?>"></use>
 						<path class="canvas cls-2"></path>
 						<path class="search-appendum cls-2" d="M 27.42 70.09 L 19.91 62.58 L 9.65 72.83 C 11.856 75.621 14.379 78.144 17.17 80.35 Z"></path>
 					</svg>

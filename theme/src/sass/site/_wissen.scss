@@ -1,5 +1,6 @@
 
 
+
 body.category-wissen {
     @include set-color-scheme(
         $color__wissen-background,
@@ -81,7 +82,9 @@ body.category-wissen {
     position: relative;
     margin-bottom: 0;
     padding-bottom: 4rem;
-    min-height: calc(100vh - 12.25rem);
+    padding-top: 4rem;
+    min-height: calc(100vh - #{7.25rem + $body__padding-top});
+    min-height: calc(-webkit-fill-available - #{7.25rem + $body__padding-top});
 
     .entry-header {
         display: flex;

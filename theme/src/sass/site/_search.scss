@@ -1,5 +1,5 @@
 body.search{
-    padding-top: 6rem;
+    padding-top: $body__padding-top + 2.75rem;
 
     &.category-denken{
         .search-popup{
@@ -43,10 +43,28 @@ body.search{
 
 }
 
+.posts-navigation .nav-previous {
+    float: none;
+    width: auto;
+}
+
+body.search {
+    .nav-links {
+        font-style: italic;
+
+        a:after {
+            content: ' →'
+        }
+    }
+}
+
 .search-results-container{
     padding: 2rem 0;
 
-    .post, .page {
+    .post, .page, .posts-navigation {
+        display: block;
+        overflow: initial;
+
         @mixin set-colors($background, $link, $link_hover){
             background-color: $background;
             a {
@@ -57,6 +75,8 @@ body.search{
                 }
             }
         }
+
+        @include set-colors($color__denken-background, $color__denken-link, $color__denken-link-hover);
 
         &.category-denken{
             @include set-colors($color__denken-background, $color__denken-link, $color__denken-link-hover);
@@ -75,14 +95,21 @@ body.search{
         padding: 0rem 0.5rem 0rem 2rem;
         background-color: white;
 
-        h2{
+        h2, .nav-previous {
+            display: inline;
             text-transform: none;
             font-size: 1.2rem;
             font-weight: normal;
-            a{
+            a {
                 text-decoration: none;
             }
         }
     }
 
+}
+
+@include mobile() {
+    body.search {
+        padding-top: $body__padding-top + 6.5rem;
+    }
 }

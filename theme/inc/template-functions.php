@@ -7,19 +7,27 @@
 
 function is_wissen() {
 	$cat = null;
-	if (count(get_the_category()) > 0) {
+	if ($_GET['cat']) {
+		$cat = $_GET['cat'];
+	} else if (count(get_the_category()) > 0) {
 		$cat = get_the_category()[0]->slug;
 	}
 	return is_page_template( 'page-wissen.php') || is_category('wissen') || $cat == 'wissen';
 }
 
 function is_denken() {
-	return is_page_template( 'page-denken.php' ) || is_bbpress();
+	$cat = null;
+	if ($_GET['cat']) {
+		$cat = $_GET['cat'];
+	}
+	return is_page_template( 'page-denken.php' ) || is_bbpress() || $cat == 'denken';
 }
 
 function is_handeln() {
 	$cat = null;
-	if (count(get_the_category()) > 0) {
+	if ($_GET['cat']) {
+		$cat = $_GET['cat'];
+	} else if (count(get_the_category()) > 0) {
 		$cat = get_the_category()[0]->slug;
 	}
 	return is_page_template('paged_handeln.php') || is_category('handeln') || $cat == 'handeln';

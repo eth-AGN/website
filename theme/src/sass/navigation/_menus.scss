@@ -410,7 +410,7 @@ body.category-handeln {
 
 
 
-@mixin set-spacing($top, $side, $tab-size) {
+@mixin set-spacing($top, $side, $bottom, $tab-size) {
 	.search-popup {
 		padding-top: $top;
 		padding-left: $side;
@@ -420,12 +420,12 @@ body.category-handeln {
 	}
 
 	.search-popup__filter {
-		height: calc(100vh - #{3*$tab-size + 6rem + $body-padding});
-		height: calc(-webkit-fill-available - #{3*$tab-size + 6rem + $body-padding});
+		height: calc(100vh - #{$top + 6rem + $bottom});
+		height: calc(-webkit-fill-available - #{$top + 6rem + $bottom});
 	}
 
 	.search-popup.filter-is-open {
-		max-height: calc(100vh - #{3*$tab-size - $top});
+		max-height: calc(100vh - #{$bottom});
 	}
 }
 
@@ -451,20 +451,20 @@ body.category-handeln {
 	}
 
 	body.category-wissen  {
-		@include set-spacing($body-padding, $body-padding, $tab-width);
+		@include set-spacing($body-padding, $body-padding, 3*$tab-width, $tab-width);
 	}
 
 	body.category-denken {
-		@include set-spacing(2*$tab-width, $body-padding, $tab-width);
+		@include set-spacing(2*$tab-width, $body-padding, $tab-width, $tab-width);
 		&.is-scrolled {
-			@include set-spacing($body-padding + .5rem, $body-padding, $body-padding)
+			@include set-spacing($body-padding + .5rem, $body-padding, $body-padding, $body-padding)
 		}
 	}
 
 	body.category-handeln {
-		@include set-spacing(3*$tab-width, $body-padding, $tab-width);
+		@include set-spacing(3*$tab-width, $body-padding, 0rem, $tab-width);
 		&.is-scrolled {
-			@include set-spacing(2*$body-padding + .5rem, $body-padding, $body-padding)
+			@include set-spacing(2*$body-padding + .5rem, $body-padding, 0rem, $body-padding)
 		}
 	}
 }

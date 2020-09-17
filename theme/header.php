@@ -58,7 +58,8 @@
 			<div class="search-popup__header">
 				<div class="search-popup__column">
 					<form class="search-form" action="/" method="get">
-						<input hidden type="text" name="cat" value="<?php echo agn_get_the_area() ?>">
+						<?php $category = $_GET['cat'] ? $_GET['cat'] : agn_get_the_area() ?>
+						<input hidden type="text" name="cat" value="<?php echo $category ?>">
 						<input class="search-input"
 							placeholder="Search"
 							type="text"
@@ -140,7 +141,11 @@
 				</ul>
 			</div>
 
-			<?php $initial_action = is_single() ? 'cross' : 'blank' ?>
+			<?php
+			$initial_action = 'blank';
+			if (is_search()) $initial_action = 'arrow';
+			else if (is_single()) $initial_action = 'cross';
+			?>
 			<div id="global-fab"
 				data-initial-action="<?php echo $initial_action ?>"
 				data-home-url="<?php echo agn_get_parent_archive_url() ?>">

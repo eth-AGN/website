@@ -19,6 +19,8 @@
     const tagString = window.sessionStorage['tag-filter'];
     const tags = new Set(tagString ? tagString.split(',') : []);
 
+    if (tags.size > 0) button.classList.add('is-active');
+
     const searchPopup = {
         isOpen: false,
         filterIsOpen: false,
@@ -62,7 +64,13 @@
                 searchPopup.tags.add(slug);
                 el.classList.add('is-active');
                 window.sessionStorage['tag-filter'] = Array.from(searchPopup.tags);
-            };
+            }
+
+            if (searchPopup.tags.size > 0) {
+                button.classList.add('is-active');
+            } else {
+                button.classList.remove('is-active');
+            }
         },
         // redirect user if any filters have been changed
         redirectIfDirty() {

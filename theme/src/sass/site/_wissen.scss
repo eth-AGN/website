@@ -9,6 +9,10 @@ body.category-wissen {
         $color__wissen-link,
         $color__wissen-link-hover
     );
+
+    .no-results {
+        padding-top: 5rem;
+    }
 }
 
 .wissen__posts {

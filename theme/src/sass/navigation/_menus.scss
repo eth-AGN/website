@@ -326,9 +326,16 @@ body.category-handeln {
 		transform: none;
 	}
 
+	&.is-active {
+		path {
+			fill: $black;
+		}
+	}
+
 	svg {
 		height: 100%;
 		path {
+			transition: .2s ease;
 			fill: $green;
 		}
 	}

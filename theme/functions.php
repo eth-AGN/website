@@ -181,6 +181,20 @@ function add_tags_to_query($query) {
 }
 add_action('pre_get_posts', 'add_tags_to_query');
 
+/**
+ * Add bbPress posts to search results
+ */
+function include_bbpress_search( $query ) {
+	
+    if ( $query->is_search ) {
+		$query->set( 'post_type', array( 'post', 'page', 'topic' ) );
+    }
+    
+    return $query;
+    
+}
+add_filter( 'pre_get_posts', 'include_bbpress_search' ); 
+
 function get_topic_tags() {
 	global $wpdb;
 

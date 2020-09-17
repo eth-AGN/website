@@ -163,23 +163,7 @@ if ( bbp_is_reply_edit() ) : ?>
 
 <?php else : ?>
 
-	<div id="no-reply-<?php bbp_topic_id(); ?>" class="bbp-no-reply">
-		<div class="bbp-template-notice">
-			<ul>
-				<li><?php is_user_logged_in()
-					? esc_html_e( 'You cannot reply to this topic.',               'bbpress' )
-					: esc_html_e( 'You must be logged in to reply to this topic.', 'bbpress' );
-				?></li>
-			</ul>
-		</div>
-
-		<?php if ( ! is_user_logged_in() ) : ?>
-
-			<?php bbp_get_template_part( 'form', 'user-login' ); ?>
-
-		<?php endif; ?>
-
-	</div>
+	<!-- User is not logged in, do nothing for now -->
 
 <?php endif; ?>
 

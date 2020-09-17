@@ -1,6 +1,8 @@
 
 
 body.category-denken {
+    padding-top: 2rem;
+
     @include set-color-scheme(
         $color__denken-background,
         $color__denken-navigation,
@@ -11,8 +13,10 @@ body.category-denken {
 
     .wordcloud {
         width: 100%;
-        height: calc(100vh - 6rem);
-        height: calc(-webkit-fill-available - 6rem);
+        height: calc(100vh - 2rem);
+        height: calc(-webkit-fill-available - 2rem);
+        padding-bottom: 2rem;
+
         a {
             color: $black;
             &:hover {
@@ -59,7 +63,7 @@ body.category-denken {
         padding: 1rem;
     }
 
-    > * {
+    > *:not(.no-results) {
         @include rounded-border($green);
         margin: 0;
     }

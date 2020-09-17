@@ -142,9 +142,9 @@
 			</div>
 
 			<?php
-			$initial_action = 'blank';
+			$initial_action = 'cross';
 			if (is_search()) $initial_action = 'arrow';
-			else if (is_single()) $initial_action = 'cross';
+			else if (is_page() || is_category()) $initial_action = 'blank';
 			?>
 			<div id="global-fab"
 				data-initial-action="<?php echo $initial_action ?>"

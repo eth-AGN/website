@@ -7,6 +7,10 @@ body.category-handeln {
         $color__handeln-link,
         $color__handeln-link-hover
     );
+
+    .no-results {
+        padding-top: 5rem;
+    }
 }
 
 .post.category-handeln {

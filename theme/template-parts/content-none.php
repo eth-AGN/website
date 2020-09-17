@@ -40,8 +40,9 @@
 			?>
 
 			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'agn-theme' ); ?></p>
+			<p><?php esc_html_e( 'Also double check whether you have any active tag filters that might prevent you from finding what you&rsquo;re looking for.', 'agn-theme' ); ?></p>
 			<?php
-			get_search_form();
+			//get_search_form();
 
 		endif;
 		?>

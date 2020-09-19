@@ -227,9 +227,36 @@ body.category-handeln {
 		}
 
 		&.category-wissen {
+			.wissen_page {
+				bottom: 2*$body-padding;
+			}
+
 			.denken_page {
 				bottom: $body-padding;
 			}
+		}
+	}
+
+	.current_page_item {
+		&.wissen_page:before {
+			background-color: $black;
+		}
+
+		&.denken_page:before {
+			background-color: $white;
+		}
+
+		&.handeln_page:before {
+			background-color: $green;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: $body-padding;
+			right: $body-padding;
 		}
 	}
 

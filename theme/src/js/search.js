@@ -26,6 +26,7 @@
         filterIsOpen: false,
         tags,
         toggle() {
+            if (Boolean(button.dataset.disabled)) return;
             searchPopup.isOpen = !searchPopup.isOpen;
             el.classList.toggle('is-open');
             button.classList.toggle('is-open');

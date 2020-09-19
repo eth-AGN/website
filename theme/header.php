@@ -105,7 +105,7 @@
 		<div class="main-navigation-overlay"></div>
 		<nav id="site-navigation" class="main-navigation">
 			<div id="search-menu">
-				<div class="search-icon">
+				<div class="search-icon" <?php echo is_search() ? 'data-disabled="true"' : '' ?>>
 					<svg viewbox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
 						<path fillmode="even-odd" d="
 							M 30 10
@@ -124,27 +124,28 @@
 
 			<div id="primary-menu" class="menu">
 				<ul class="nav-menu">
-					<?php foreach ($urls as $category => $url) :
+					<?php
+					foreach ($urls as $category => $url) :
 						$is_current_area = "is_$category";
-						if ($is_current_area()):
+
+						$classes = $category.'_page';
+						if ($is_current_area()) {
+							$classes = $classes.' current_page_item is-covering';
+						}
 						?>
-						<li class="page_item current_page_item is-covering <?php echo $category.'_page' ?>">
-							<a><?php echo $category ?></a>
-						</li>
-						<?php else: ?>
-						<li class="page_item <?php echo $category.'_page' ?>">
-							<a href="<?php echo $url ?>">
-								<?php echo $category ?>
-							</a>
-						</li>
-					<?php endif; endforeach ?>
+							<li class="page_item <?php echo $classes ?>">
+								<a <?php echo $is_current_area() ? '' : 'href="'.$url.'"' ?>>
+									<?php echo $category ?>
+								</a>
+							</li>
+					<?php
+					endforeach ?>
 				</ul>
 			</div>
 
 			<?php
 			$initial_action = 'cross';
-			if (is_search()) $initial_action = 'arrow';
-			else if (is_page() || is_category()) $initial_action = 'blank';
+			if (is_page() || is_category()) $initial_action = 'blank';
 			?>
 			<div id="global-fab"
 				data-initial-action="<?php echo $initial_action ?>"

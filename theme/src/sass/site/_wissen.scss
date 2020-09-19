@@ -88,7 +88,6 @@ body.category-wissen {
     padding-bottom: 4rem;
     padding-top: 4rem;
     min-height: calc(100vh - #{7.25rem + $body__padding-top});
-    min-height: calc(-webkit-fill-available - #{7.25rem + $body__padding-top});
 
     .entry-header {
         display: flex;

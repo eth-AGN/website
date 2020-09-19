@@ -407,7 +407,6 @@ body.category-handeln {
 	.search-popup__filter {
 		width: 100%;
 		height: calc(100vh - 9.25rem);
-		height: calc(-webkit-fill-available - 9.25rem);
 		// transform: translateY(-100%);
 
 		.wordcloud {
@@ -434,7 +433,6 @@ body.category-handeln {
 
 	.search-popup__filter {
 		height: calc(100vh - #{$top + 6rem + $bottom});
-		height: calc(-webkit-fill-available - #{$top + 6rem + $bottom});
 	}
 
 	.search-popup.filter-is-open {

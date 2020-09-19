@@ -191,9 +191,25 @@ function include_bbpress_search( $query ) {
     }
     
     return $query;
-    
 }
-add_filter( 'pre_get_posts', 'include_bbpress_search' ); 
+add_filter( 'pre_get_posts', 'include_bbpress_search' );
+
+/**
+ * If user is not logged in, remove private posts from WISSEN
+ */
+function restrict_private_posts($query) {
+	if (!is_user_logged_in()) {
+		$meta_query = array(
+			array(
+			   'key' => 'is_public',
+			   'value' => 1,
+			   'compare' => '==',
+			),
+		);
+		// $query->query_vars['meta_query'] = $meta_query;
+	}
+}
+add_filter( 'pre_get_posts', 'restrict_private_posts' );
 
 function get_topic_tags() {
 	global $wpdb;

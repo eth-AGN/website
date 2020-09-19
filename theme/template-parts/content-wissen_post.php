@@ -48,10 +48,10 @@ $location = get_field('location');
         <a class="button is-rounded is-green" href="<?php the_field('source_url') ?>" target="_blank">
             link to source
         </a>
-        <a class="button is-rounded is-white">
+        <a class="button is-rounded is-white" style="visibility: hidden;">
             add a comment
         </a>
-        <a class="button is-rounded is-white">
+        <a class="button is-rounded is-white" style="visibility: hidden;">
             read comments
         </a>
     </div>

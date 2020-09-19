@@ -164,7 +164,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 function add_tags_to_query($query) {
 	// echo $_GET['tag'];
- 	if ($_GET['tag'] && ! empty($_GET['tag'])) {
+ 	if (isset($_GET['tag']) && ! empty($_GET['tag'])) {
 		if ($query->is_category()) {
 			$query->query_vars['tag'] = $_GET['tag'];
 		}
@@ -198,23 +198,24 @@ add_filter( 'pre_get_posts', 'include_bbpress_search' );
  * If user is not logged in, remove private posts from WISSEN
  */
 function restrict_private_posts($query) {
-	if (!is_user_logged_in()) {
-		$meta_query = array(
-			array(
-			   'key' => 'is_public',
-			   'value' => 1,
-			   'compare' => '==',
-			),
-		);
-		// $query->query_vars['meta_query'] = $meta_query;
+	// $query->set('meta_key', 'is_public');
+	// $query->set('meta_value', '1');
+	// if (!is_user_logged_in() || true) {
+	// 	// $query->set('meta_query',$meta_query);
+	// 	// echo var_dump($query->get('meta_query'));
+	// }
+	// $query->set('category_name', 'wissen');
+	if ((is_category('wissen') || $query->is_search) && !is_user_logged_in()) {
+		$query->set('meta_key', 'is_public');
+		$query->set('meta_value', '1');
 	}
+	return $query;
 }
 add_filter( 'pre_get_posts', 'restrict_private_posts' );
 
 function get_topic_tags() {
 	global $wpdb;
 
-	$cat = get_category($category);
 	$tags = $wpdb->get_results
 	("
 		SELECT tag.term_id as term_id, tag.name as name, COUNT(post.id) as count

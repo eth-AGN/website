@@ -10,7 +10,6 @@
 query_posts(array('category_name' => 'wissen'));
 get_header();
 ?>
-    
     <div id="primary" class="content-area">
 		<main id="main" class="site-main">
 

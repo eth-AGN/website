@@ -45,7 +45,7 @@ $location = get_field('location');
     
 
     <div class="actions">
-        <a class="button is-rounded is-green" href="<?php the_field('source_url') ?>">
+        <a class="button is-rounded is-green" href="<?php the_field('source_url') ?>" target="_blank">
             link to source
         </a>
         <a class="button is-rounded is-white">

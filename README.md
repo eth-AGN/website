@@ -14,12 +14,16 @@ To get the website running locally:
 
 ### Setup
 Once the local WordPress instance is running...
-1. Install all required WordPress plugins:
+1. Complete the Wordpress setup and log in
+   Recommended settings:
+   - Username: `admin`
+   - Password: `admin`
+2. Install and activate all required WordPress plugins:
    - Advanced Custom Fields (v5.9)
    - bbPress
    - TinyMCE Advanced
    - Advanced TinyMCE Configuration
-2. Change the theme to `Agn_Theme` (under Appearance -> Themes)
-3. Change the permalink format to "Post name" (under Settings -> Permalinks)
-4. Get a copy of the live database by visiting [agn.arch.ethz.ch] and creating an export file (under Tools -> Export)
-5. Import the created file locally (under Tools -> Import -> WordPress -> Install Now -> Run Importer)
+3. Change the theme to `Agn Theme` (under Appearance -> Themes)
+4. Change the permalink format to "Post name" (under Settings -> Permalinks)
+5. Get a copy of the live database by visiting (agn.arch.ethz.ch) and creating an export file (under Tools -> Export)
+6. Import the created file locally (under Tools -> Import -> WordPress -> Install Now -> Run Importer)

@@ -58,7 +58,7 @@ body.search{
 
 }
 
-.posts-navigation .nav-previous {
+.posts-navigation .nav-links > * {
     float: none;
     width: auto;
 }
@@ -126,7 +126,7 @@ body.search {
         margin-right: .5rem;
         background-color: white;
 
-        h2, .nav-previous {
+        h2, .nav-links > * {
             display: inline;
             text-transform: none;
             font-size: 1.2rem;

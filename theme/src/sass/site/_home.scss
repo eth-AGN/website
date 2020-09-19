@@ -2,6 +2,8 @@
 body.home {
     background-color: $green;
     padding: 1rem;
+    height: 100vh;
+    max-height: -webkit-fill-available;
 
     #content {
         position: relative;

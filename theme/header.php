@@ -81,13 +81,13 @@
 					$topic_tags = get_topic_tags();
 					$tags = array();
 					foreach ($post_tags as $tag) {
-						$tags[$tag->name] = $tag;
+						$tags[strtolower($tag->name)] = $tag;
 					}
 					foreach ($topic_tags as $tag) {
-						if (isset($tags[$tag->name])) {
-							$tags[$tag->name]->count += $tag->count;
+						if (isset($tags[strtolower($tag->name)])) {
+							$tags[strtolower($tag->name)]->count += $tag->count;
 						} else {
-							$tags[$tag->name] = $tag;
+							$tags[strtolower($tag->name)] = $tag;
 						}
 					}
 					$data = array();

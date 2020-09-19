@@ -225,6 +225,12 @@ body.category-handeln {
 			max-height: 0 !important;
 			pointer-events: none;
 		}
+
+		&.category-wissen {
+			.denken_page {
+				bottom: $body-padding;
+			}
+		}
 	}
 
 	body, .search-popup {

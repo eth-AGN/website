@@ -83,6 +83,12 @@ body.category-handeln {
     }
 }
 
+@include mobile() {
+    .post.category-handeln {
+        flex-direction: column;
+    }
+}
+
 body.category-handeln .posts-container .post {
     margin: 0;
     overflow: hidden;

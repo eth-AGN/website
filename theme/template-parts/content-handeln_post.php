@@ -50,10 +50,10 @@ $location = get_field('location');
                 >
                     find location
                 </a>
-                <button class="action has-plus is-white is-rounded" style="visibility: hidden;">
+                <button class="action has-plus is-white is-rounded" style="display: none">
                     add a new comment
                 </button>
-                <button class="action is-rounded is-white" style="visibility: hidden;">
+                <button class="action is-rounded is-white" style="display: none">
                     read all
                 </button>
             </div>

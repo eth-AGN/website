@@ -15,6 +15,10 @@ import WordCloud from 'wordcloud';
             return;
         }
 
+        for (let item of list) {
+            item[0] = item[0].toUpperCase();
+        }
+
         const maxSize = list.reduce((max, item) => Math.max(max, item[1]), 0)
         const minSize = list.reduce((min, item) => Math.min(min, item[1]), maxSize)
 

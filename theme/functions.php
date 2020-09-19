@@ -206,8 +206,20 @@ function restrict_private_posts($query) {
 	// }
 	// $query->set('category_name', 'wissen');
 	if ((is_category('wissen') || $query->is_search) && !is_user_logged_in()) {
-		$query->set('meta_key', 'is_public');
-		$query->set('meta_value', '1');
+		$query->set('meta_query', array(
+			'relation' => 'OR',
+			array(
+				'key' => 'is_public',
+				'value' => '1',
+			),
+			array(
+				'key' => 'is_public',
+				'value' => '',
+				'compare' => 'NOT EXISTS'
+			),
+		));
+		// $query->set('meta_key', 'is_public');
+		// $query->set('meta_value', '1');
 	}
 	return $query;
 }

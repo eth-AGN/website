@@ -25,7 +25,7 @@
 		</header>
 
 		<div class="thumb">
-			<?php agn_theme_post_thumbnail(); ?>
+			<?php the_post_thumbnail(); ?>
 		</div>
 
 		<div class="schraffur">

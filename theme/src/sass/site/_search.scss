@@ -93,6 +93,11 @@ body.search {
         display: block;
         overflow: initial;
 
+        margin-bottom: 1.5rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+
         @mixin set-colors($background, $text, $link, $link_hover) {
             background-color: $background;
 

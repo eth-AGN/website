@@ -44,7 +44,7 @@ import WordCloud from 'wordcloud';
                 list: list,
                 fontFamily: 'Helvetica Neue',
                 weightFactor: fontSize,
-                gridSize: 32,
+                gridSize: 24,
                 minRotation: 0,
                 maxRotation: 0,
                 drawOutOfBound: true,

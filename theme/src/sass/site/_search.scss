@@ -87,16 +87,13 @@ body.search {
 }
 
 .search-results-container{
-    padding: 2rem 0;
+    padding: 2rem 0 .5rem;
 
-    .post, .page, .topic, .posts-navigation {
+    .post, .page, .topic, .nav-links > * {
         display: block;
         overflow: initial;
 
         margin-bottom: 1.5rem;
-        &:last-child {
-            margin-bottom: 0;
-        }
 
         @mixin set-colors($background, $text, $link, $link_hover) {
             background-color: $background;
@@ -126,15 +123,27 @@ body.search {
         margin-right: .5rem;
         background-color: white;
 
-        h2, .nav-links > * {
+        h2, a {
             display: inline;
             text-transform: none;
             font-size: 1.2rem;
             font-weight: normal;
-            a {
-                text-decoration: none;
-            }
+            text-decoration: none;
         }
+    }
+
+    .posts-navigation {
+        margin-bottom: 0;
+        
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .nav-next {
+        padding: 0 2rem 0 .5rem;
+        margin-right: 0;
     }
 
 }

@@ -24,7 +24,7 @@
 			</p>
 		</header>
 
-		<div id="thumb">
+		<div class="thumb">
 			<?php agn_theme_post_thumbnail(); ?>
 		</div>
 

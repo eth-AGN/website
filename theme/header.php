@@ -66,7 +66,7 @@
 							name="s"
 							id="search"
 							value="<?php the_search_query(); ?>">
-						<button hidden type="submit">submit</button>
+						<button style="position: fixed; pointer-events: none; opacity: 0; top: -100rem;" type="submit">submit</button>
 					</form>
 				</div>
 				<div class="search-popup__column">

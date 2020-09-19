@@ -71,5 +71,17 @@ $location = get_field('location');
             ) );
             ?>
         </div><!-- .entry-content -->
+
+
+        <p class="tags">
+        <?php
+            $tags = get_the_tags();
+            $tags = array_map(function($tag) {
+                $url = get_tag_link($tag);
+                return "<a href=\"$url?cat=handeln\">$tag->name</a>";
+            }, $tags);
+            echo join(' | ', $tags);
+            ?>
+        </p>
     </div>
 </article><!-- #post-<?php the_ID(); ?> -->

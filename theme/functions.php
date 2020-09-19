@@ -181,6 +181,19 @@ function add_tags_to_query($query) {
 }
 add_action('pre_get_posts', 'add_tags_to_query');
 
+
+function add_category_to_tag_archive($query) {
+	if ($query->is_tag) {
+		if (is_wissen()) {
+			$query->set('category_name', 'wissen');
+		}
+		if (is_handeln()) {
+			$query->set('category_name', 'handeln');
+		}
+	}
+}
+add_action('pre_get_posts', 'add_category_to_tag_archive');
+
 /**
  * Add bbPress posts to search results
  */

@@ -237,19 +237,7 @@ body.category-handeln {
 		}
 	}
 
-	.current_page_item {
-		&.wissen_page:before {
-			background-color: $black;
-		}
-
-		&.denken_page:before {
-			background-color: $white;
-		}
-
-		&.handeln_page:before {
-			background-color: $green;
-		}
-
+	body.category-wissen .current_page_item {
 		&:before {
 			content: '';
 			position: absolute;
@@ -257,6 +245,7 @@ body.category-handeln {
 			bottom: 0;
 			left: $body-padding;
 			right: $body-padding;
+			background-image: linear-gradient(to top, rgba($black, 1), rgba($black, 0));
 		}
 	}
 

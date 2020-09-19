@@ -22,7 +22,7 @@ get_header();
 				?>
 			</header><!-- .page-header -->
 
-            <div class="handeln__posts-container">
+            <div class="posts-container">
                 <?php
                 /* Start the Loop */
                 while ( have_posts() ) :

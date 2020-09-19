@@ -22,22 +22,32 @@ get_header();
 				?>
 			</header><!-- .page-header -->
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+			<div class="posts-container">
 
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
+				<?php
+				/* Start the Loop */
+				while ( have_posts() ) :
+					the_post();
 
-			endwhile;
+					/*
+					* Include the Post-Type-specific template for the content.
+					* If you want to override this in a child theme, then include a file
+					* called content-___.php (where ___ is the Post Type name) and that will be used instead.
+					*/
+					if (is_wissen()) {
+						get_template_part( 'template-parts/content-wissen', get_post_type() );
+					} else if (is_handeln()) {
+						get_template_part( 'template-parts/content-handeln', get_post_type() );
+					} else {
+						get_template_part( 'template-parts/content', get_post_type() );
+					}
 
-			the_posts_navigation();
+				endwhile;
 
+				the_posts_navigation();
+				?>
+			</div>
+		<?php
 		else :
 
 			get_template_part( 'template-parts/content', 'none' );

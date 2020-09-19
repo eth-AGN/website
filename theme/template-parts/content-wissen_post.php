@@ -40,8 +40,16 @@ $location = get_field('location');
         </div><!-- .entry-content -->
     </div>
 
-    
-    <?php the_tags('<p class="tags">',' | ', '</p>'); ?>
+    <p class="tags">
+    <?php
+        $tags = get_the_tags();
+        $tags = array_map(function($tag) {
+            $url = get_tag_link($tag);
+            return "<a href=\"$url?cat=wissen\">$tag->name</a>";
+        }, $tags);
+        echo join(' | ', $tags);
+        ?>
+    </p>
     
 
     <div class="actions">

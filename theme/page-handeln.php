@@ -16,7 +16,7 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-            <div class="handeln__posts-container">
+            <div class="posts-container">
                 <?php
                 /* Start the Loop */
                 while ( have_posts() ) :

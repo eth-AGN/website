@@ -24,6 +24,12 @@
 			</p>
 		</header>
 
-		<?php agn_theme_post_thumbnail(); ?>
+		<div id="thumb">
+			<?php agn_theme_post_thumbnail(); ?>
+		</div>
+
+		<div class="schraffur">
+			<img src="<?php echo get_template_directory_uri(); ?>/assets/img/agn-schraffuren/festival-past.svg" alt="Schraffur" />
+		</div>
 	</a>
 </article><!-- #post-<?php the_ID(); ?> -->

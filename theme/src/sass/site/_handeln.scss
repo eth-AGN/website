@@ -96,7 +96,7 @@ body.category-handeln {
         overflow: hidden;
         position: relative;
 
-        img {
+        #thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -119,6 +119,20 @@ body.category-handeln {
                 font-weight: normal;
                 font-size: 1.25rem;
             }
+        }
+
+        .schraffur{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            transition: opacity 0.3s;
+        }
+
+    }
+
+    .post:hover {
+        .schraffur{
+            opacity: 0;
         }
     }
 }

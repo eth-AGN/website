@@ -40,6 +40,10 @@ $location = get_field('location');
         </div><!-- .entry-content -->
     </div>
 
+    
+    <?php the_tags('<p class="tags">',' | ', '</p>'); ?>
+    
+
     <div class="actions">
         <a class="button is-rounded is-green" href="<?php the_field('source_url') ?>">
             link to source

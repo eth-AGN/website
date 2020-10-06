@@ -24,6 +24,18 @@ get_header(); ?>
                         <?php bbp_topic_post_date(); ?>
                     </p>
                     <h1 class="entry-title"><?php bbp_topic_title(); ?></h1>
+
+
+										<p class="tags is-black">
+												<?php
+												$tags = bbp_get_topic_tags();
+												$tags = array_map(function($tag) {
+														$url = get_tag_link($tag);
+														return "<a class=\"is-black\" href=\"$url?cat=handeln\">$tag->name</a>";
+												}, $tags);
+												echo join(' | ', $tags);
+												?>
+										</p>
                 </header>
 
                 <?php bbp_get_template_part( 'content', 'single-topic' ); ?>

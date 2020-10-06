@@ -7,6 +7,18 @@
  * @package Agn_Theme
  */
 
+$format = get_field('format');
+$current_date = new DateTime();
+$event_date = DateTime::createFromFormat('d/m/Y H:i', get_field('event_date'));
+
+$time_pos = 'present';
+if ($event_date) {
+	if ($current_date > $event_date) {
+		$time_pos = 'past';
+	} else if ($current_date < $event_date) {
+		$time_pos = 'future';
+	}
+}
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -17,10 +29,10 @@
 				<?php the_title() ?>
 			</h2>
 			<p class="entry-date">
-				<?php echo get_field('event_date', get_the_ID()); ?>
+				<?php the_field('display_date'); ?>
 			</p>
 			<p class="entry-location">
-				<?php echo get_field('location', get_the_ID()); ?>
+				<?php the_field('location'); ?>
 			</p>
 		</header>
 
@@ -29,7 +41,7 @@
 		</div>
 
 		<div class="schraffur">
-			<img src="<?php echo get_template_directory_uri(); ?>/assets/img/agn-schraffuren/festival-past.svg" alt="Schraffur" />
+			<img src="<?php echo get_template_directory_uri()."/assets/img/agn-schraffuren/$format-$time_pos.svg"; ?>" alt="Schraffur" />
 		</div>
 	</a>
 </article><!-- #post-<?php the_ID(); ?> -->

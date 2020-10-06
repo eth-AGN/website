@@ -207,37 +207,6 @@ function include_bbpress_search( $query ) {
 }
 add_filter( 'pre_get_posts', 'include_bbpress_search' );
 
-/**
- * If user is not logged in, remove private posts from WISSEN
- */
-function restrict_private_posts($query) {
-	// $query->set('meta_key', 'is_public');
-	// $query->set('meta_value', '1');
-	// if (!is_user_logged_in() || true) {
-	// 	// $query->set('meta_query',$meta_query);
-	// 	// echo var_dump($query->get('meta_query'));
-	// }
-	// $query->set('category_name', 'wissen');
-	if ((is_category('wissen') || $query->is_search) && !is_user_logged_in()) {
-		$query->set('meta_query', array(
-			'relation' => 'OR',
-			array(
-				'key' => 'is_public',
-				'value' => '1',
-			),
-			array(
-				'key' => 'is_public',
-				'value' => '',
-				'compare' => 'NOT EXISTS'
-			),
-		));
-		// $query->set('meta_key', 'is_public');
-		// $query->set('meta_value', '1');
-	}
-	return $query;
-}
-add_filter( 'pre_get_posts', 'restrict_private_posts' );
-
 function get_topic_tags() {
 	global $wpdb;
 

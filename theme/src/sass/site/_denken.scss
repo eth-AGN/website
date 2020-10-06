@@ -1,4 +1,5 @@
 
+$wordcloud-height: calc(100vh - 2rem);
 
 body.category-denken {
     padding-top: 2rem;
@@ -13,7 +14,10 @@ body.category-denken {
 
     .wordcloud {
         width: 100%;
-        height: calc(100vh - 2rem);
+        position: fixed !important;
+        top: 1rem;
+        z-index: 0;
+        height: $wordcloud-height;
         padding-bottom: 2rem;
 
         a {
@@ -28,6 +32,10 @@ body.category-denken {
 .denken__posts-container {
     width: 100%;
     margin-bottom: 2rem;
+    margin-top: $wordcloud-height;
+    background-color: $color__denken-background;
+    position: relative;
+    z-index: 1;
 
     a.topic {
         position: relative;

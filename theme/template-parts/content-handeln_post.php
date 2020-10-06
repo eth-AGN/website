@@ -8,7 +8,9 @@
  */
 
 $date = get_field('event_date');
+$display_date = get_field('display_date');
 $location = get_field('location');
+$location_url = get_field('location_url');
 ?>
 
 <hr class="is-black">
@@ -21,7 +23,7 @@ $location = get_field('location');
                     <?php the_title() ?>
                 </h2>
                 <p class="entry-date">
-                    <?php echo $date; ?>
+                    <?php echo $display_date; ?>
                 </p>
                 <p class="entry-location">
                     <?php echo $location; ?>
@@ -29,27 +31,28 @@ $location = get_field('location');
             </div>
 
             <div class="actions">
-                <a class="action has-plus button is-white is-rounded" target="_blank" ref="noopener noreferrer"
-                <?php
-                $date_obj = DateTime::createFromFormat('d/m/Y H:i', $date);
-                $gcal_query = http_build_query(array(
-                    'text' => get_the_title(),
-                    'date' => $date_obj->format('Ymd').'/'.($date_obj->format('Ymd') + 1),
-                    'details' => 'Event website: '.get_permalink(),
-                    'location' => $location
-                ));
-                echo 'href="https://calendar.google.com/calendar/r/eventedit?'.$gcal_query.'"';
-                ?>
-                >
-                    add to calendar
-                </a>
-                <a class="action button is-white is-rounded" target="_blank" ref="noopener noreferrer"
-                <?php
-                echo 'href="https://www.google.com/maps/search/'.urlencode($location).'"';
-                ?>
-                >
-                    find location
-                </a>
+                <?php if ($date): ?>
+                    <a class="action has-plus button is-white is-rounded" target="_blank" ref="noopener noreferrer"
+                        <?php
+                        $date_obj = DateTime::createFromFormat('d/m/Y H:i', $date);
+                        $gcal_query = http_build_query(array(
+                            'text' => get_the_title(),
+                            'date' => $date_obj->format('Ymd').'/'.($date_obj->format('Ymd') + 1),
+                            'details' => 'Event website: '.get_permalink(),
+                            'location' => $location
+                        ));
+                        echo 'href="https://calendar.google.com/calendar/r/eventedit?'.$gcal_query.'"';
+                        ?>
+                    >
+                        add to calendar
+                    </a>
+                <?php endif; ?>
+                <?php if ($location_url): ?>
+                    <a class="action button is-white is-rounded" target="_blank" ref="noopener noreferrer"
+                            href="<?php echo $location_url ?>">
+                        find location
+                    </a>
+                <?php endif; ?>
                 <button class="action has-plus is-white is-rounded" style="display: none">
                     add a new comment
                 </button>

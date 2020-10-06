@@ -6,9 +6,8 @@
  *
  * @package Agn_Theme
  */
-
-$date = get_field('event_date');
-$location = get_field('location');
+global $wp;
+$current_url = home_url(add_query_arg(array(), $wp->request));
 ?>
 
 <hr class="is-white">
@@ -53,9 +52,15 @@ $location = get_field('location');
     
 
     <div class="actions">
-        <a class="button is-rounded is-green" href="<?php the_field('source_url') ?>" target="_blank">
-            link to source
-        </a>
+        <?php if (get_field('is_public') || is_user_logged_in()): ?>
+            <a class="button is-rounded is-green" href="<?php the_field('source_url') ?>" target="_blank">
+                link to source
+            </a>
+        <?php else: ?>
+            <a class="button is-rounded is-green" href="<?php echo wp_login_url($current_url) ?>">
+                login to view source
+            </a>
+        <?php endif; ?>
         <a class="button is-rounded is-white" style="display: none">
             add a comment
         </a>

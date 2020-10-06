@@ -7,7 +7,12 @@
  * @package Agn_Theme
  */
 
-query_posts(array('category_name' => 'handeln'));
+query_posts(array(
+    'category_name' => 'handeln',
+    'meta_key'		=> 'event_date',
+	'orderby'		=> 'meta_value',
+	'order'			=> 'DESC'
+));
 get_header();
 ?>
 

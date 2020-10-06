@@ -181,6 +181,10 @@
 	<div class="loading-screen"></div>
 
 	<div class="text-border">
+		<a class="link link-top" href="<?php echo home_url() ?>"></a>
+		<a class="link link-bottom" href="<?php echo home_url() ?>"></a>
+		<a class="link link-left" href="<?php echo home_url() ?>"></a>
+		<a class="link link-right" href="<?php echo home_url() ?>"></a>
 		<div class="border border-top"></div>
 		<div class="border border-bottom"></div>
 		<div class="border border-left"></div>

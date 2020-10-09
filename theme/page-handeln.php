@@ -11,7 +11,8 @@ query_posts(array(
     'category_name' => 'handeln',
     'meta_key'		=> 'event_date',
 	'orderby'		=> 'meta_value',
-	'order'			=> 'DESC'
+    'order'			=> 'DESC',
+    'posts_per_page' => 100
 ));
 get_header();
 ?>

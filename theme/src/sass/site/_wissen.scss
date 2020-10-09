@@ -13,14 +13,14 @@ body.category-wissen {
     .no-results {
         padding-top: 5rem;
     }
+
 }
 
-.wissen__posts {
+.category-wissen .posts-container {
     display: table;
     width: 100%;
     max-width: 100%;
     overflow: hidden;
-
     .post {
         margin: 0;
         display: contents;
@@ -67,6 +67,7 @@ body.category-wissen {
             position: absolute;
             height: 100%;
             width: 1rem;
+            z-index: 1;
         }
 
         &:before {

@@ -5,34 +5,6 @@
  * @package Agn_Theme
  */
 
-function is_wissen() {
-	$cat = null;
-	if ($_GET['cat']) {
-		$cat = $_GET['cat'];
-	} else if (!is_home() && count(get_the_category()) > 0) {
-		$cat = get_the_category()[0]->slug;
-	}
-	return is_page_template( 'page-wissen.php') || is_category('wissen') || $cat == 'wissen';
-}
-
-function is_denken() {
-	$cat = null;
-	if ($_GET['cat']) {
-		$cat = $_GET['cat'];
-	}
-	return is_page_template( 'page-denken.php' ) || is_bbpress() || $cat == 'denken';
-}
-
-function is_handeln() {
-	$cat = null;
-	if ($_GET['cat']) {
-		$cat = $_GET['cat'];
-	} else if (!is_home() && count(get_the_category()) > 0) {
-		$cat = get_the_category()[0]->slug;
-	}
-	return is_page_template('paged_handeln.php') || is_category('handeln') || $cat == 'handeln';
-}
-
 /**
  * Adds custom classes to the array of body classes.
  *

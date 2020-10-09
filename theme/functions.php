@@ -162,6 +162,35 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+function is_wissen() {
+	$cat = null;
+	if ($_GET['cat']) {
+		$cat = $_GET['cat'];
+	} else if (!is_home() && count(get_the_category()) > 0) {
+		$cat = get_the_category()[0]->slug;
+	}
+	return is_page_template( 'page-wissen.php') || is_category('wissen') || $cat == 'wissen';
+}
+
+function is_denken() {
+	$cat = null;
+	if ($_GET['cat']) {
+		$cat = $_GET['cat'];
+	}
+	return is_page_template( 'page-denken.php' ) || is_bbpress() || $cat == 'denken';
+}
+
+function is_handeln() {
+	$cat = null;
+	if ($_GET['cat']) {
+		$cat = $_GET['cat'];
+	} else if (!is_home() && count(get_the_category()) > 0) {
+		$cat = get_the_category()[0]->slug;
+	}
+	return is_page_template('paged_handeln.php') || is_category('handeln') || $cat == 'handeln';
+}
+
 function add_tags_to_query($query) {
 	// echo $_GET['tag'];
  	if (isset($_GET['tag']) && ! empty($_GET['tag'])) {
@@ -270,4 +299,28 @@ function get_forum_id_by_name($name) {
 	} else {
 		return null;
 	}
+}
+
+function display_global_wordcloud() {
+	$post_tags = get_tags();
+	$topic_tags = get_topic_tags();
+	$tags = array();
+	foreach ($post_tags as $tag) {
+		$tags[strtolower($tag->name)] = $tag;
+	}
+	foreach ($topic_tags as $tag) {
+		if (isset($tags[strtolower($tag->name)])) {
+			$tags[strtolower($tag->name)]->count += $tag->count;
+		} else {
+			$tags[strtolower($tag->name)] = $tag;
+		}
+	}
+	$data = array();
+	foreach ($tags as $tag) {
+		$slug = $tag->slug ? $tag->slug : $tag->name;
+		$data[] = [$tag->name, $tag->count, ['data-tag-slug' => $slug]];
+	}
+
+	$json = htmlspecialchars(json_encode($data));
+	echo "<div class=\"wordcloud\" data-wordcloud-list=\"$json\"></div>";
 }

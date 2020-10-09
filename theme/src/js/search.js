@@ -103,14 +103,27 @@
 
     filterButton.addEventListener('click', searchPopup.toggleFilterPopup);
 
+    function denkenToggleTagFilter(event) {
+        console.log(el);
+        searchPopup.toggleTagFilter(event);
+        searchPopup.redirectIfDirty();
+    }
+
     // wait for the wordcloud to finish rendering until registering event listeners
-    window.addEventListener('wordcloud:ready', () => {
+    window.addEventListener('wordcloud:ready', event => {
+        console.log(event);
         document.querySelectorAll('.search-popup__filter a').forEach(el => {
             const slug = el.dataset.tagSlug;
             if (tags.has(slug)) el.classList.add('is-active');
-    
+            
             el.addEventListener('click', searchPopup.toggleTagFilter);
         });
+        document.querySelectorAll('.category-denken .site-main .wordcloud a').forEach(el => {
+            const slug = el.dataset.tagSlug;
+            if (tags.has(slug)) el.classList.add('is-active');
+    
+            el.addEventListener('click', denkenToggleTagFilter);
+        })
     })
 
     window.searchPopup = searchPopup;

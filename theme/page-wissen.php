@@ -7,14 +7,17 @@
  * @package Agn_Theme
  */
 
-query_posts(array('category_name' => 'wissen'));
+query_posts(array(
+	'category_name' => 'wissen',
+	'posts_per_page' => 100
+));
 get_header();
 ?>
     <div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
 		<?php if ( have_posts() ) : ?>
-			<div class="wissen__posts">
+			<div class="posts-container">
 				<?php
 				/* Start the Loop */
 				while ( have_posts() ) :
@@ -28,6 +31,8 @@ get_header();
 					get_template_part( 'template-parts/content-wissen', get_post_type() );
 
 				endwhile;
+
+				the_posts_navigation();
 				?>
 			</div>
 		<?php else :

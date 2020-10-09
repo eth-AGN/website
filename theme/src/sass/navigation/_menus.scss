@@ -4,12 +4,10 @@
 /** category dependent styles */
 /*****************************/
 
-$tab-width: 3.5rem;
+$tab-width: $nav__tab-width;
 $tab-width-expanded: 4.5rem;
 $body-padding: $body__padding-left;
 $search-icon-size: 4rem;
-
-$global-fab-width: 4rem;
 
 // if no category class is set, use the following styles
 body, .search-popup {
@@ -429,10 +427,6 @@ body.category-handeln {
 			width: 100%;
 			height: 100%;
 		}
-
-		a {
-			cursor: pointer;
-		}
 	}
 }
 
@@ -501,11 +495,11 @@ body {
 	@mixin set-colors($background, $active-background, $active-text) {
 		.search-popup__filter {
 			@include stripes($background);
+		}
 
-			.is-active {
-				background-color: $active-background;
-				color: $active-text;
-			}
+		.wordcloud .is-active {
+			background-color: $active-background;
+			color: $active-text;
 		}
 
 		.search-popup {

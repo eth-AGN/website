@@ -31,7 +31,7 @@ get_header(); ?>
 												$tags = bbp_get_topic_tags();
 												$tags = array_map(function($tag) {
 														$url = get_tag_link($tag);
-														return "<a class=\"is-black\" href=\"$url?cat=handeln\">$tag->name</a>";
+														return "<a class=\"is-black\" href=\"$url?cat=denken\">$tag->name</a>";
 												}, $tags);
 												echo join(' | ', $tags);
 												?>

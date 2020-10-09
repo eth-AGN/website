@@ -2,7 +2,6 @@
 $wordcloud-height: calc(100vh - 2rem);
 
 body.category-denken {
-    padding-top: 2rem;
 
     @include set-color-scheme(
         $color__denken-background,
@@ -12,8 +11,8 @@ body.category-denken {
         $color__denken-link-hover
     );
 
-    .wordcloud {
-        width: 100%;
+    .site-main .wordcloud {
+        width: calc(100vw - #{3*$nav__tab-width + $body__padding-left + $body__padding-right + .25*$global-fab-width});
         position: fixed !important;
         top: 1rem;
         z-index: 0;
@@ -29,11 +28,44 @@ body.category-denken {
     }
 }
 
+body.category-denken:not(.topic-tag) {
+    padding-top: 2rem;
+
+    .denken__posts-container {
+        $overflow: 6rem;
+        padding-left: $overflow;
+        padding-right: $overflow;
+        margin-left: -$overflow;
+        margin-right: -$overflow;
+        margin-top: $wordcloud-height;
+        box-sizing: content-box;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 4rem;
+            top: 0;
+            background-image: linear-gradient(to bottom, transparent, rgba($color__denken-background, 0.75), $color__denken-background);
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            top: 4rem;
+            bottom: 0;
+            background-color: $color__denken-background;
+            z-index: -1;
+        }
+    }
+}
+
 .denken__posts-container {
     width: 100%;
     margin-bottom: 2rem;
-    margin-top: $wordcloud-height;
-    background-color: $color__denken-background;
     position: relative;
     z-index: 1;
 
@@ -68,11 +100,17 @@ body.category-denken {
 
     .bbp-form {
         padding: 1rem;
+        background-color: $color__denken-background;
     }
 
     > *:not(.no-results) {
         @include rounded-border($green);
+        overflow: hidden;
         margin: 0;
+    }
+
+    .no-results {
+        padding-top: 4rem;
     }
 }
 
@@ -125,6 +163,7 @@ body.category-denken {
 }
 
 .denken__post {
+    margin-top: 2rem;
     @include rounded-border($green);
 
     > * {

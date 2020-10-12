@@ -18,17 +18,18 @@
         link.blur();
         setTimeout(() => {
           window.location = link.href
-        }, 150);
+        }, 300);
         link.parentElement.classList.add('is-expanded');
+        document.body.classList.add('nav-animation', `to-${link.dataset.to}`);
         loadingScreen.classList.remove('is-hidden');
       })
     }
   });
 
-  const scrollThreshold = 16;
+  const scrollThreshold = 0;
   function setBodyClassIfScrolled(cls) {
     const scrollTop = window.pageYOffset;
-    if (scrollTop >= scrollThreshold) document.body.classList.add(cls);
+    if (scrollTop > scrollThreshold) document.body.classList.add(cls);
     else document.body.classList.remove(cls);
   }
 

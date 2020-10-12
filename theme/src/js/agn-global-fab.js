@@ -9,7 +9,10 @@ function getButtonRange(root, totalPadding) {
 }
 
 function createDragListeners(root, paddingTop, paddingBottom) {
+    const container = document.querySelector('#content');
     let isDragging = false;
+    let initialScrollPosition = 0;
+    let currScrollPosition = 0;
 
     function handleMouseDown(e) {
         let rightClick = false;
@@ -20,15 +23,18 @@ function createDragListeners(root, paddingTop, paddingBottom) {
         } else if ("button" in e) { // IE, Opera 
             rightClick = e.button == 2; 
         }
-
+        
         if (!rightClick) {
             isDragging = true;
             window.addEventListener('mouseup', handleMouseUp, { passive: true });
             window.addEventListener('touchend', handleMouseUp, { passive: true });
             window.addEventListener('mouseleave', handleMouseUp, { passive: true });
             window.addEventListener('blur', handleMouseUp, { passive: true });
-            window.addEventListener('mousemove', handleMouseMove);
-            window.addEventListener('touchmove', handleMouseMove);
+            window.addEventListener('mousemove', handleMouseMove, { passive: false });
+            window.addEventListener('touchmove', handleMouseMove, { passive: false });
+            initialScrollPosition = window.scrollY;
+            currScrollPosition = initialScrollPosition;
+            window.customScrollPosition = currScrollPosition;
         }
     }
 
@@ -40,11 +46,16 @@ function createDragListeners(root, paddingTop, paddingBottom) {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('touchmove', handleMouseMove);
         isDragging = false;
+        window.scrollTo(0, currScrollPosition);
+        container.style = '';
+        window.customScrollPosition = undefined;
     }
 
     function handleMouseMove(e) {
+        e.preventDefault();
         let scrollHeight = document.body.clientHeight;
         let windowHeight = window.innerHeight;
+
         if (isDragging && scrollHeight - windowHeight > 0) {
             let mouseY = e.clientY;
             if (e.touches) {
@@ -56,7 +67,9 @@ function createDragListeners(root, paddingTop, paddingBottom) {
 
             let scrollPercent = (mouseY - paddingTop - buttonHeight/2) / buttonRange;
             let scrollPx = scrollPercent * Math.max(windowHeight, scrollHeight - windowHeight);
-            window.scrollTo(0, scrollPx);
+            currScrollPosition = Math.min(scrollHeight - windowHeight, Math.max(0, scrollPx));
+            container.style = `position: relative; top: ${initialScrollPosition - currScrollPosition}px`;
+            window.customScrollPosition = currScrollPosition;
         }
     }
 
@@ -94,9 +107,12 @@ function createDragListeners(root, paddingTop, paddingBottom) {
      */
 
     function setGlobalFabPosition() {
+        const scrollHeight = document.body.clientHeight;
         const windowHeight = window.innerHeight;
-        const scrollHeight = document.body.scrollHeight;
-        const scrollTop = window.pageYOffset;
+        let scrollTop = window.pageYOffset;
+        if (window.customScrollPosition !== undefined) {
+            scrollTop = window.customScrollPosition;
+        }
 
         // check if the user is able to scroll
         if (scrollHeight - windowHeight > 0) {
@@ -104,14 +120,12 @@ function createDragListeners(root, paddingTop, paddingBottom) {
             let buttonRange = getButtonRange(root, paddingTop + paddingBottom);
             root.style.transform = `translateY(${scrollPercent * buttonRange}px)`;
         }
+        window.requestAnimationFrame(setGlobalFabPosition);
     }
     
     const paddingTop = root.offsetTop;
     const paddingBottom = new Number(window.getComputedStyle(document.body).paddingBottom.replace('px', ''));
-    window.addEventListener('scroll', () => {
-        setGlobalFabPosition()
-    }, { passive: true });
-    setGlobalFabPosition();
+    window.requestAnimationFrame(setGlobalFabPosition);
 
 
     /**

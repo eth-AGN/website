@@ -5,7 +5,7 @@
 /*****************************/
 
 $tab-width: $nav__tab-width;
-$tab-width-expanded: 4.5rem;
+$tab-width-expanded: 4.25rem;
 $body-padding: $body__padding-left;
 $search-icon-size: 4rem;
 
@@ -39,10 +39,6 @@ body.category-wissen {
 		background-color: $color__wissen-background;
 	}
 
-	.search-icon {
-		left: $tab-width - 0.5*$search-icon-size;
-	}
-
 	.search-popup {
 		background-color: $black;
 		transform: translateX(100%);
@@ -60,19 +56,9 @@ body.category-denken {
 		left: 0;
 	}
 
-	.handeln_page {
-		position: fixed;
-		right: 0;
-	}
-
 	.main-navigation-overlay {
 		height: 2*$tab-width;
 		background-color: $color__denken-background;
-	}
-
-	.search-icon {
-		left: auto;
-		right: $tab-width - 0.5*$search-icon-size;
 	}
 
 	.search-popup {
@@ -97,11 +83,6 @@ body.category-handeln {
 		background-color: $color__handeln-background;
 	}
 
-	.search-icon {
-		left: auto;
-		right: $tab-width - 0.5*$search-icon-size;
-	}
-
 	.search-popup {
 		background-color: $color__handeln-background;
 		transform: translateX(-100%);
@@ -122,7 +103,6 @@ body.category-handeln {
 }
 
 .main-navigation {
-	position: fixed;
 	top: 0;
 	bottom: 0;
 	right: 0;
@@ -165,7 +145,7 @@ body.category-handeln {
 			max-width: calc(100vw - #{2*$tab-width});
 		}
 
-		&:hover {
+		&:hover:not(.is-expanded):not(.current_page_item) {
 			max-width: $tab-width-expanded;
 			a {
 				max-width: $tab-width-expanded;
@@ -173,6 +153,7 @@ body.category-handeln {
 		}
 
 		&.current_page_item {
+			pointer-events: none;
 			background-color: transparent;
 			max-width: $tab-width;
 			a {
@@ -186,6 +167,12 @@ body.category-handeln {
 				color: $text;
 			}
 		}
+	}
+
+	.page_item {
+		position: fixed;
+		top: 0;
+		left: 0;
 	}
 
 	.wissen_page {
@@ -205,6 +192,103 @@ body.category-handeln {
 	}
 }
 
+body.category-wissen {
+	.wissen_page {
+		left: calc(100vw - #{3*$tab-width});
+	}
+	.denken_page {
+		left: auto;
+		right: $tab-width;
+	}
+	.handeln_page {
+		left: auto;
+		right: 0;
+	}
+	.search-icon {
+		left: calc(100vw - #{2*$tab-width + 0.5*$search-icon-size});
+	}
+
+	&.nav-animation {
+		.wissen_page {
+			left: 0;
+		}
+		.denken_page {
+			max-width: calc(100vw - #{2*$tab-width});
+		}
+	}
+	&.to-denken {
+		.search-icon {
+			left: $tab-width - 0.5*$search-icon-size;
+		}
+	}
+	&.to-handeln {
+		.search-icon {
+			left: 2*$tab-width - 0.5*$search-icon-size;
+		}
+	}
+}
+
+body.category-denken {
+	.denken_page {
+		left: $tab-width;
+	}
+	.handeln_page {
+		left: auto;
+		right: 0;
+	}
+	.search-icon {
+		left: $tab-width - 0.5*$search-icon-size;
+	}
+
+	&.to-wissen {
+		.denken_page {
+			left: calc(100vw - #{2*$tab-width});
+		}
+		.search-icon {
+			left: calc(100vw - #{2*$tab-width + 0.5*$search-icon-size});
+		}
+	}
+	&.to-handeln {
+		.search-icon {
+			left: 2*$tab-width - 0.5*$search-icon-size;
+		}
+	}
+}
+
+body.category-handeln {
+	.wissen_page {
+		z-index: 1;
+	}
+	.denken_page {
+		left: $tab-width;
+	}
+	.handeln_page {
+		left: 2*$tab-width;
+	}
+	.search-icon {
+		left: 2*$tab-width - 0.5*$search-icon-size;
+	}
+
+	&.nav-animation {
+		.handeln_page {
+			left: calc(100vw - #{$tab-width});
+		}
+	}
+	&.to-wissen {
+		.denken_page {
+			left: calc(100vw - #{2*$tab-width});
+		}
+		.search-icon {
+			left: calc(100vw - #{2*$tab-width + 0.5*$search-icon-size});
+		}
+	}
+	&.to-denken {
+		.search-icon {
+			left: $tab-width - 0.5*$search-icon-size;
+		}
+	}
+}
+
 /* Small menu. */
 .menu-toggle,
 .main-navigation.toggled ul {
@@ -212,25 +296,48 @@ body.category-handeln {
 }
 
 @include mobile() {
+	.main-navigation {
+		.page_item {
+			left: 0 !important;
+		}
+
+		.denken_page {
+			top: $tab-width;
+		}
+	
+		.handeln_page {
+			top: 2*$tab-width;
+		}
+	}
+
 	.is-scrolled {
 		.page_item {
-			max-height: 2rem !important;
+			transform: scaleY(#{(2/3.5)});
 			a {
 				opacity: 0;
 			}
 		}
 		.current_page_item {
-			max-height: 0 !important;
+			transform: scaleY(0);
 			pointer-events: none;
 		}
 
 		&.category-wissen {
 			.wissen_page {
-				bottom: 2*$body-padding;
+				transform: translateY(#{2*($tab-width - $body-padding)}) scaleY(0);
 			}
 
 			.denken_page {
-				bottom: $body-padding;
+				transform: translateY(#{($tab-width - $body-padding)}) scaleY(#{(2/3.5)});
+			}
+		}
+
+		&.category-handeln {
+			.denken_page {
+				transform: translateY(#{-($tab-width - $body-padding)}) scaleY(#{(2/3.5)});
+			}
+			.handeln_page {
+				transform: translateY(#{-2*($tab-width - $body-padding)}) scaleY(0);
 			}
 		}
 	}
@@ -254,18 +361,22 @@ body.category-handeln {
 	body.category-wissen {
 		padding: $body-padding $body-padding (2*$tab-width + 1.5rem);
 
+		.page_item {
+			transform-origin: bottom;
+		}
+
 		.wissen_page {
-			position: fixed;
+			top: auto;
 			bottom: 2*$tab-width;
 		}
 
 		.denken_page {
-			position: fixed;
+			top: auto;
 			bottom: $tab-width;
 		}
 
 		.handeln_page {
-			position: fixed;
+			top: auto;
 			bottom: 0;
 		}
 	}
@@ -273,13 +384,22 @@ body.category-handeln {
 	body.category-denken {
 		padding: 2*$tab-width $body-padding ($tab-width + 1.5rem);
 
+		.wissen_page, .denken_page {
+			transform-origin: top;
+		}
 		.handeln_page {
+			top: auto;
 			bottom: 0;
+			transform-origin: bottom;
 		}
 	}
 
 	body.category-handeln {
 		padding: 3*$tab-width $body-padding $body-padding;
+
+		.page_item {
+			transform-origin: top;
+		}
 	}
 
 	.main-navigation{
@@ -330,7 +450,7 @@ body.category-handeln {
 
 .search-icon {
 	background-color: $white;
-	position: absolute;
+	position: fixed;
 	z-index: $z-index__search-icon;
 	top: 5rem;
 	width: $search-icon-size;

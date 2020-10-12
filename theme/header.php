@@ -112,7 +112,7 @@
 						}
 						?>
 							<li class="page_item <?php echo $classes ?>">
-								<a <?php echo $is_current_area() ? '' : 'href="'.$url.'"' ?>>
+								<a <?php echo $is_current_area() ? '' : 'href="'.$url.'"' ?> data-to="<?php echo $category ?>">
 									<?php echo $category ?>
 								</a>
 							</li>

@@ -30,7 +30,7 @@ function createMagicGrid(el) {
 (function() {
     document.querySelectorAll('[data-magic-grid]').forEach(el => {
         createMagicGrid(el);
-        window.addEventListener('resize', () => { createMagicGrid(el) });
+        window.addEventListener('resize', () => { createMagicGrid(el) }, { passive: true });
         window.addEventListener('tinymce:init', () => { createMagicGrid(el) });
     })
 })();

@@ -55,10 +55,15 @@ import WordCloud from 'wordcloud';
     
         }
 
+        let wordcloudWidth = el.clientWidth;
+        let wordcloudHeight = el.clientHeight;
         initWordCloud();
         window.addEventListener('resize', () => {
+            if (el.clientWidth == wordcloudWidth && el.clientHeight == wordcloudHeight) return;
+            wordcloudWidth = el.clientWidth;
+            wordcloudHeight = el.clientHeight;
             requestAnimationFrame(initWordCloud);
-        });
+        }, { passive: true });
 
         el.addEventListener('wordcloudstop', () => {
             el.querySelectorAll('span').forEach(span => {

@@ -1,11 +1,20 @@
 
 
+$global-fab-size: 4rem;
 
 #global-fab {
     position: fixed;
     top: 10rem;
     left: 1.5rem;
     z-index: $z-index__global-fab;
+    transition: left .3s ease;
+
+    .the-button {
+        transition: background-color .3s ease;
+    }
+    path {
+        transition: fill .3s ease;
+    }
 
     button {
         cursor: pointer;
@@ -47,19 +56,62 @@
     }
 }
 
-body.category-wissen {
+@mixin global-fab-wissen {
     @include global-fab-position(10rem, 2rem, initial);
     @include global-fab-color($white, $green);
 }
 
-body.category-denken {
-    @include global-fab-position(10rem, initial, 1.5rem);
+@mixin global-fab-denken {
+    @include global-fab-position(10rem, calc(100vw - #{$global-fab-size + 1.5rem}), initial);
     @include global-fab-color($green, $black);
 }
 
-body.category-handeln {
-    @include global-fab-position(10rem, initial, 2rem);
+@mixin global-fab-handeln {
+    @include global-fab-position(10rem, calc(100vw - #{$global-fab-size + 2rem}), initial);
     @include global-fab-color($green, $white);
+}
+
+@mixin global-fab-reset {
+    #global-fab {
+        transition: .3s ease;
+        transform: none !important;
+    }
+}
+
+body.category-wissen {
+    @include global-fab-wissen;
+    &.to-denken {
+        @include global-fab-denken;
+        @include global-fab-reset;
+    }
+    &.to-handeln {
+        @include global-fab-handeln;
+        @include global-fab-reset;
+    }
+}
+
+body.category-denken {
+    @include global-fab-denken;
+    &.to-wissen {
+        @include global-fab-wissen;
+        @include global-fab-reset;
+    }
+    &.to-handeln {
+        @include global-fab-handeln;
+        @include global-fab-reset;
+    }
+}
+
+body.category-handeln {
+    @include global-fab-handeln;
+    &.to-wissen {
+        @include global-fab-wissen;
+        @include global-fab-reset;
+    }
+    &.to-denken {
+        @include global-fab-denken;
+        @include global-fab-reset;
+    }
 }
 
 @include mobile() {

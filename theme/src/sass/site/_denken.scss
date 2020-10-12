@@ -1,5 +1,4 @@
 
-$wordcloud-height: calc(100vh - 2rem);
 
 body.category-denken {
 
@@ -13,10 +12,10 @@ body.category-denken {
 
     .site-main .wordcloud {
         width: calc(100vw - #{3*$nav__tab-width + $body__padding-left + $body__padding-right + .25*$global-fab-width});
-        position: fixed !important;
-        top: 1rem;
+        position: sticky !important;
+        top: 2rem;
         z-index: 0;
-        height: $wordcloud-height;
+        height: calc(100vh - 4rem);
         padding-bottom: 2rem;
 
         a {
@@ -24,6 +23,13 @@ body.category-denken {
             &:hover {
                 color: lighten($black, 20%);
             }
+        }
+    }
+
+    @include mobile() {
+        .site-main .wordcloud {
+            width: calc(100vw - #{$body__padding-right + $body__padding-left});
+            overflow-x: hidden;
         }
     }
 }
@@ -37,8 +43,13 @@ body.category-denken:not(.topic-tag) {
         padding-right: $overflow;
         margin-left: -$overflow;
         margin-right: -$overflow;
-        margin-top: $wordcloud-height;
         box-sizing: content-box;
+        @include mobile() {
+            padding-left: 2rem;
+            padding-right: 2rem;
+            margin-left: -2rem;
+            margin-right: -2rem;
+        }
 
         &:before {
             content: '';
@@ -47,7 +58,7 @@ body.category-denken:not(.topic-tag) {
             width: 100%;
             height: 4rem;
             top: 0;
-            background-image: linear-gradient(to bottom, transparent, rgba($color__denken-background, 0.75), $color__denken-background);
+            background-image: linear-gradient(to bottom, rgba($color__denken-background, 0), rgba($color__denken-background, 0.75), $color__denken-background);
         }
 
         &:after {
@@ -164,6 +175,9 @@ body.category-denken:not(.topic-tag) {
 
 .denken__post {
     margin-top: 2rem;
+    @include mobile() {
+        margin-top: 1rem;
+    }
     @include rounded-border($green);
 
     > * {

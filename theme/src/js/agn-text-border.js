@@ -1,18 +1,16 @@
 
 
 // construct SVG according to screen size
-function createTextBorder() {
-    const border = document.querySelector('.text-border');
-    if (border == undefined) return;
-
+function createTextBorder(border) {
     const svg = border.querySelector('svg');
     if (svg == undefined) return;
 
     const path = svg.querySelector('path');
     if (path == undefined) return;
 
+    console.log(svg.clientWidth, svg.clientHeight)
     const height = 200;
-    const width = window.innerWidth/window.innerHeight*height;
+    const width = svg.clientWidth/svg.clientHeight*height;
     const padding = 5;
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 
@@ -34,6 +32,9 @@ function createTextBorder() {
 }
 
 (function() {
-    createTextBorder();
-    window.addEventListener('resize', createTextBorder, { passive: true });
+    const border = document.querySelector('.text-border');
+    if (border == undefined) return;
+
+    createTextBorder(border);
+    window.addEventListener('resize', () => { createTextBorder(border) }, { passive: true });
 })();

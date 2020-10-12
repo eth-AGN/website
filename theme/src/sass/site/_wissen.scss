@@ -83,6 +83,12 @@ body.category-wissen {
     }
 }
 
+.category-wissen {
+    .site-main > hr {
+        margin-top: -.25rem;
+    }
+}
+
 .wissen__post {
     position: relative;
     margin-bottom: 0;
@@ -122,7 +128,7 @@ body.category-wissen {
         }
     }
 
-    .tags a{
+    .tags a {
         text-decoration: none;
     }
 }

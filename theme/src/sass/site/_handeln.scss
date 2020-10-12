@@ -13,6 +13,12 @@ body.category-handeln {
     }
 }
 
+.category-handeln {
+    .site-main > hr {
+        margin-top: -.25rem;
+    }
+}
+
 .post.category-handeln {
     display: flex;
     justify-content: space-between;

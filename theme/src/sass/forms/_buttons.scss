@@ -4,6 +4,10 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"] {
 	@include button();
+	
+	&:hover {
+		transition: color .3s ease;
+	}
 
 	&.is-rounded {
 		@include is-rounded();
@@ -14,8 +18,7 @@ input[type="submit"] {
 		color: $black;
 
 		&:hover {
-			background-color: darken($white, 5%);
-			color: lighten($black, 10%);
+			color: $green;
 		}
 	}
 
@@ -24,8 +27,7 @@ input[type="submit"] {
 		color: $green;
 
 		&:hover {
-			background-color: lighten($black, 10%);
-			color: lighten($green, 5%);
+			color: $white;
 		}
 	}
 
@@ -34,8 +36,7 @@ input[type="submit"] {
 		color: $black;
 
 		&:hover {
-			background-color: darken($green, 5%);
-			color: lighten($black, 10%);
+			color: $white;
 		}
 	}
 

@@ -46,8 +46,19 @@ body.category-wissen {
         position: relative;
         padding: .25rem 0 ; 
         max-width: 12rem;
+
+        &.is-scrolling {
+            overflow: hidden;
+            height: 1.5rem;
+            > * {
+                max-width: none;
+                position: absolute;
+                transition: none;
+            }
+        }
         
         > * {
+            transition: transform .3s ease;
             padding: 0 1rem;
             display: block;
             white-space: nowrap;

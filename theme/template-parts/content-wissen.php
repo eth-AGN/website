@@ -12,19 +12,19 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<a class="wissen__post-entry" href="<?php the_permalink(); ?>">
 		<span class="scroll-wrapper">
-			<span><?php the_title() ?></span>
+			<span data-auto-scroll><?php the_title() ?></span>
 		</span>
 		<span class="scroll-wrapper">
-			<span><?php the_field('author') ?></span>
+			<span data-auto-scroll><?php the_field('author') ?></span>
 		</span>
 		<span class="scroll-wrapper">
-			<span><?php the_field('format') ?></span>
+			<span data-auto-scroll><?php the_field('format') ?></span>
 		</span>
 		<span class="scroll-wrapper">
-			<span><?php the_field('published_at') ?></span>
+			<span data-auto-scroll><?php the_field('published_at') ?></span>
 		</span>
 		<span class="scroll-wrapper">
-			<span><?php the_field('publisher') ?></span>
+			<span data-auto-scroll><?php the_field('publisher') ?></span>
 		</span>
 	</a>
 

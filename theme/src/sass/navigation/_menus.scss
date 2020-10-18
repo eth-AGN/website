@@ -229,6 +229,9 @@ body.category-wissen {
 
 	@include mobile {
 		&.nav-animation {
+			.page_item {
+				transform: none;
+			}
 			.search-icon {
 				left: auto;
 				right: .25rem;
@@ -274,6 +277,9 @@ body.category-denken {
 
 	@include mobile {
 		&.nav-animation {
+			.page_item {
+				transform: none;
+			}
 			.search-icon {
 				left: auto;
 				right: .25rem;
@@ -327,6 +333,9 @@ body.category-handeln {
 
 	@include mobile {
 		&.nav-animation {
+			.page_item {
+				transform: none;
+			}
 			.search-icon {
 				left: auto;
 				right: .25rem;

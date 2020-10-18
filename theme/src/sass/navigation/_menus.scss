@@ -226,6 +226,24 @@ body.category-wissen {
 			left: 2*$tab-width - 0.5*$search-icon-size;
 		}
 	}
+
+	@include mobile {
+		&.nav-animation {
+			.search-icon {
+				left: auto;
+				right: .25rem;
+			}
+			.wissen_page {
+				bottom: calc(100vh - #{$tab-width});
+			}
+		}
+
+		&.to-handeln {
+			.denken_page {
+				bottom: calc(100vh - #{2*$tab-width});
+			}
+		}
+	}
 }
 
 body.category-denken {
@@ -251,6 +269,25 @@ body.category-denken {
 	&.to-handeln {
 		.search-icon {
 			left: 2*$tab-width - 0.5*$search-icon-size;
+		}
+	}
+
+	@include mobile {
+		&.nav-animation {
+			.search-icon {
+				left: auto;
+				right: .25rem;
+			}
+		}
+
+		&.to-wissen {
+			.wissen_page > a {
+				transition: .3s ease;
+				transform: translateY(calc(100vh - #{3*$tab-width}));
+			}
+			.denken_page {
+				top: calc(100vh - #{2*$tab-width});
+			}
 		}
 	}
 }
@@ -285,6 +322,28 @@ body.category-handeln {
 	&.to-denken {
 		.search-icon {
 			left: $tab-width - 0.5*$search-icon-size;
+		}
+	}
+
+	@include mobile {
+		&.nav-animation {
+			.search-icon {
+				left: auto;
+				right: .25rem;
+			}
+			.handeln_page {
+				top: calc(100vh - #{$tab-width});
+			}
+		}
+
+		&.to-wissen {
+			.wissen_page > a {
+				transition: .3s ease;
+				transform: translateY(calc(100vh - #{3*$tab-width}));
+			}
+			.denken_page {
+				top: calc(100vh - #{2*$tab-width});
+			}
 		}
 	}
 }
@@ -487,9 +546,9 @@ body.category-handeln {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	padding: 6rem 3rem $body-padding 3rem;
+	padding: 4rem 3rem $body-padding 3rem;
 
-	max-height: 9.25rem;
+	max-height: 5.25rem + $body-padding;
 	overflow: hidden;
 
 	transition: max-height .3s ease, transform .3s ease;
@@ -526,7 +585,7 @@ body.category-handeln {
 			}
 		}
 
-		.filter-button {
+		.filter-button, .clear-filter-button {
 			background: none;
 			border: none;
 			outline: none;
@@ -535,6 +594,12 @@ body.category-handeln {
 			color: inherit;
 			cursor: pointer;
 			padding: 0;
+		}
+
+		.clear-filter-button {
+			display: none;
+			margin-right: .25rem;
+			transform: scaleX(1.4);
 		}
 	}
 
@@ -627,9 +692,15 @@ body {
 				background-color: $active-background;
 				color: $active-text;
 			}
-			&.filter-is-open .filter-button {
-				color: $active-text;
-				background-color: $active-background;
+			&.filter-is-open {
+				.filter-button, .clear-filter-button {
+					color: $active-text;
+					background-color: $active-background;
+				}
+
+				.clear-filter-button {
+					display: initial;
+				}
 			}
 		}
 	}

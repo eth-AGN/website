@@ -1,4 +1,37 @@
 
+const globalTags = {
+    initEventListeners() {
+        document.querySelectorAll('.global-tags').forEach(el => {
+            const display = el.querySelector('.global-tags-display');
+            const status = el.querySelector('.global-tags-status');
+            if (!display || !status) return;
+
+            el.addEventListener('click', () => {
+                if (window.searchPopup) {
+                    window.searchPopup.openFilterPopup();
+                }
+            })
+        })
+    },
+    displayGlobalTags() {
+        const tagString = window.sessionStorage['tag-filter'].split(',').join(', ');
+
+        document.querySelectorAll('.global-tags').forEach(el => {
+            const display = el.querySelector('.global-tags-display');
+            const status = el.querySelector('.global-tags-status');
+            if (!display || !status) return;
+
+            if (tagString) {
+                el.classList.add('is-active');
+                display.textContent = tagString;
+                status.textContent = 'Active filter';
+            } else {
+                el.classList.remove('is-active');
+            }
+        })
+    }
+};
+
 (function() {
     const el = document.querySelector('#search-menu');
     if (!el) return;
@@ -15,11 +48,21 @@
     const filterButton = popup.querySelector('.filter-button');
     if (!filterButton) return;
 
+    const clearFilterButton = popup.querySelector('.clear-filter-button');
+    if (!clearFilterButton) return;
+
 
     const tagString = window.sessionStorage['tag-filter'];
     const tags = new Set(tagString ? tagString.split(',') : []);
 
-    if (tags.size > 0) button.classList.add('is-active');
+    if (tags.size > 0) {
+        button.classList.add('is-active');
+    } else {
+        clearFilterButton.style.display = 'none';
+    }
+
+    globalTags.initEventListeners();
+    globalTags.displayGlobalTags();
 
     const searchPopup = {
         isOpen: false,
@@ -52,6 +95,10 @@
                 searchPopup.redirectIfDirty();
             }
         },
+        openFilterPopup() {
+            if (!this.isOpen) this.toggle();
+            if (!this.filterIsOpen) this.toggleFilterPopup();
+        },
         // add or remove tag from filter list
         toggleTagFilter(event) {
             const el = event.target;
@@ -69,9 +116,13 @@
 
             if (searchPopup.tags.size > 0) {
                 button.classList.add('is-active');
+                clearFilterButton.style.display = '';
             } else {
                 button.classList.remove('is-active');
+                clearFilterButton.style.display = 'none';
             }
+
+            globalTags.displayGlobalTags();
         },
         // redirect user if any filters have been changed
         redirectIfDirty() {

@@ -122,15 +122,10 @@ body.category-handeln {
         }
     }
 
-    body.category-wissen {
+    body.category-wissen, body.category-denken, body.category-handeln {
         @include global-fab-position(9.25rem, initial, .25rem);
-    }
-    
-    body.category-denken {
-        @include global-fab-position(9.25rem, initial, .25rem);
-    }
-    
-    body.category-handeln {
-        @include global-fab-position(9.25rem, initial, .25rem);
+        &.nav-animation {
+            @include global-fab-position(9.25rem, initial, .25rem);
+        }
     }
 }

@@ -16,6 +16,14 @@ body {
 	padding-right: $body__padding-right;
 	padding-top: $body__padding-top;
 	padding-bottom: $body__padding-bottom;
+
+	@include set-color-scheme(
+		$color__denken-background,
+		$color__denken-navigation,
+		$color__denken-text,
+		$color__denken-link,
+		$color__denken-link-hover
+	);
 	
 	-ms-overflow-style: none;  /* Internet Explorer 10+ */
 	scrollbar-width: none;  /* Firefox */

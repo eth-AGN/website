@@ -11,9 +11,12 @@
 
 get_header();
 ?>
+	<div class="global-tags">
+		<p class="global-tags-display"></p>
+		<p class="global-tags-status"></p>
+	</div>
 
-
-    <div id="primary" class="content-area">
+	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
 			<?php

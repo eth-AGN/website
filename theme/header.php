@@ -70,7 +70,8 @@
 					</form>
 				</div>
 				<div class="search-popup__column">
-					<button type="button" class="filter-button">Filter</button>
+					<button type="button" class="clear-filter-button" title="Clear global filter">X</button>
+					<button type="button" class="filter-button" title="Toggle global filter options">Filter</button>
 				</div>
 			</div>
 

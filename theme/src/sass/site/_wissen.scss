@@ -155,12 +155,28 @@ body.category-wissen {
 @include show-n-rows(4);
 @include show-n-rows(3);
 @include show-n-rows(2);
-@include show-n-rows(3, 4rem, 8rem);
-@include show-n-rows(2, 4rem, 8rem);
 
 @include mobile() {
-    .wissen__post-entry > .scroll-wrapper {
-        max-width: 8rem;
+    @include show-n-rows(2, 4rem, 8rem);
+
+    .category-wissen .posts-container {
+        display: block;
+    }
+
+    .wissen__post-entry {
+        display: flex;
+        flex-direction: column;
+        padding: .375rem 0;
+        border-bottom: 1px dotted $green;
+        &:first-child {
+            border-top: 1px dotted $green;
+        }
+        margin-top: -1px;
+
+        > .scroll-wrapper {
+            max-width: 100%;
+            padding: 0;
+        }
     }
 
     .wissen__post {

@@ -8,7 +8,6 @@ function createTextBorder(border) {
     const path = svg.querySelector('path');
     if (path == undefined) return;
 
-    console.log(svg.clientWidth, svg.clientHeight)
     const height = 200;
     const width = svg.clientWidth/svg.clientHeight*height;
     const padding = 5;

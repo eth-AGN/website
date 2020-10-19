@@ -14,6 +14,7 @@ const globalTags = {
         })
     },
     displayGlobalTags() {
+        if (!window.sessionStorage['tag-filter']) return;
         const tagString = window.sessionStorage['tag-filter'].split(',').join(', ');
 
         document.querySelectorAll('.global-tags').forEach(el => {
@@ -99,18 +100,27 @@ const globalTags = {
             if (!this.isOpen) this.toggle();
             if (!this.filterIsOpen) this.toggleFilterPopup();
         },
+        clearFilter() {
+            searchPopup.tags.clear();
+            window.sessionStorage['tag-filter'] = '';
+            clearFilterButton.style.display = 'none';
+            document.querySelectorAll('svg text.is-active').forEach(el => {
+                deselectTag(el);
+            })
+        },
         // add or remove tag from filter list
         toggleTagFilter(event) {
             const el = event.target;
             const slug = el.dataset.tagSlug;
+            console.log(el, slug)
 
             if (searchPopup.tags.has(slug)) {
                 searchPopup.tags.delete(slug);
-                el.classList.remove('is-active');
+                deselectTag(el);
                 window.sessionStorage['tag-filter'] = Array.from(searchPopup.tags);
             } else {
                 searchPopup.tags.add(slug);
-                el.classList.add('is-active');
+                selectTag(el);
                 window.sessionStorage['tag-filter'] = Array.from(searchPopup.tags);
             }
 
@@ -154,22 +164,33 @@ const globalTags = {
 
     filterButton.addEventListener('click', searchPopup.toggleFilterPopup);
 
+    clearFilterButton.addEventListener('click', searchPopup.clearFilter);
+
     function denkenToggleTagFilter(event) {
         searchPopup.toggleTagFilter(event);
         searchPopup.redirectIfDirty();
     }
 
+    function selectTag(el) {
+        el.classList.add('is-active');
+        el.previousElementSibling.classList.add('is-active');
+    }
+    function deselectTag(el) {
+        el.classList.remove('is-active');
+        el.previousElementSibling.classList.remove('is-active');
+    }
+
     // wait for the wordcloud to finish rendering until registering event listeners
     window.addEventListener('wordcloud:ready', event => {
-        document.querySelectorAll('.search-popup__filter a').forEach(el => {
+        document.querySelectorAll('.search-popup__filter text').forEach(el => {
             const slug = el.dataset.tagSlug;
-            if (tags.has(slug)) el.classList.add('is-active');
+            if (tags.has(slug)) selectTag(el);
             
             el.addEventListener('click', searchPopup.toggleTagFilter);
         });
-        document.querySelectorAll('.category-denken .site-main .wordcloud a').forEach(el => {
+        document.querySelectorAll('.category-denken .site-main .wordcloud text').forEach(el => {
             const slug = el.dataset.tagSlug;
-            if (tags.has(slug)) el.classList.add('is-active');
+            if (tags.has(slug)) selectTag(el);
     
             el.addEventListener('click', denkenToggleTagFilter);
         })

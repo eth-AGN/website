@@ -1,6 +1,6 @@
 
 body {
-    @mixin set-colors($background, $link-hover) {
+    @mixin set-colors($background, $link, $link-hover, $active-background, $active-color) {
         // .wordcloud {
         //     .is-small {
         //         color: $link;
@@ -9,29 +9,39 @@ body {
         //         }
         //     }
         // }
-        .wordcloud > * {
-            background-color: $background;
+        .wordcloud svg {
+            rect {
+                fill: $background;
+                &.is-active {
+                    fill: $active-background;
+                }
+            }
+
+            text {
+                color: $link;
+                &:hover {
+                    color: $link-hover;
+                }
+                &.is-active {
+                    color: $active-color;
+                }
+            }
         }
     }
-
-    &.category-denken {
-        @include set-colors($color__denken-background, $color__denken-link-hover);
-    }
+    
     &.category-wissen {
-        @include set-colors($color__wissen-background, $color__wissen-link-hover);
+        @include set-colors($black, $green, darken($green, 10%), $white, $black);
+    }
+    &.category-denken {
+        @include set-colors($white, $black, lighten($black, 10%), $black, $green);
     }
     &.category-handeln {
-        @include set-colors($color__handeln-background, $color__handeln-link-hover);
+        @include set-colors($green, $black, lighten($black, 10%), $white, $black);
     }
 }
 
 .wordcloud {
-    > * {
-        text-decoration: none;
-        padding: .25rem;
-    }
-
-    a {
+    svg text {
         cursor: pointer;
     }
 }

@@ -1,4 +1,49 @@
-import WordCloud from 'wordcloud';
+//import WordCloud from 'wordcloud';
+import * as d3 from 'd3';
+import cloud from 'd3-cloud';
+
+
+function initWordCloud(el, words, fontSize, callback) {
+    const width = el.clientWidth, height = el.clientHeight;
+
+    var layout = cloud()
+        .size([width, height])
+        .words(words.map(function(d) {
+            return {text: d[0], size: fontSize(d[1]), data: d[2]};
+        }))
+        .padding(5)
+        .timeInterval(16)
+        .spiral('rectangular')
+        .rotate(function() { return 0; })
+        .font("Helvetica Neue")
+        .fontSize(function(d) { return d.size; })
+        .on("end", (words) => {
+            
+            d3.select(el).select('svg').remove();
+            d3.select(el).append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+                .selectAll("text")
+                .data(words)
+                .enter().append("text")
+                .style("font-size", function(d) { return d.size + "px"; })
+                .style("font-family", "Helvetica Neue")
+                .attr("text-anchor", "middle")
+                .attr('data-tag-slug', function(d) {
+                    return d.data['data-tag-slug'];
+                })
+                .attr("transform", function(d) {
+                    return "translate(" + [d.x, d.y] + ") rotate(0)";
+                })
+                .text(function(d) { return d.text; });
+            requestAnimationFrame(callback);
+        });
+
+    layout.start();
+
+}
 
 (function() {
     document.querySelectorAll('.wordcloud').forEach(el => {
@@ -32,66 +77,36 @@ import WordCloud from 'wordcloud';
         }
 
         const rootFontSize = Number(window.getComputedStyle(document.body).getPropertyValue('font-size').replace('px', ''));
-        const minFontSize = rootFontSize;
+        const minFontSize = 0.5*rootFontSize;
         function fontSize(size) {
+            const min = 0.5;
+            const max = 2;
             // smallest element will be 0.5rem, biggest will be 2rem
             // but it will be clamped to minFontSize
-            return Math.max((1.5*scale(size) + 0.5)*rootFontSize, minFontSize);
+            return Math.max(((max - min)*scale(size) + min)*rootFontSize, minFontSize);
         }
 
-        function initWordCloud() {
-            WordCloud([el], {
-                list: list,
-                fontFamily: 'Helvetica Neue',
-                weightFactor: fontSize,
-                gridSize: 24,
-                minRotation: 0,
-                maxRotation: 0,
-                drawOutOfBound: true,
-                color: '',
-                backgroundColor: '',
-                shuffle: false
-            });
-    
-        }
+        function onWordcloudInit() {
+            el.querySelectorAll('text').forEach(text => {
+                let ctx = text.parentElement;
+                let bbox = text.getBBox();
 
-        let wordcloudWidth = el.clientWidth;
-        let wordcloudHeight = el.clientHeight;
-        initWordCloud();
-        window.addEventListener('resize', () => {
-            if (el.clientWidth == wordcloudWidth && el.clientHeight == wordcloudHeight) return;
-            wordcloudWidth = el.clientWidth;
-            wordcloudHeight = el.clientHeight;
-            requestAnimationFrame(initWordCloud);
-        }, { passive: true });
-
-        el.addEventListener('wordcloudstop', () => {
-            el.querySelectorAll('span').forEach(span => {
-                const link = document.createElement('a');
-                const item = list.find(item => item[0] == span.innerHTML);
-                link.innerHTML = item[0];
-
-                // set attributes to values specified in options
-                let options = item[2];
-                for (let key of Object.keys(options)) {
-                    link.setAttribute(key, options[key]);
-                }
-
-                // apply styles to element
-                link.style.cssText = span.style.cssText;
-                link.style.width = '';
-                link.style.height = '';
-                link.setAttribute('class', span.getAttribute('class'))
-
-                // romve old element, attach new element to the DOM
-                el.removeChild(span);
-                el.appendChild(link);
+                var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                rect.setAttribute("x", bbox.x);
+                rect.setAttribute("y", bbox.y);
+                rect.setAttribute("width", bbox.width);
+                rect.setAttribute("height", bbox.height);
+                rect.setAttribute("transform", text.getAttribute('transform'))
+                ctx.insertBefore(rect, text);
             });
 
             // wait one frame for the client to render the new elements
             requestAnimationFrame(() => {
                 window.dispatchEvent(new CustomEvent('wordcloud:ready'))
             });
-        });
+        }
+
+        initWordCloud(el, list, fontSize, onWordcloudInit);
+
     })
 })()

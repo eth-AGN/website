@@ -176,7 +176,13 @@
 					   L 5 10 Q 5 5, 10 5
 					   L 190 5 Q 195 5, 195 10
 					   L 195 190 Q 195 195, 190 195
-					   L 105 195" fill="transparent" />
+						 L 105 195" fill="transparent" />
+			<path id="left"
+						d="M 45 195
+						L 95 195" fill="transparent" />
+			<path id="right"
+						d="M 95 195
+						L 135 195" fill="transparent" />
 			<text>
 				<textPath xlink:href="#curve">
 					ARBEITSGRUPPE DIE AUSGEHEND VOM DEPARTEMENT
@@ -198,6 +204,12 @@
 					RAUM FÜR DISKUSSION UND ENGAGEMENT. FÜR EINE NEUE
 					SELBSTVERSTÄNDLICHKEIT DER NACHHALTIGKEIT.
 				</textPath>
+			</text>
+			<text class="agn-arbeitsgruppe">
+				<textPath xlink:href="#left">ARBEITSGRUPPE</textPath>
+			</text>
+			<text class="agn-nachhaltigkeit">
+				<textPath xlink:href="#right">NACHHALTIGKEIT</textPath>
 			</text>
 		</svg>
 	</div>

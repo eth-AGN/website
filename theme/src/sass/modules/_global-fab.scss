@@ -57,7 +57,7 @@ $global-fab-size: 4rem;
 }
 
 @mixin global-fab-wissen {
-    @include global-fab-position(10rem, 2rem, initial);
+    @include global-fab-position(8rem, 2rem, initial);
     @include global-fab-color($white, $green);
 }
 

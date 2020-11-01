@@ -181,7 +181,7 @@ body.category-denken:not(.topic-tag) {
 .denken__post {
     margin-top: 2rem;
     @include mobile() {
-        margin-top: 1rem;
+        margin-top: 2*$tab-width - $body-padding + .5rem;
     }
     @include rounded-border($green);
 

@@ -41,7 +41,7 @@
         <span class="is-right">Nachhaltigkeit</span>
     </h1>
     
-    <p>
+    <p class="login">
         <span class="is-left">
             <a href="<?php echo esc_url( wp_login_url('/denken') ); ?>" alt="<?php esc_attr_e( 'Login', 'textdomain' ); ?>">
                 ETH login
@@ -50,6 +50,20 @@
         <span class="is-right">
             <a href="/denken">
                 or enter
+            </a>
+        </span>
+    </p>
+
+    <p class="social">
+        <span class="is-left">
+            <a href="mailto:agn@arch.ethz.ch">
+                Email
+            </a>
+        </span>
+        
+        <span class="is-right">
+            <a href="https://www.instagram.com/agn_ethz/" rel="norefferer" target="_blank">
+                Insta
             </a>
         </span>
     </p>

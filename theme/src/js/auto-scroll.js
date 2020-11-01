@@ -11,14 +11,17 @@ const SCROLLING_SPEED = 100;
       if (start === undefined) start = t;
       const dt = t - start;
 
-      const maxScroll = Math.max(0, el.clientWidth - wrapper.clientWidth);
+      const maxScroll = Math.max(0, el.scrollWidth - wrapper.clientWidth);
       const scrollAmount = Math.min(maxScroll, SCROLLING_SPEED*dt/1000);
+      // console.log(el, wrapper)
       el.style.transform = `translateX(-${scrollAmount}px)`;
 
       if (scrolling) {
         window.requestAnimationFrame(scrollTick);
       } else {
         start = undefined;
+        wrapper.classList.remove('is-scrolling');
+        el.style.transform = '';
       }
     }
 
@@ -30,8 +33,7 @@ const SCROLLING_SPEED = 100;
 
     el.addEventListener('mouseleave', () => {
       scrolling = false;
-      wrapper.classList.remove('is-scrolling');
-      el.style.transform = '';
+      console.log(el.style.transform)
     });
   })
 })()

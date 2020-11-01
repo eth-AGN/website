@@ -64,8 +64,22 @@ function initWordCloud(el, words, fontSize, callback) {
             item[0] = item[0].toUpperCase();
         }
 
-        const maxSize = list.reduce((max, item) => Math.max(max, item[1]), 0)
+        const maxSize = list.reduce((max, item) => Math.max(max, item[1]), 0) + 1;
         const minSize = list.reduce((min, item) => Math.min(min, item[1]), maxSize)
+        let mainItem = [
+            'CHARTER OF A NEW ARCHITECTURE',
+            maxSize,
+            {
+                'data-tag-slug': 'https://agn.arch.ethz.ch/forums/topic/charter-of-a-new-architecture/'
+            }
+        ];
+        let mainItemIndex = list.findIndex(item => item[0].toUpperCase() == mainItem[0]);
+        if (mainItemIndex >= 0) {
+            list[mainItemIndex] = mainItem;
+        } else {
+            list.push(mainItem);
+        }
+
 
         function scale(size) {
             // log^2 scale, will be 0 for minSize and 1 for maxSize
@@ -80,7 +94,7 @@ function initWordCloud(el, words, fontSize, callback) {
         const minFontSize = 0.5*rootFontSize;
         function fontSize(size) {
             const min = 0.5;
-            const max = 2;
+            const max = 1.5;
             // smallest element will be 0.5rem, biggest will be 2rem
             // but it will be clamped to minFontSize
             return Math.max(((max - min)*scale(size) + min)*rootFontSize, minFontSize);

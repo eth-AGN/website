@@ -112,7 +112,12 @@ const globalTags = {
         toggleTagFilter(event) {
             const el = event.target;
             const slug = el.dataset.tagSlug;
-            console.log(el, slug)
+
+            console.log(slug, el)
+            if (slug.startsWith('http')) {
+                window.location.href = slug;
+                return;
+            }
 
             if (searchPopup.tags.has(slug)) {
                 searchPopup.tags.delete(slug);

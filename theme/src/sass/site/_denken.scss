@@ -12,12 +12,12 @@ body.category-denken {
 
     .site-main .wordcloud {
         width: calc(100vw - #{3*$nav__tab-width + $body__padding-left + $body__padding-right + .25*$global-fab-width});
-        position: sticky !important;
+        position: fixed !important;
         top: 2rem;
         z-index: 0;
         height: calc(100vh - 4rem);
 
-        a {
+        text {
             color: $black;
             &:hover {
                 color: lighten($black, 20%);
@@ -35,6 +35,7 @@ body.category-denken {
 
 body.category-denken:not(.topic-tag) {
     padding-top: 2rem;
+    padding-bottom: 0;
 
     .denken__posts-container {
         $overflow: 6rem;
@@ -71,9 +72,14 @@ body.category-denken:not(.topic-tag) {
             z-index: -1;
         }
     }
+
+    .bbp-pagination {
+        background-color: $white;
+    }
 }
 
 .denken__posts-container {
+    margin-top: 100vh;
     width: 100%;
     padding-bottom: 3rem;
     position: relative;

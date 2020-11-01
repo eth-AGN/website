@@ -67,7 +67,7 @@ function initWordCloud(el, words, fontSize, callback) {
         const maxSize = list.reduce((max, item) => Math.max(max, item[1]), 0) + 1;
         const minSize = list.reduce((min, item) => Math.min(min, item[1]), maxSize)
         let mainItem = [
-            'CHARTER OF A NEW ARCHITECTURE',
+            'CHARTER',
             maxSize,
             {
                 'data-tag-slug': 'https://agn.arch.ethz.ch/forums/topic/charter-of-a-new-architecture/'

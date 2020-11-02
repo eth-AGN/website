@@ -20,12 +20,11 @@ body.category-handeln {
 }
 
 .post.category-handeln {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 40%) minmax(50%, 1fr);
 
     .header-container {
         position: relative;
-        flex: 1 0 40%;
     }
 
     .entry-header {
@@ -43,7 +42,6 @@ body.category-handeln {
             text-transform: none;
             font-weight: normal;
             font-size: 1.25rem;
-            white-space: nowrap;
         }
 
         .actions {
@@ -89,9 +87,9 @@ body.category-handeln {
     }
 }
 
-@include mobile() {
+@media screen and (max-width: 60rem) {
     .post.category-handeln {
-        flex-direction: column;
+        display: block;
     }
 }
 

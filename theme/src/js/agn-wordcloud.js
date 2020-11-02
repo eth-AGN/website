@@ -15,7 +15,7 @@ function initWordCloud(el, words, fontSize, callback) {
         .timeInterval(16)
         .spiral('rectangular')
         .rotate(function() { return 0; })
-        .font("Helvetica Neue")
+        .font("'Helvetica Neue', Helvetica, Arial, sans-serif")
         .fontSize(function(d) { return d.size; })
         .on("end", (words) => {
             
@@ -29,7 +29,7 @@ function initWordCloud(el, words, fontSize, callback) {
                 .data(words)
                 .enter().append("text")
                 .style("font-size", function(d) { return d.size + "px"; })
-                .style("font-family", "Helvetica Neue")
+                .style("font-family", "'Helvetica Neue', Helvetica, Arial, sans-serif")
                 .attr("text-anchor", "middle")
                 .attr('data-tag-slug', function(d) {
                     return d.data['data-tag-slug'];

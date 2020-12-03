@@ -1,4 +1,13 @@
 
+/**
+ * This component will hook up to two specific wordclouds (specified at the bottom)
+ * and will toggle the global filter-tags when any element in the
+ * wordcloud is clicked.
+ * 
+ * The global filter is loaded from and stored in window.sessionStorage.
+ * The filter is applied by the component in agn-tag-filter.js.
+ */
+
 const globalTags = {
     initEventListeners() {
         document.querySelectorAll('.global-tags').forEach(el => {

@@ -2,6 +2,15 @@
 import * as d3 from 'd3';
 import { interpolatePath } from 'd3-interpolate-path';
 
+/**
+ * This component controls the behavior of the floating action button (FAB)
+ * present on all pages.
+ * 
+ * The look and actions can be configured by changing the `actions` variable.
+ * The globalFab object is globally available, which is used to change the
+ * current action from within other components.
+ */
+
 function getButtonRange(root, totalPadding) {
     const windowHeight = window.innerHeight;
     const buttonHeight = root.offsetHeight;

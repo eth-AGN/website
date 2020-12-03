@@ -162,7 +162,10 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-
+/**
+ * Helper function to decide whether the current page is in
+ * category WISSEN
+ */
 function is_wissen() {
 	$cat = null;
 	if ($_GET['cat']) {
@@ -173,6 +176,10 @@ function is_wissen() {
 	return is_page_template( 'page-wissen.php') || is_category('wissen') || $cat == 'wissen';
 }
 
+/**
+ * Helper function to decide whether the current page is in
+ * category DENKEN
+ */
 function is_denken() {
 	$cat = null;
 	if ($_GET['cat']) {
@@ -181,6 +188,10 @@ function is_denken() {
 	return is_page_template( 'page-denken.php' ) || is_bbpress() || $cat == 'denken';
 }
 
+/**
+ * Helper function to decide whether the current page is in
+ * category HANDELN
+ */
 function is_handeln() {
 	$cat = null;
 	if ($_GET['cat']) {
@@ -191,6 +202,10 @@ function is_handeln() {
 	return is_page_template('paged_handeln.php') || is_category('handeln') || $cat == 'handeln';
 }
 
+/**
+ * Make sure that the 'tag' GET-parameter works for all categories
+ * (specifically, make sure it works for DENKEN)
+ */
 function add_tags_to_query($query) {
 	// echo $_GET['tag'];
  	if (isset($_GET['tag']) && ! empty($_GET['tag'])) {
@@ -211,6 +226,10 @@ function add_tags_to_query($query) {
 add_action('pre_get_posts', 'add_tags_to_query');
 
 
+/**
+ * Make sure only posts from the current category are displayed
+ * when looking at a specific tag.
+ */
 function add_category_to_tag_archive($query) {
 	if ($query->is_tag) {
 		if (is_wissen()) {
@@ -224,7 +243,8 @@ function add_category_to_tag_archive($query) {
 add_action('pre_get_posts', 'add_category_to_tag_archive');
 
 /**
- * Add bbPress posts to search results
+ * Add bbPress posts to search results.
+ * This function makes sure that bbPress posts are also searchable.
  */
 function include_bbpress_search( $query ) {
 	
@@ -255,7 +275,10 @@ function get_topic_tags() {
 	return $tags;
 }
 
-
+/**
+ * Returns all tags that have at least one post
+ * in the specified category.
+ */
 function get_tags_by_category($category) {
 	global $wpdb;
 
@@ -285,6 +308,10 @@ function get_tags_by_category($category) {
 	return $tags;
 }
 
+/**
+ * Returns the ID of the forum with the specified name
+ * or NULL if that forum doesn't exist.
+ */
 function get_forum_id_by_name($name) {
 	global $wpdb;
 	$forums = $wpdb->get_results
@@ -301,6 +328,10 @@ function get_forum_id_by_name($name) {
 	}
 }
 
+/**
+ * Renders a wordcloud with all tags.
+ * The agn-wordcloud JavaScript component will hook up to this.
+ */
 function display_global_wordcloud() {
 	$post_tags = get_tags();
 	$topic_tags = get_topic_tags();

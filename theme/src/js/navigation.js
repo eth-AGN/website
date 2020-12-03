@@ -1,8 +1,11 @@
 /**
- * File navigation.js.
- *
- * Handles toggling the navigation menu for small screens and enables TAB key
- * navigation support for dropdown menus.
+ * This component is responsible for animating the transition
+ * between WISSEN, DENKEN, HANDELN.
+ * 
+ * This is achieved by listening for click-events on the navigation
+ * links and preventing their default behaviour. A short time later
+ * (enough for the animation to play), the navigation event is
+ * executed artificially.
  */
 (function() {
 

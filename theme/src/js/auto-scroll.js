@@ -1,4 +1,10 @@
 
+/**
+ * This component is used for horizontally scrolling
+ * an element on-hover.
+ * For an example, check out `content-wissen.php`.
+ */
+
 const SCROLLING_SPEED = 100;
 
 (function() {

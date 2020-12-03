@@ -1,4 +1,10 @@
 
+/**
+ * This component applies the global tag filter
+ * by changing every link on the page after it has loaded.
+ * It does this by appending a GET-parameter with all selected tags.
+ */
+
 (function() {
     const tags = window.sessionStorage['tag-filter'];
     if (!tags) return;

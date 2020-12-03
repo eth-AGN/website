@@ -1,4 +1,13 @@
 
+/**
+ * This component distributes the children of the specified elements
+ * in the number of columns specified by the CSS-property `grid-template-columns`.
+ * It removes all whitespace between rows, so that the columns are contiguous
+ * (e.g. like on Pinterest).
+ * 
+ * This is currently used on the DENKEN page.
+ */
+
 function createMagicGrid(el) {
     const children = el.querySelectorAll('.magic-grid > *');
     for (let child of children) child.style.gridArea = '';

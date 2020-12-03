@@ -2,6 +2,11 @@
 import * as d3 from 'd3';
 import cloud from 'd3-cloud';
 
+/**
+ * This component hooks up to any element with a class "wordcloud"
+ * and tries to initialize a d3-cloud.
+ * The component in search.js will hook up to this.
+ */
 
 function initWordCloud(el, words, fontSize, callback) {
     const width = el.clientWidth, height = el.clientHeight;

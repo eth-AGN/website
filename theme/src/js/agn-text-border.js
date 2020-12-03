@@ -1,4 +1,11 @@
 
+/**
+ * This component is responsible for generating the text border
+ * as an SVG. The border must be generated for it to
+ * be well-proportioned independent of screen size.
+ * 
+ * The border is also re-generated on resize.
+ */
 
 // construct SVG according to screen size
 function createTextBorder(border) {

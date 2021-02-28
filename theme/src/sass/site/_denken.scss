@@ -33,7 +33,7 @@ body.category-denken {
     }
 }
 
-body.category-denken:not(.topic-tag) {
+body.category-denken:not(.topic-tag, .search) {
     padding-top: 2rem;
     padding-bottom: 0;
 

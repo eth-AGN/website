@@ -115,7 +115,8 @@ function initWordCloud(el, words, fontSize, callback) {
                 rect.setAttribute("y", bbox.y);
                 rect.setAttribute("width", bbox.width);
                 rect.setAttribute("height", bbox.height);
-                rect.setAttribute("transform", text.getAttribute('transform'))
+                rect.setAttribute("transform", text.getAttribute('transform'));
+                rect.dataset.belongsTo = text.dataset.tagSlug;
                 ctx.insertBefore(rect, text);
             });
 

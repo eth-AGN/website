@@ -1,6 +1,4 @@
 body.search{
-    padding-top: $body__padding-top + 2.75rem !important;
-
     &.category-denken{
         .search-popup{
             background-color: $color__denken-background;
@@ -146,10 +144,4 @@ body.search {
         margin-right: 0;
     }
 
-}
-
-@include mobile() {
-    body.search {
-        padding-top: $body__padding-top + 6.5rem;
-    }
 }

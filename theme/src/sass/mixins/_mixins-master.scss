@@ -68,8 +68,8 @@
 	}
 }
 
-@mixin stripes($color, $size: 1rem){
-	background: repeating-linear-gradient(135deg, rgba($color,1) 0, rgba($color,1) 0.5*$size, rgba($color,0) 0.5*$size, rgba($color,0) $size);
+@mixin stripes($color, $size: 0.25rem){
+	background: repeating-linear-gradient(135deg, rgba($color,1) 0, rgba($color,1) $size, rgba($color,0) $size, rgba($color,0) 3*$size);
 }
 
 @mixin set-color-scheme($background, $navigation, $text, $link, $link-hover) {

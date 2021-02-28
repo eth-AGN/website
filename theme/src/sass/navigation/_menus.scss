@@ -665,12 +665,19 @@ body.category-handeln {
 		}
 	}
 
+	body.search {
+		#page {
+			padding-top: 6rem;
+		}
+	}
+
 	body.category-wissen  {
 		@include set-spacing($body-padding, $body-padding, 3*$tab-width, $tab-width);
 	}
 
 	body.category-denken {
 		@include set-spacing(2*$tab-width, $body-padding, $tab-width, $tab-width);
+
 		&.is-scrolled {
 			@include set-spacing($body-padding + .5rem, $body-padding, $body-padding, $body-padding)
 		}
@@ -682,6 +689,7 @@ body.category-handeln {
 			@include set-spacing(2*$body-padding + .5rem, $body-padding, 0rem, $body-padding)
 		}
 	}
+
 }
 
 body {

@@ -72,7 +72,7 @@ const globalTags = {
     }
 
     globalTags.initEventListeners();
-    globalTags.displayGlobalTags();
+    // globalTags.displayGlobalTags();
 
     const searchPopup = {
         isOpen: false,
@@ -187,11 +187,18 @@ const globalTags = {
 
     function selectTag(el) {
         el.classList.add('is-active');
-        el.previousElementSibling.classList.add('is-active');
+        const parent = el.parentElement;
+        if (parent && el.dataset.tagSlug) {
+            const rect = parent.querySelector(`[data-belongs-to="${el.dataset.tagSlug}"]`);
+            if (rect) rect.classList.add('is-active');
+        }
     }
     function deselectTag(el) {
         el.classList.remove('is-active');
-        el.previousElementSibling.classList.remove('is-active');
+        if (parent && el.dataset.tagSlug) {
+            const rect = parent.querySelector(`[data-belongs-to="${el.dataset.tagSlug}"]`);
+            if (rect) rect.classList.remove('is-active');
+        }
     }
 
     // wait for the wordcloud to finish rendering until registering event listeners
